@@ -3,10 +3,8 @@ message: "If you use this software, please cite it using these metadata."
 title: "Submitting AI Jobs to the Anvil Supercomputer"
 type: software
 authors:
-  -
-    family-names: "Garcia Mesa"
+  - family-names: "Garcia Mesa"
     given-names: "Juanjo"
-    name: "Juanjo Garcia Mesa"
 repository-code: "https://github.com/jgarciamesa/submit-hpc-jobs"
 url: "https://jgarciamesa.github.io/submit-hpc-jobs"
 license: "CC-BY-4.0"
@@ -20,18 +18,4 @@ keywords:
   - "Anvil"
   - "ACCESS"
   - "NAIRR"
-identifiers:
-  -
-    type: doi
-    value: "10.5281/zenodo.0000000"
-    description: "Replace this placeholder DOI with the real one after publishing."
-    recommended: true
 date-released: "2026-09-08"
-preferred-citation:
-  type: software
-  title: "Submitting AI Jobs to the Anvil Supercomputer"
-  authors:
-    -
-      name: "Juanjo Garcia Mesa"
-  date-released: "2026-09-08"
-  url: "https://jgarciamesa.github.io/submit-hpc-jobs"
