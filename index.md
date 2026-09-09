@@ -33,15 +33,16 @@ and GPU nodes.
 The lesson is a sequence of short episodes, each built around doing something
 real. The two you will use constantly are:
 
-- **The lab files** live in the site's [`data/labs/`](data/labs/) folder -- each
-  lab is a small Python script plus a `.sbatch` submission script.
-- **The reference page** ([learners/reference.md](reference.html)) holds
+- **The lab files** live in the repo's `episodes/data/labs/` folder -- each
+  lab is a small Python script plus a `.sbatch` submission script. They are
+  copied to the `data/labs/` folder of the built site.
+- **The reference page** ([learners/reference.md](learners/reference.md)) holds
   the partition table, a command cheat sheet, and a troubleshooting table.
   Keep it open in a second tab.
 
 > [!NOTE]
 > If you are an instructor, see the
-> [instructor notes](instructor-notes.html) for the pre-session
+> [instructor notes](instructors/instructor-notes.md) for the pre-session
 > checklist, minute-by-minute timing, and fallbacks for when a lab runs long.
 
 Let's begin with [why a supercomputer for AI][01-introduction].
