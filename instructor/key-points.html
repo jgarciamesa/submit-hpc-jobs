@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Lesson Title: Key Points</title>
+<title>Submitting AI Jobs to the Anvil Supercomputer: Key Points</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../assets/themetoggle.js"></script><link rel="stylesheet" type="text/css" href="../assets/styles.css">
 <script src="../assets/scripts.js" type="text/javascript"></script><!-- mathjax --><!-- NOTE: https://docs.mathjax.org/en/latest/output/mathml.html#mathml-support --><!-- Changes from V2 to V4: https://mathjax.github.io/MathJax-demos-web/convert-configuration/convert-configuration.html
@@ -99,7 +99,7 @@
       <img class="small-logo" alt="Lesson Description" src="../assets/images/incubator-logo-sm.svg">
 </div>
     <div class="lesson-title-md">
-      Lesson Title
+      Submitting AI Jobs to the Anvil Supercomputer
     </div>
     <div class="search-icon-sm">
       <!-- TODO: do not show until we have search
@@ -110,7 +110,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
           <span class="lesson-title">
-            Lesson Title
+            Submitting AI Jobs to the Anvil Supercomputer
           </span>
         </li>
         <li class="nav-item">
@@ -237,7 +237,91 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="01-introduction.html">1. Introduction: AI Workloads on a Supercomputer</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="02-connecting-to-anvil.html">2. Connecting to Anvil</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="03-meeting-anvils-queues.html">3. Meeting Anvil's Queues (Partitions)</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="04-your-first-job.html">4. Your First Job: hello, Anvil</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="06-an-ai-job-on-a-gpu.html">6. An AI Job on an A100 GPU</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="08-wrap-up.html">8. Wrap-Up: Allocations, Rules, and Where to Go Next</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -301,17 +385,85 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Key Points</h1>
         
-<section id="introduction"><h2 class="section-heading"><a href="introduction.html">Using Markdown</a></h2>
+<section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction: AI Workloads on a SupercomputerWhy a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a>Login nodes and compute nodes<a class="anchor" aria-label="anchor" href="#login-nodes-and-compute-nodes"></a>What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>Anvil is an NSF-funded ACCESS supercomputer: ~1,000 CPU nodes, 16
+A100 GPU nodes, 21 H100 GPU nodes.</li>
+<li>You log in to a login node; you submit jobs to a scheduler, which
+runs them on compute nodes.</li>
+<li>Running heavy work directly on the login node is against Anvil
+policy.</li>
+</ul></section><section id="02-connecting-to-anvil"><h2 class="section-heading"><a href="02-connecting-to-anvil.html">Connecting to AnvilLog in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a>Look around: your account and the queues<a class="anchor" aria-label="anchor" href="#look-around-your-account-and-the-queues"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>Log in with
+<code>ssh &lt;x-username&gt;@anvil.rcac.purdue.edu</code>, or use Open
+OnDemand’s web shell if you have no SSH key.</li>
+<li>Your Anvil username starts with <code>x-</code> and is not your
+ACCESS username.</li>
+<li>
+<code>mybalance</code> prints the account string you will pass with
+<code>-A</code> in every job script.</li>
+</ul></section><section id="03-meeting-anvils-queues"><h2 class="section-heading"><a href="03-meeting-anvils-queues.html">Meeting Anvil's Queues (Partitions)What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a>Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>A partition is a named queue with its own machines and limits (max
+nodes, max time, max jobs per user).</li>
+<li>Use <code>debug</code> (CPU) and <code>gpu-debug</code> (A100) for
+short testing runs; use <code>shared</code>, <code>gpu</code>, or
+<code>ai</code> for production.</li>
+<li>Always name a partition with <code>-p</code>; if you omit it, Slurm
+uses the default <code>shared</code> partition.</li>
+</ul></section><section id="04-your-first-job"><h2 class="section-heading"><a href="04-your-first-job.html">Your First Job: hello, AnvilThe job submission script<a class="anchor" aria-label="anchor" href="#the-job-submission-script"></a>Submit it and watch it run<a class="anchor" aria-label="anchor" href="#submit-it-and-watch-it-run"></a>Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>A Slurm job script is a shell script whose <code>#SBATCH</code>
+lines request resources; the rest runs on a compute node.</li>
+<li>
+<code>-A &lt;account&gt;</code> and
+<code>-p &lt;partition&gt;</code> are mandatory on Anvil.</li>
+<li>Submit with <code>sbatch &lt;script&gt;</code>, follow with
+<code>squeue -u $USER</code>, and read the
+<code>slurm-&lt;jobid&gt;.out</code> file.</li>
+</ul></section><section id="05-an-ai-job-on-cpu"><h2 class="section-heading"><a href="05-an-ai-job-on-cpu.html">A Real AI Job on the CPU NodesTrain a digit classifier<a class="anchor" aria-label="anchor" href="#train-a-digit-classifier"></a>Submit and read the result<a class="anchor" aria-label="anchor" href="#submit-and-read-the-result"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>A CPU AI job is just a Python program run under <code>sbatch</code>;
+load <code>conda</code> in the script for scikit-learn and numpy.</li>
+<li>Ask for more cores with <code>--cpus-per-task</code> and more memory
+with <code>--mem</code>.</li>
+<li>Name the output file with <code>%j</code> (job ID) so repeated
+submissions do not overwrite each other.</li>
+</ul></section><section id="06-an-ai-job-on-a-gpu"><h2 class="section-heading"><a href="06-an-ai-job-on-a-gpu.html">An AI Job on an A100 GPUAsk for a GPU<a class="anchor" aria-label="anchor" href="#ask-for-a-gpu"></a>Submit and confirm you got a GPU<a class="anchor" aria-label="anchor" href="#submit-and-confirm-you-got-a-gpu"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>Request a GPU with <code>--gres=gpu:&lt;n&gt;</code> and submit to a
+GPU partition such as <code>gpu-debug</code>.</li>
+<li>A <code>g</code> node name and an <code>nvidia-smi</code> /
+<code>[cuda]</code> line in the output confirm the job ran on a
+GPU.</li>
+<li>If the GPU queue is full, the job simply waits in PENDING and runs
+when a node frees up – that is normal HPC behaviour.</li>
+</ul></section><section id="07-job-arrays"><h2 class="section-heading"><a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>A job array runs the same script many times in one submission;
+<code>--array=0-4</code> creates five tasks.</li>
+<li>
+<code>SLURM_ARRAY_TASK_ID</code> tells each task which experiment it
+is.</li>
+<li>Name output files with <code>%A</code> (job ID) and <code>%a</code>
+(task ID) so each task writes its own file.</li>
+</ul></section><section id="08-wrap-up"><h2 class="section-heading"><a href="08-wrap-up.html">Wrap-Up: Allocations, Rules, and Where to Go NextWhat you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a>Your next job is the hard one: getting your own allocation<a class="anchor" aria-label="anchor" href="#your-next-job-is-the-hard-one-getting-your-own-allocation"></a>Rules of the road<a class="anchor" aria-label="anchor" href="#rules-of-the-road"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<ul>
+<li>Testing is free on <code>debug</code>/<code>gpu-debug</code>; real
+work needs an ACCESS or NAIRR allocation.</li>
+<li>Get help from the Anvil docs, <code>rcac-help@purdue.edu</code>, or
+the reference page on this site.</li>
+<li>Be a good citizen: no heavy work on login nodes, request only the
+resources you need, and cancel jobs you no longer need.</li>
 </ul></section>
 </div>
     </main>
@@ -325,14 +477,14 @@ locally</li>
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/README.md" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/README.md" class="external-link">Edit on GitHub</a>
 
 	
-        | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
-        | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
+        | <a href="https://github.com/jgarciamesa/submit-hpc-jobs/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
+        | <a href="https://github.com/jgarciamesa/submit-hpc-jobs/" class="external-link">Source</a></p>
         <p>
         <a href="../citation.html">Cite</a>
-        | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+        | <a href="mailto:jgarc111@asu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 		</div>
 		<div class="col-md-6">
 
@@ -352,18 +504,18 @@ locally</li>
     {
   "@context": "https://schema.org",
   "@type": "LearningResource",
-  "@id": "https://carpentries.github.io/workbench-template-md/instructor/key-points.html",
+  "@id": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/key-points.html",
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "HPC, Slurm, supercomputing, machine learning, GPU, AI, Anvil, ACCESS, NAIRR",
   "name": "Key Points",
   "creativeWorkStatus": "active",
-  "url": "https://carpentries.github.io/workbench-template-md/instructor/key-points.html",
-  "identifier": "https://carpentries.github.io/workbench-template-md/instructor/key-points.html",
+  "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/key-points.html",
+  "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/key-points.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-08",
-  "datePublished": "2026-09-08"
+  "dateModified": "2026-09-09",
+  "datePublished": "2026-09-09"
 }
 
   </script><script>

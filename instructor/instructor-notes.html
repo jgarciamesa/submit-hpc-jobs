@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Lesson Title: Instructor Notes</title>
+<title>Submitting AI Jobs to the Anvil Supercomputer: Instructor Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../assets/themetoggle.js"></script><link rel="stylesheet" type="text/css" href="../assets/styles.css">
 <script src="../assets/scripts.js" type="text/javascript"></script><!-- mathjax --><!-- NOTE: https://docs.mathjax.org/en/latest/output/mathml.html#mathml-support --><!-- Changes from V2 to V4: https://mathjax.github.io/MathJax-demos-web/convert-configuration/convert-configuration.html
@@ -99,7 +99,7 @@
       <img class="small-logo" alt="Lesson Description" src="../assets/images/incubator-logo-sm.svg">
 </div>
     <div class="lesson-title-md">
-      Lesson Title
+      Submitting AI Jobs to the Anvil Supercomputer
     </div>
     <div class="search-icon-sm">
       <!-- TODO: do not show until we have search
@@ -110,7 +110,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
           <span class="lesson-title">
-            Lesson Title
+            Submitting AI Jobs to the Anvil Supercomputer
           </span>
         </li>
         <li class="nav-item">
@@ -237,7 +237,91 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="01-introduction.html">1. Introduction: AI Workloads on a Supercomputer</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="02-connecting-to-anvil.html">2. Connecting to Anvil</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="03-meeting-anvils-queues.html">3. Meeting Anvil's Queues (Partitions)</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="04-your-first-job.html">4. Your First Job: hello, Anvil</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="06-an-ai-job-on-a-gpu.html">6. An AI Job on an A100 GPU</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="08-wrap-up.html">8. Wrap-Up: Allocations, Rules, and Where to Go Next</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -302,23 +386,276 @@
         <h1>Instructor Notes</h1>
         
 
-<p>This is a placeholder file. Please add content here.</p>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
+<div class="section level1">
+<h1 id="instructor-notes">Instructor Notes<a class="anchor" aria-label="anchor" href="#instructor-notes"></a>
+</h1>
+<p>These notes are for whoever leads the session. They complement the
+<strong>inline instructor notes</strong> embedded in each episode
+(visible only in the instructor view of this site) – the inline notes
+carry the per-episode beats, this page carries the whole-session
+logistics.</p>
+<ul>
+<li>
+<strong>Session:</strong> “Submitting AI Jobs to the Anvil
+Supercomputer”</li>
+<li>
+<strong>Where/when:</strong> The Mill at MSU, Starkville, MS –
+September 15, 2026, Beginner Track 1, 1:00–2:30 PM CT (90 minutes).</li>
+<li>
+<strong>Instructor:</strong> Juanjo Garcia Mesa (ASU Research
+Technology Office).</li>
+<li>
+<strong>Audience:</strong> Beginners – faculty, students, staff from
+Mississippi research institutions; no HPC experience assumed. Some will
+have just finished the morning “Leveraging National Level AI and HPC
+Resources” talk – open by connecting to it.</li>
+</ul>
+<div class="section level2">
+<h2 id="pre-session-checklist-t-minus">Pre-session checklist (T-minus)<a class="anchor" aria-label="anchor" href="#pre-session-checklist-t-minus"></a>
+</h2>
+<p>Do these <strong>before</strong> the workshop. Accounts are the
+number-one success factor.</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>Accounts
+provisioned.</strong> Every registered attendee has an Anvil account
+with their ACCESS or NAIRR allocation attached. Confirm the Anvil
+username (the <code>x-</code>-prefixed one) for the pre-provisioned
+group.</label></li>
+<li><label><input type="checkbox"><strong>Lab files staged.</strong>
+Copy the site’s <a href="../data/labs"><code>data/labs/</code></a> folder
+to a shared location on Anvil
+(e.g. <code>~/ai-workshop-submit-jobs</code> for a workshop user)
+<em>and</em> confirm the GitHub repo is public so attendees can
+<code>git clone</code> it.</label></li>
+<li><label><input type="checkbox"><strong>GPU partition
+checked.</strong> <code>showpartitions | grep gpu-debug</code> – note
+how many A100 nodes are free. If saturated, plan to demo the GPU lab
+from the front and have attendees submit-and-check-later.</label></li>
+<li><label><input type="checkbox"><strong>PyTorch module
+pinned.</strong> On an Anvil login node run
+<code>module spider pytorch</code> and put the exact module line into
+<code>train-gpu.sbatch</code> (the commented line near the top). Until
+then the GPU script has a placeholder.</label></li>
+<li><label><input type="checkbox"><strong>Dry-run each lab</strong> on
+a <code>debug</code> / <code>gpu-debug</code> job as yourself so you
+know the real wall time and the exact output to show.</label></li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="the-two-open-items-to-resolve-before-the-session">The two open items to resolve before the session<a class="anchor" aria-label="anchor" href="#the-two-open-items-to-resolve-before-the-session"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<strong>The account string.</strong> Every lab’s
+<code>.sbatch</code> has <code>#SBATCH -A &lt;ACCOUNT&gt;</code>. Do not
+hard-code one account into the published files – attendees each use
+their own from <code>mybalance</code>. For the <em>instructor’s</em> own
+demo jobs, note your account separately.</li>
+<li>
+<strong>The PyTorch module.</strong> Pin the exact
+<code>module load &lt;pytorch&gt;</code> (or the Singularity/NGC
+container command) in <code>train-gpu.sbatch</code>. The script is
+written to load <code>conda</code> first, so a module-based PyTorch or a
+module-based Singularity both fit the existing structure.</li>
+</ol>
+</div>
+<div class="section level2">
+<h2 id="timing-90-minutes-15-framing-60-hands-on-15-wrap-up">Timing (90 minutes: 15 framing / 60 hands-on / 15 wrap-up)<a class="anchor" aria-label="anchor" href="#timing-90-minutes-15-framing-60-hands-on-15-wrap-up"></a>
+</h2>
+<p>The lesson has eight episodes; the session walks through them as
+follows. Each hands-on lab is <strong>checkpointed</strong> – no one
+falls more than one lab behind, and each lab ends on a visible success
+signal before you move on.</p>
+<table class="table">
+<colgroup>
+<col width="16%">
+<col width="24%">
+<col width="27%">
+<col width="32%">
+</colgroup>
+<thead><tr>
+<th>Time</th>
+<th>Episode</th>
+<th>Activity</th>
+<th>Checkpoint</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1:00–1:15 (15m)</td>
+<td>
+<a href="01-introduction.html">01</a>, <a href="03-meeting-anvils-queues.html">03</a>
+</td>
+<td>Framing: why HPC, login/compute model, the partition table</td>
+<td>Everyone sees the partition table</td>
+</tr>
+<tr>
+<td>1:15–1:27 (12m)</td>
+<td><a href="02-connecting-to-anvil.html">02</a></td>
+<td>Lab 1: connect, <code>mybalance</code>, <code>showpartitions</code>,
+<code>sfeatures</code>
+</td>
+<td>Everyone can name their account string</td>
+</tr>
+<tr>
+<td>1:27–1:39 (12m)</td>
+<td><a href="04-your-first-job.html">04</a></td>
+<td>Lab 2: submit <code>hello.sbatch</code>, watch <code>squeue</code>,
+<code>cat</code> the output</td>
+<td>Everyone has a <code>slurm-*.out</code> with their job ID</td>
+</tr>
+<tr>
+<td>1:39–1:57 (18m)</td>
+<td><a href="05-an-ai-job-on-cpu.html">05</a></td>
+<td>Lab 3: digits CPU training job</td>
+<td>Everyone sees a test-accuracy number</td>
+</tr>
+<tr>
+<td>1:57–2:12 (15m)</td>
+<td><a href="06-an-ai-job-on-a-gpu.html">06</a></td>
+<td>Lab 4: GPU PyTorch job (<code>--gres=gpu:1</code>)</td>
+<td>
+<code>nvidia-smi</code> shows <code>NVIDIA A100</code>
+</td>
+</tr>
+<tr>
+<td>2:12–2:15 (if 10m+ remain)</td>
+<td><a href="07-job-arrays.html">07</a></td>
+<td>Stretch: job-array sweep</td>
+<td>One array of 5 tasks submitted</td>
+</tr>
+<tr>
+<td>2:15–2:30 (15m)</td>
+<td><a href="08-wrap-up.html">08</a></td>
+<td>Wrap-up: allocations, rules of the road, help, Q&amp;A</td>
+<td>Everyone leaves with the reference page</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="fallbacks-when-a-lab-runs-long">Fallbacks (when a lab runs long)<a class="anchor" aria-label="anchor" href="#fallbacks-when-a-lab-runs-long"></a>
+</h2>
+<ul>
+<li>
+<strong>Cut line is Labs 3 and 4.</strong> If you are more than five
+minutes behind at the start of Lab 3, convert it to a front-of-room
+demo: you submit and walk the output, attendees submit on their own and
+check the result after. <strong>Never</strong> cut Lab 2 (it is the core
+<code>sbatch</code> skill) or the wrap-up.</li>
+<li>
+<strong><code>debug</code> queue busy at 1 PM.</strong> Every lab
+also runs on <code>shared</code> (the default partition) – a one-line
+change to <code>-p shared</code>. Mention this so attendees are not
+blocked.</li>
+<li>
+<strong><code>gpu-debug</code> saturated.</strong> Demo from the
+front; attendees submit and leave with a <code>PENDING</code> job plus
+instructions to check the output later. Frame it as the real HPC
+experience: <em>your job runs when the resource is free.</em>
+</li>
+<li>
+<strong>SSH keys not set up (biggest time sink).</strong> Route
+those people to the OnDemand browser shell; helpers roam. Do not spend
+the group’s time on one person’s key.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="differentiation-by-audience">Differentiation by audience<a class="anchor" aria-label="anchor" href="#differentiation-by-audience"></a>
+</h2>
+<ul>
+<li>
+<strong>Never touched a terminal:</strong> the OnDemand GUI runs
+every lab except the stretch; the setup page walks SSH-key creation for
+anyone who wants it.</li>
+<li>
+<strong>Has a cluster account elsewhere:</strong> “if you know
+Slurm, you know Anvil.” Point them to the <em>Anvil-specific
+differences</em> section of the reference page (account string,
+<code>mybalance</code>, debug queues).</li>
+<li>
+<strong>Fast finishers:</strong> the job-array stretch, then explore
+<code>sacct</code> columns and the charge factors.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="success-criteria">Success criteria<a class="anchor" aria-label="anchor" href="#success-criteria"></a>
+</h2>
+<ul>
+<li>At least <strong>80%</strong> of attendees produce their own
+<code>slurm-*.out</code> (Lab 2).</li>
+<li>At least <strong>60%</strong> see A100 <code>nvidia-smi</code>
+output from their own GPU job (Lab 4).</li>
+<li>Every attendee leaves with the reference page and knows the two
+mandatory <code>#SBATCH</code> lines (<code>-A</code>, <code>-p</code>)
+by heart.</li>
+</ul>
+</div>
+</div>
+<div class="section level1">
+<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h1>
+</div>
 
 
-      <section id="aggregate-instructor-notes"><section id="introduction"><h2 class="section-heading"><a href="introduction.html">Using Markdown</a></h2>
+      <section id="aggregate-instructor-notes"><section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction: AI Workloads on a SupercomputerWhy a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a>Login nodes and compute nodes<a class="anchor" aria-label="anchor" href="#login-nodes-and-compute-nodes"></a>What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
 <hr class="half-width">
-<h3 id="introduction-headingInstructor1">
-<a href="introduction.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor1"></a>
+<h3 id="01-introduction-headingInstructor1">
+<a href="01-introduction.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#01-introduction-headingInstructor1"></a>
 </h3>
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
+<p>You are connecting to the morning session on national-level AI and
+HPC resources. A one-line bridge earns a lot of attention: “This is the
+machine that talk was about, and by 2:30 you will have run your own job
+on it.” Keep this episode to ten minutes – the partition table in the
+next episode is reference, not a lecture, so do not over-explain.</p>
 <hr>
-<br></section></section>
+<br></section><section id="02-connecting-to-anvil"><h2 class="section-heading"><a href="02-connecting-to-anvil.html">Connecting to AnvilLog in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a>Look around: your account and the queues<a class="anchor" aria-label="anchor" href="#look-around-your-account-and-the-queues"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<h3 id="02-connecting-to-anvil-headingInstructor1">
+<a href="02-connecting-to-anvil.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#02-connecting-to-anvil-headingInstructor1"></a>
+</h3>
+<p>If someone’s <code>ssh</code> says
+<code>failed to map user &lt;you&gt;@access-ci.org</code>, their
+allocation is not attached to Anvil yet. Route them to the browser path
+and flag them for the “getting your own allocation” episode. Do not let
+the group wait on one connection problem.</p>
+<hr>
+<br></section><section id="03-meeting-anvils-queues"><h2 class="section-heading"><a href="03-meeting-anvils-queues.html">Meeting Anvil's Queues (Partitions)What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a>Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<h3 id="03-meeting-anvils-queues-headingInstructor1">
+<a href="03-meeting-anvils-queues.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#03-meeting-anvils-queues-headingInstructor1"></a>
+</h3>
+<p>Ask “how many of you have run anything on a cluster before?” here. If
+most hands go up, skim the table and spend the time on the two rules. If
+most hands go down, slow down on the table – the partition concept is
+new. Either way, do not exceed ten minutes.</p>
+<hr>
+<br></section><section id="04-your-first-job"><h2 class="section-heading"><a href="04-your-first-job.html">Your First Job: hello, AnvilThe job submission script<a class="anchor" aria-label="anchor" href="#the-job-submission-script"></a>Submit it and watch it run<a class="anchor" aria-label="anchor" href="#submit-it-and-watch-it-run"></a>Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width"></section><section id="05-an-ai-job-on-cpu"><h2 class="section-heading"><a href="05-an-ai-job-on-cpu.html">A Real AI Job on the CPU NodesTrain a digit classifier<a class="anchor" aria-label="anchor" href="#train-a-digit-classifier"></a>Submit and read the result<a class="anchor" aria-label="anchor" href="#submit-and-read-the-result"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<h3 id="05-an-ai-job-on-cpu-headingInstructor1">
+<a href="05-an-ai-job-on-cpu.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#05-an-ai-job-on-cpu-headingInstructor1"></a>
+</h3>
+<p>If you are running more than five minutes behind schedule at the
+start of this episode, convert it to a front-of-room demo: you submit
+and walk the output, attendees submit on their own and check the result
+after. Never cut the previous episode (your first job) or the final
+allocation discussion.</p>
+<hr>
+<br></section><section id="06-an-ai-job-on-a-gpu"><h2 class="section-heading"><a href="06-an-ai-job-on-a-gpu.html">An AI Job on an A100 GPUAsk for a GPU<a class="anchor" aria-label="anchor" href="#ask-for-a-gpu"></a>Submit and confirm you got a GPU<a class="anchor" aria-label="anchor" href="#submit-and-confirm-you-got-a-gpu"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width">
+<h3 id="06-an-ai-job-on-a-gpu-headingInstructor1">
+<a href="06-an-ai-job-on-a-gpu.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#06-an-ai-job-on-a-gpu-headingInstructor1"></a>
+</h3>
+<p>This is the wow moment – protect ten minutes for it. If
+<code>gpu-debug</code> is saturated (check before the session), demo
+from the front and let attendees submit and check later, framed as “the
+real HPC experience.” The <code>&lt;pytorch-module&gt;</code> line in
+the script is confirmed in the pre-session dry run; pin the exact module
+or container there before the workshop.</p>
+<hr>
+<br></section><section id="07-job-arrays"><h2 class="section-heading"><a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width"></section><section id="08-wrap-up"><h2 class="section-heading"><a href="08-wrap-up.html">Wrap-Up: Allocations, Rules, and Where to Go NextWhat you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a>Your next job is the hard one: getting your own allocation<a class="anchor" aria-label="anchor" href="#your-next-job-is-the-hard-one-getting-your-own-allocation"></a>Rules of the road<a class="anchor" aria-label="anchor" href="#rules-of-the-road"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<hr class="half-width"></section></section>
 </div>
     </main>
 </div>
@@ -331,14 +668,14 @@ View”</p>
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/README.md" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/README.md" class="external-link">Edit on GitHub</a>
 
 	
-        | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
-        | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
+        | <a href="https://github.com/jgarciamesa/submit-hpc-jobs/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
+        | <a href="https://github.com/jgarciamesa/submit-hpc-jobs/" class="external-link">Source</a></p>
         <p>
         <a href="../citation.html">Cite</a>
-        | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+        | <a href="mailto:jgarc111@asu.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 		</div>
 		<div class="col-md-6">
 
@@ -358,18 +695,18 @@ View”</p>
     {
   "@context": "https://schema.org",
   "@type": "LearningResource",
-  "@id": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
+  "@id": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/instructor-notes.html",
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "HPC, Slurm, supercomputing, machine learning, GPU, AI, Anvil, ACCESS, NAIRR",
   "name": "Instructor Notes",
   "creativeWorkStatus": "active",
-  "url": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
-  "identifier": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
+  "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/instructor-notes.html",
+  "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/instructor-notes.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-08",
-  "datePublished": "2026-09-08"
+  "dateModified": "2026-09-09",
+  "datePublished": "2026-09-09"
 }
 
   </script><script>
