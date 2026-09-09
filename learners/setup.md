@@ -100,6 +100,6 @@ You should see `hello.py`, `hello.sbatch`, `train_digits.py`,
 
 Open a second tab to the [reference page](reference.html) -- the partition table
 and the command cheat sheet are the two things you will look up most. Then
-start with [Episode 1][01-introduction.html].
+start with [Episode 1](01-introduction.html).
 
 [01-introduction.html]: 01-introduction.html

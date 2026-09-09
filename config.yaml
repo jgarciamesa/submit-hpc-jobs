@@ -14,6 +14,10 @@ authors:
 # Title of the lesson engine.
 # Don't change unless creating a derivative of workbench.
 engine: "The Carpentries Workbench"
+# What kind of Carpentries lesson this is. Drives the rendered header/citation
+# label. Values: lc, dc, swc, hpcc, cp, incubator, lab -- or set
+# carpentry_description instead.
+carpentry: "incubator"
 # (Optional) specify an organization to use in citations.
 organization: "The Carpentries"
 # (Optional) list of keywords for the lesson.

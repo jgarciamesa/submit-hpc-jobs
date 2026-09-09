@@ -88,10 +88,10 @@ script, so they are fast and polite to the cluster.
 
 | File | What it does | Episode |
 |------|--------------|---------|
-| `hello.py` / `hello.sbatch` | Prints a greeting and the Slurm environment (which node you ran on) | [Your first job][04-your-first-job.html] |
-| `train_digits.py` / `train-digits-cpu.sbatch` | Trains an SVM digit classifier, reports test accuracy | [A real AI job on the CPU][05-an-ai-job-on-cpu.html] |
-| `train_gpu.py` / `train-gpu.sbatch` | Trains a small PyTorch net on a GPU, prints `nvidia-smi` | [An AI job on a GPU][06-an-ai-job-on-a-gpu.html] |
-| `train_sweep.py` / `array.sbatch` | Hyperparameter sweep as a 5-task job array | [Job arrays][07-job-arrays.html] |
+| `hello.py` / `hello.sbatch` | Prints a greeting and the Slurm environment (which node you ran on) | [Your first job](04-your-first-job.html) |
+| `train_digits.py` / `train-digits-cpu.sbatch` | Trains an SVM digit classifier, reports test accuracy | [A real AI job on the CPU](05-an-ai-job-on-cpu.html) |
+| `train_gpu.py` / `train-gpu.sbatch` | Trains a small PyTorch net on a GPU, prints `nvidia-smi` | [An AI job on a GPU](06-an-ai-job-on-a-gpu.html) |
+| `train_sweep.py` / `array.sbatch` | Hyperparameter sweep as a 5-task job array | [Job arrays](07-job-arrays.html) |
 
 ## Troubleshooting
 
