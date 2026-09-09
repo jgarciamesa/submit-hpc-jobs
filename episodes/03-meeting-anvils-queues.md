@@ -34,6 +34,7 @@ Here is what matters for this lesson:
 | `highmem`   | large-memory   | 1             | 48 hrs   | 2                     | ~1 TB RAM, charges 4x |
 | `gpu`       | GPU (A100)     | --            | 48 hrs   | --                    | A100 production jobs |
 | `ai`        | GPU (H100)     | --            | 48 hrs   | --                    | H100 production jobs |
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## Debug queues are a class's best friend
@@ -54,6 +55,7 @@ work, but for a lesson they are perfect.
    time.** If you submit a second job before the first finishes, it waits in
    `PENDING`. That is not an error -- it is the queue doing its job. We will
    use that waiting to learn how to read the queue.
+
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
 Ask "how many of you have run anything on a cluster before?" here. If

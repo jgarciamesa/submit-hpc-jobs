@@ -97,12 +97,14 @@ job misbehaves or you simply changed your mind.
 A good habit: submit, then immediately note the job ID and re-check with `squeue`
 in a couple of minutes. When something is not working, `sacct -j <jobid>` tells
 you *why*.
+
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Why is my job stuck in PENDING?
 
 You submitted `hello.sbatch` and `squeue -u $USER` shows it as `PD` (pending)
 for more than a minute. What is the most likely cause, and how do you check it?
+
 :::::::::::::::::::::::: solution 
 
 ## Most likely: the queue is full
@@ -128,6 +130,7 @@ the running job to finish, or cancel it first with `scancel <oldjobid>`.
 
 You submitted and Slurm replied with something like `error: invalid account
 specified` or `failed to map user`. What went wrong?
+
 :::::::::::::::::::::::: solution 
 
 ## Missing or wrong -A account

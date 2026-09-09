@@ -67,6 +67,7 @@ Test accuracy: 0.980
 
 and `digits_metrics.json` holds the accuracy, the node, the partition, and the
 elapsed time. You have now trained and evaluated a model on a supercomputer.
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## What did this cost?
@@ -85,6 +86,7 @@ same job on two cores -- resources are not free.
 Change `--cpus-per-task=16` to `8` in `train-digits-cpu.sbatch`, resubmit,
 and compare the elapsed time in the two output files. What changed, and why
 might fewer cores be *faster* here?
+
 :::::::::::::::::::::::: solution 
 
 ## Fewer cores can be faster

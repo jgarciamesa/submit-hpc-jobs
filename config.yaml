@@ -128,7 +128,7 @@ build_ignore:
 # Varies depending on what {source} is set to.
 # Used to keep lessons in sync with a repository at a specific version,
 # with a default source of The Carpentries Workshop.
-source: "https://github.com/carpentries/workbench"
+source: "https://github.com/jgarciamesa/submit-hpc-jobs"
 # Version of the sandbox to use.
 # Don't change unless creating a derivative of workbench.
 sandbox_version: "0.2.8"

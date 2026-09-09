@@ -26,6 +26,7 @@ Two things trip people up at this step, so check both before you move on:
   is something like `x-jdoe`.
 - Anvil does **not** accept passwords. Only SSH keys. If you do not have a key
   yet, use the browser path below -- do not spend lab time generating one.
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## No SSH key? Use the browser.
@@ -64,12 +65,14 @@ submit a job without the right account and it is rejected.
 `showpartitions` and `sfeatures` show you the queues and the machines behind
 them. You do not need to memorize this now -- the next episode walks through
 the table. Just notice that the `g` nodes are A100s and the `h` nodes are H100s.
+
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Can you find your account?
 
 Run `mybalance` in your terminal. What is the account string it prints?
 You will paste this into every job script in this lesson.
+
 :::::::::::::::::::::::: solution 
 
 ## Your account string

@@ -65,6 +65,7 @@ Final accuracy: 0.987 on CUDA
 
 That is the moment the whole lesson is about: your AI workload just trained on
 a national supercomputer GPU.
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## No GPU in the output?
@@ -81,6 +82,7 @@ partition. Check both, resubmit, and the next run will report a GPU.
 
 You submit the GPU job and it sits in `PENDING` because `gpu-debug` has no
 free node. What do you do?
+
 :::::::::::::::::::::::: solution 
 
 ## Submit-and-check-later is the real HPC experience

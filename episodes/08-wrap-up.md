@@ -41,6 +41,7 @@ The paths most relevant to a Mississippi researcher:
 Both are documented at [ACCESS][access] and [NAIRR][nairr]. Ask your department's
 research computing contact, or the workshop's HPC team, to help submit the first
 request -- it is a form and an email, not a research proposal.
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## Where to get help
@@ -72,6 +73,7 @@ These are not rules to obey and forget -- they are the same etiquette you alread
 use in a shared lab or office.
 
 That is the whole model, and now it is yours.
+
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - Testing is free on `debug`/`gpu-debug`; real work needs an ACCESS or NAIRR allocation.

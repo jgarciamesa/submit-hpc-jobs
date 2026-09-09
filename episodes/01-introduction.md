@@ -28,6 +28,7 @@ Center][rcac] and is an NSF-funded [ACCESS][access] resource. By the numbers:
 The hardware is the easy part. What makes a supercomputer *work* is the **job
 scheduler** that shares it fairly among hundreds of users at once. That is what
 you will learn to drive.
+
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
 You are connecting to the morning session on national-level AI and HPC
@@ -53,6 +54,7 @@ Instead, you write your work out as a job and submit it to the scheduler. The
 scheduler places your job on a **compute node** -- a full server with 128
 cores, or a GPU server -- and runs it when the resources you asked for become
 available.
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## The whole model in one sentence
@@ -74,6 +76,7 @@ By the end of this lesson you will have:
 5. Seen how one script can become many experiments with a *job array*.
 
 In the next episode you will connect to the machine and look around.
+
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - Anvil is an NSF-funded ACCESS supercomputer: ~1,000 CPU nodes, 16 A100 GPU nodes, 21 H100 GPU nodes.

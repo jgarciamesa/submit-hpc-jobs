@@ -53,12 +53,14 @@ ls slurm-array_*_*.out            # one output file per task
 Each of the five tasks runs the same script with a different `C` and writes its
 own `sweep_<task>.json`. One command, five experiments, five results to
 compare -- the pattern you will use for every sweep in your own work.
+
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## How do I tell which result came from which setting?
 
 Five `sweep_*.json` files land in your directory. How do you match each
 result to the `C` value that produced it?
+
 :::::::::::::::::::::::: solution 
 
 ## Read the task ID
