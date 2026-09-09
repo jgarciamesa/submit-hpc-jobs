@@ -1,10 +1,13 @@
-<!-- 
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
- -->
+---
+---
 
-[pandoc]: https://pandoc.org/MANUAL.html
-[r-markdown]: https://rmarkdown.rstudio.com/
-[rstudio]: https://www.rstudio.com/
-[carpentries-workbench]: https://carpentries.github.io/sandpaper-docs/
+# References
 
+[rcac]: https://www.rcac.purdue.edu "Purdue Research Computing Center (RCAC)"
+[access]: https://access-ci.org "NSF ACCESS allocation program"
+[nairr]: https://nairr.org "NSF NAIRR allocation program"
+[ondemand]: https://ondemand.rcac.purdue.edu "Purdue Open OnDemand portal"
+[anvil_docs]: https://docs.rcac.purdue.edu/userguides/anvil/ "Anvil user guide (RCAC)"
+[sklearn]: https://scikit-learn.org "scikit-learn"
+[pytorch]: https://pytorch.org "PyTorch"
+[slurm]: https://slurm.schedmd.com "Slurm workload manager"

@@ -1,86 +1,143 @@
-#------------------------------------------------------------
-# Values for this lesson.
-#------------------------------------------------------------
+# yaml-language-server: $schema=https://raw.githubusercontent.com/carpentries/workbench-style/main/inst/config/config.schema.json
 
-# Which carpentry is this (swc, dc, lc, or cp)?
-# swc: Software Carpentry
-# dc: Data Carpentry
-# lc: Library Carpentry
-# cp: Carpentries (to use for instructor training for instance)
-# incubator: The Carpentries Incubator
-# 
-# This option supports custom types so lessons can be branded
-# and themed with your own logo and alt-text (see `carpentry_description`)
-# See https://carpentries.github.io/sandpaper-docs/editing.html#adding-a-custom-logo
-carpentry: 'incubator'
-
-# Alt-text description of the lesson.
-carpentry_description: 'Lesson Description'
-
-# Overall title for pages.
-title: 'Lesson Title' # FIXME
-
-# Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
-
-# Comma-separated list of keywords for the lesson
-keywords: 'software, data, lesson, The Carpentries' # FIXME
-
-# Life cycle stage of the lesson
-# refer to <https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html> for details
-# possible values: pre-alpha, alpha, beta, stable
-life_cycle: 'pre-alpha' # FIXME
-
-# License of the lesson
-license: 'CC-BY 4.0'
-
-# Link to the source repository for this lesson
-source: 'https://github.com/carpentries/workbench-template-md' # FIXME
-
-# Default branch of your lesson
-branch: 'main'
-
-# Who to contact if there are any issues
-contact: 'team@carpentries.org' # FIXME
-
-# Navigation ------------------------------------------------
+# NOTE: You can override a per-lesson config in the top-level config.yaml of a
+# lesson. See https://carpentries.github.io/sandpaper/config.html#lesson
+# for more details
 #
-# Use the following menu items to specify the order of
-# individual pages in each dropdown section. Leave blank to
-# include all pages in the folder.
+# ------------------------------------
+# These variables should be set per-lesson.
 #
-# Example -------------
+title: "Submitting AI Jobs to the Anvil Supercomputer"
+# Authors of the lesson
+authors:
+  - "Juanjo Garcia Mesa"
+# Title of the lesson engine.
+# Don't change unless creating a derivative of workbench.
+engine: "The Carpentries Workbench"
+# (Optional) specify an organization to use in citations.
+organization: "The Carpentries"
+# (Optional) list of keywords for the lesson.
+keywords:
+  - "HPC"
+  - "Slurm"
+  - "supercomputing"
+  - "machine learning"
+  - "GPU"
+  - "AI"
+  - "Anvil"
+  - "ACCESS"
+  - "NAIRR"
+# Contact e-mail address for all authors.
+email: "jgarc111@asu.edu"
+# Location of the lesson.
+root: "."
+# URL for the lesson.
+url: "https://jgarciamesa.github.io/submit-hpc-jobs"
+# When the lesson was released.
+created: "2026-09-08"
+# What kind of lesson is it (workshop, software, data, or other)?
+kind: "workshop"
+# The human-language name of the lesson.
+# (e.g. "The Unix Shell")
+nickname: "Submitting AI Jobs to the Anvil Supercomputer"
+# Specify authors of the lesson in reverse order (from most recent
+# contributor to least recent). The *first* listed author is the person
+# who most recently contributed to the lesson, and is its "owner" in
+# the sense of a GitHub repository.
 #
-# episodes:
-# - introduction.md
-# - first-steps.md
+# Be sure to include the name of each author.
+# You can also include the authors' orcid and/or email.
+# orcid must be formatted as 'xxxx-xxxx-xxxx-xxxx'
 #
-# learners:
-# - setup.md
+# Example:
+# contributors:
+#   -
+#     name: "Your Name Here"
+#     orcid: "0000-0000-0000-0000"
+#   -
+#     name: "Secondary Person"
+#     email: "secondary.person@example.com"
+#   -
+#     name: "Doctor Mentor"
+#     orcid: "0000-0000-0000-0000"
+#     email: "dr.mentor@example.com"
+contributors:
+  -
+    name: "Juanjo Garcia Mesa"
+# specify the license here. Available options are:
+# - cc-by (default)
+# - cc-by-nc
+# - cc-by-sa
+# - cc-by-nd
+# - cc-by-sa-nc
+# - cc-by-nd-nc
+license: "cc-by-4.0"
+
+# ------------------------------------
+# You should not need to change anything from below here.
 #
-# instructors:
-# - instructor-notes.md
-#
-# profiles:
-# - one-learner.md
-# - another-learner.md
-
-# Order of episodes in your lesson
-episodes: 
-- introduction.md
-
-# Information for Learners
-learners: 
-
-# Information for Instructors
-instructors: 
-
-# Learner Profiles
-profiles: 
-
-# Customisation ---------------------------------------------
-#
-# This space below is where custom yaml items (e.g. pinning
-# sandpaper and varnish versions) should live
-
-
+sandbox: false
+# Where to store files
+dest:
+  website: "./site"
+  allinone: "./allinone"
+  markdown: "./md"
+  html: "./html"
+# Taxonomies to use for search terms
+taxonomies:
+  - kind
+  - domains
+  - roles
+  - formats
+  - lessons
+# Whether or not to build search for the AIO page
+# (currently uses Algolia)
+search: false
+# Which features to enable in the generated site
+features:
+  lessons: true
+  discussion: true
+  prerequisites: true
+  sync_file: true
+  auto_repr: true
+  sandpaper_pins: true
+# Which files to process as generic (non-episode or non-index) Markdown files
+extra:
+  - "profiles/**.md"
+  - "learners/**.md"
+  - "instructors/**.md"
+# Yaml array of files that should be excluded from any endpoints.
+# These paths will be available at the root eg. (/LICENSE.md)
+# but will not be processed by the site.
+bin:
+  - "LICENSE.md"
+# Yaml array of directories that should be ignored by epitome
+# These will be excluded from (eg) the all-in-one page
+build_ignore:
+  - "^\\.github/_entries"
+  - site
+  - workshop
+  - allinone
+  - html
+  - md
+  - .
+  - _
+# Do not alter:
+# Version control for the lesson.
+# This should not be changed for derivative lessons.
+# Varies depending on what {source} is set to.
+# Used to keep lessons in sync with a repository at a specific version,
+# with a default source of The Carpentries Workshop.
+source: "https://github.com/carpentries/workbench"
+# Version of the sandbox to use.
+# Don't change unless creating a derivative of workbench.
+sandbox_version: "0.2.8"
+# Version of sandpaper the lesson was built with
+sandpaper: "0.2.8"
+# filename: Use NULL to get random pins
+#          Or specify a commit that has already been published eg. /1000/1
+#          To create a new pin, use the `sandpaper::create_pin()` function
+#          in sandpaper >= 0.4.0
+pin:
+  filename: null
+  commit: null
