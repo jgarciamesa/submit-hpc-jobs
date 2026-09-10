@@ -12,11 +12,11 @@ objectives:
 
 # Why a supercomputer for AI?
 
-Your laptop is a fine machine, but it holds one (or a few) chips and a few tens
-of gigabytes of memory. Training or serving a modern AI model can take hundreds
-of gigabytes of memory and many hours of arithmetic. **Anvil** is a
-supercomputer built for exactly that kind of work, and in this lesson you will
-submit your own AI jobs to it.
+Your laptop is a capable machine, but it holds one (or a few) chips and a few
+tens of gigabytes of memory. Training or serving a modern AI model can take
+hundreds of gigabytes of memory and many hours of arithmetic. **Anvil** is a
+supercomputer built for that kind of work, and in this lesson you will submit
+your own AI jobs to it.
 
 Anvil is operated by Purdue's [Research Computing
 Center][rcac] and is an NSF-funded [ACCESS][access] resource. By the numbers:
@@ -25,8 +25,8 @@ Center][rcac] and is an NSF-funded [ACCESS][access] resource. By the numbers:
 - 16 nodes carrying 4x NVIDIA A100 GPUs each.
 - 21 nodes carrying 4x NVIDIA H100 GPUs each.
 
-The hardware is the easy part. What makes a supercomputer *work* is the **job
-scheduler** that shares it fairly among hundreds of users at once. That is what
+The hardware is only half the picture. The other half is the **job scheduler**
+that shares the machine fairly among hundreds of users at once. That is what
 you will learn to drive.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
@@ -50,8 +50,8 @@ Every user shares the same handful of login nodes. If you ran a training job
 right there, you would slow down every other person using the machine, so
 **running jobs on a login node is against Anvil policy.**
 
-Instead, you write your work out as a job and submit it to the scheduler. The
-scheduler places your job on a **compute node** -- a full server with 128
+Instead, you write your work as a job script and submit it to the scheduler.
+The scheduler places your job on a **compute node** -- a full server with 128
 cores, or a GPU server -- and runs it when the resources you asked for become
 available.
 

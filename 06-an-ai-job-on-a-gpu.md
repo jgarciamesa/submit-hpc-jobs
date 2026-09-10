@@ -63,7 +63,7 @@ epoch 1: loss=0.6931  acc=0.502  0.210s  [cuda]
 Final accuracy: 0.987 on CUDA
 ```
 
-That is the moment the whole lesson is about: your AI workload just trained on
+That is the payoff of the whole lesson: your AI workload just trained on
 a national supercomputer GPU.
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -72,7 +72,7 @@ a national supercomputer GPU.
 
 If `nvidia-smi` is missing or the output says `[cpu]`, the job landed on a CPU
 node. The usual causes: the script is missing `--gres=gpu:1`, or it named a CPU
-partition. Check both, resubmit, and the next run will report a GPU.
+partition. Check both and resubmit; the next run will report a GPU.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -99,7 +99,7 @@ runs when the resource is available.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-This is the wow moment -- protect ten minutes for it. If `gpu-debug` is
+This is the highlight of the session -- protect ten minutes for it. If `gpu-debug` is
 saturated (check before the session), demo from the front and let attendees
 submit and check later, framed as "the real HPC experience." The `<pytorch-module>`
 line in the script is confirmed in the pre-session dry run; pin the exact module
@@ -111,7 +111,7 @@ or container there before the workshop.
 
 - Request a GPU with `--gres=gpu:<n>` and submit to a GPU partition such as `gpu-debug`.
 - A `g` node name and an `nvidia-smi` / `[cuda]` line in the output confirm the job ran on a GPU.
-- If the GPU queue is full, the job simply waits in PENDING and runs when a node frees up -- that is normal HPC behaviour.
+- If the GPU queue is full, the job waits in PENDING and runs when a node frees up -- that is normal on a shared cluster.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -14,7 +14,7 @@ objectives:
 # What you did today
 
 You connected to a national supercomputer, read your allocation, and drove its
-scheduler. By now you have, with your own hands:
+scheduler. You have now:
 
 - Logged in to Anvil and found your allocation account with `mybalance`.
 - Submitted a batch job with `sbatch` and watched it go `PENDING` to `RUNNING`.
@@ -23,8 +23,8 @@ scheduler. By now you have, with your own hands:
 - Trained a neural network on an A100 GPU (`nvidia-smi` in the output).
 - (Stretch) Fanned one script out into a five-task job array.
 
-Every one of those is a real, repeatable HPC skill. The two lines that make all
-of it work are the ones you now know by heart: `#SBATCH -A <account>` and
+Each of those is a repeatable HPC skill. The two lines that make all of it work
+are the ones you have used all session: `#SBATCH -A <account>` and
 `#SBATCH -p <partition>`.
 
 # Your next job is the hard one: getting your own allocation
@@ -69,10 +69,8 @@ A few norms keep a shared machine pleasant for everyone:
 4. **Cancel what you do not need.** A forgotten job at the head of the queue is
    blocking a colleague's afternoon.
 
-These are not rules to obey and forget -- they are the same etiquette you already
-use in a shared lab or office.
-
-That is the whole model, and now it is yours.
+These are not rules to memorize and forget -- they are the same etiquette you
+already use in a shared lab or office.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 

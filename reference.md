@@ -100,7 +100,7 @@ script, so they are fast and polite to the cluster.
 | `failed to map user <you>@access-ci.org` on `ssh` | Allocation not attached to Anvil yet | Use Open OnDemand; flag for the allocation episode |
 | `error: invalid account specified` | Missing or wrong `-A` line | Run `mybalance`, copy the exact string into `#SBATCH -A` |
 | `sbatch: error: Invalid partition name` | Typo in `-p` | Use a partition from `showpartitions` |
-| Job sits in `PD` (pending) | Queue full, or a prior job of yours is still running | `scancel <oldjobid>` or wait; check reason with `squeue -j <id> -o "%Q"` |
+| Job sits in `PD` (pending) | Queue full, or a prior job of yours is still running | `scancel <oldjobid>` or wait; check reason with `squeue -j <id> -o "%r"` |
 | `nvidia-smi` missing / output says `[cpu]` | Job landed on a CPU node | Add `--gres=gpu:1` and use a `gpu` partition |
 | `No module named 'torch'` | PyTorch not loaded in the script | Add the confirmed PyTorch module line (see instructor notes) |
 | `slurm-<id>.out` is empty | Job still running, or wrote to a different file | Check `sacct -j <id>` for state and the `StdOut` path |
