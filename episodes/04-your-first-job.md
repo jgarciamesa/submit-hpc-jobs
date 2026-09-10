@@ -74,9 +74,9 @@ Hello from Anvil!
   Node list: a042
 ```
 
-If the hostname is an `a...` node and not the machine you typed on, you have just seen the whole model happen: you submitted on
-the login node, the scheduler ran your job on a compute node, and wrote the
-result to a file you read back.
+If the hostname is an `a...` node and not the machine you typed on, you have
+seen the whole model work: you submitted on the login node, the scheduler ran
+your job on a compute node, and wrote the result to a file you read back.
 
 # Manage your jobs
 
@@ -110,15 +110,15 @@ for more than a minute. What is the most likely cause, and how do you check it?
 ## Most likely: the queue is full
 
 On `debug`, only one job per user may run at a time. If your previous `hello`
-job (or a neighbour's on the same debug node) is still running, this one waits.
-Check the reason with:
+job (or another user's on the same debug node) is still running, this one
+waits. Check the reason with:
 
 ```bash
-squeue -j <jobid> -o "%Q"
+squeue -j <jobid> -o "%r"
 ```
 
-which prints the hold reason. Most often it is simply `Resources` -- wait for
-the running job to finish, or cancel it first with `scancel <oldjobid>`.
+which prints the hold reason. Most often the reason is simply `Resources` --
+wait for the running job to finish, or cancel it first with `scancel <oldjobid>`.
 
 :::::::::::::::::::::::::::::::::
 

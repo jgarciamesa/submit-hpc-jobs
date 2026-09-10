@@ -11,7 +11,7 @@ objectives:
 # A hyperparameter sweep in one command
 
 Real research rarely runs one setting. You sweep a hyperparameter -- a learning
-rate, a regularisation strength -- and compare. A **job array** is how you do
+rate, a regularization strength -- and compare. A **job array** is how you do
 that in one submission: one script, many near-identical jobs.
 
 The stretch script, `train_sweep.py`, trains the digits classifier with a
@@ -51,8 +51,8 @@ ls slurm-array_*_*.out            # one output file per task
 ```
 
 Each of the five tasks runs the same script with a different `C` and writes its
-own `sweep_<task>.json`. One command, five experiments, five results to
-compare -- the pattern you will use for every sweep in your own work.
+own `sweep_<task>.json`. One command gives you five experiments and five
+results to compare -- the same pattern you will use for your own sweeps.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
