@@ -330,7 +330,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Stretch: One Script, Many Experiments (Job Arrays)</h1>
-        <p>Last updated on 2026-09-09 |
+        <p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/07-job-arrays.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -345,7 +345,7 @@
 <div class="section level1">
 <h1 id="a-hyperparameter-sweep-in-one-command">A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a></h1>
 <p>Real research rarely runs one setting. You sweep a hyperparameter – a
-learning rate, a regularisation strength – and compare. A <strong>job
+learning rate, a regularization strength – and compare. A <strong>job
 array</strong> is how you do that in one submission: one script, many
 near-identical jobs.</p>
 <p>The stretch script, <code>train_sweep.py</code>, trains the digits
@@ -387,8 +387,8 @@ output file per task:</p>
 </div>
 <p>Each of the five tasks runs the same script with a different
 <code>C</code> and writes its own <code>sweep_&lt;task&gt;.json</code>.
-One command, five experiments, five results to compare – the pattern you
-will use for every sweep in your own work.</p>
+One command gives you five experiments and five results to compare – the
+same pattern you will use for your own sweeps.</p>
 <div id="how-do-i-tell-which-result-came-from-which-setting" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -410,7 +410,7 @@ you match each result to the <code>C</code> value that produced it?</p>
   Read the task ID
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each file is named <code>sweep_&lt;task&gt;.json</code>, where
 <code>&lt;task&gt;</code> is the array task ID (00-04), and the file
@@ -506,8 +506,8 @@ is.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/07-job-arrays.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/07-job-arrays.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-09",
-  "datePublished": "2026-09-09"
+  "dateModified": "2026-09-10",
+  "datePublished": "2026-09-10"
 }
 
   </script><script>

@@ -330,7 +330,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Your First Job: hello, Anvil</h1>
-        <p>Last updated on 2026-09-09 |
+        <p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/04-your-first-job.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -413,9 +413,9 @@ greeting and a few environment variables:</p>
   Node list: a042</code></pre>
 </div>
 <p>If the hostname is an <code>a...</code> node and not the machine you
-typed on, you have just seen the whole model happen: you submitted on
-the login node, the scheduler ran your job on a compute node, and wrote
-the result to a file you read back.</p>
+typed on, you have seen the whole model work: you submitted on the login
+node, the scheduler ran your job on a compute node, and wrote the result
+to a file you read back.</p>
 </div>
 <div class="section level1">
 <h1 id="manage-your-jobs">Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a></h1>
@@ -459,17 +459,17 @@ it?</p>
   Most likely: the queue is full
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On <code>debug</code>, only one job per user may run at a time. If
-your previous <code>hello</code> job (or a neighbour’s on the same debug
-node) is still running, this one waits. Check the reason with:</p>
+your previous <code>hello</code> job (or another user’s on the same
+debug node) is still running, this one waits. Check the reason with:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">squeue</span> <span class="at">-j</span> <span class="op">&lt;</span>jobid<span class="op">&gt;</span> -o <span class="st">"%Q"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">squeue</span> <span class="at">-j</span> <span class="op">&lt;</span>jobid<span class="op">&gt;</span> -o <span class="st">"%r"</span></span></code></pre>
 </div>
-<p>which prints the hold reason. Most often it is simply
+<p>which prints the hold reason. Most often the reason is simply
 <code>Resources</code> – wait for the running job to finish, or cancel
 it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
 </div>
@@ -497,7 +497,7 @@ it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
   Missing or wrong -A account
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The <code>-A</code> line is missing, or the string does not match an
 account on your allocation. Run <code>mybalance</code>, copy the exact
@@ -592,8 +592,8 @@ lines request resources; the rest runs on a compute node.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/04-your-first-job.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/04-your-first-job.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-09",
-  "datePublished": "2026-09-09"
+  "dateModified": "2026-09-10",
+  "datePublished": "2026-09-10"
 }
 
   </script><script>

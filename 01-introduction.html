@@ -330,7 +330,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction: AI Workloads on a Supercomputer</h1>
-        <p>Last updated on 2026-09-09 |
+        <p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/01-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -344,21 +344,21 @@
 
 <div class="section level1">
 <h1 id="why-a-supercomputer-for-ai">Why a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a></h1>
-<p>Your laptop is a fine machine, but it holds one (or a few) chips and
-a few tens of gigabytes of memory. Training or serving a modern AI model
-can take hundreds of gigabytes of memory and many hours of arithmetic.
-<strong>Anvil</strong> is a supercomputer built for exactly that kind of
-work, and in this lesson you will submit your own AI jobs to it.</p>
+<p>Your laptop is a capable machine, but it holds one (or a few) chips
+and a few tens of gigabytes of memory. Training or serving a modern AI
+model can take hundreds of gigabytes of memory and many hours of
+arithmetic. <strong>Anvil</strong> is a supercomputer built for that
+kind of work, and in this lesson you will submit your own AI jobs to
+it.</p>
 <p>Anvil is operated by Purdue’s <a href="https://www.rcac.purdue.edu" title="Purdue Research Computing Center (RCAC)" class="external-link">Research Computing
 Center</a> and is an NSF-funded <a href="https://access-ci.org" title="NSF ACCESS allocation program" class="external-link">ACCESS</a> resource. By the
 numbers:</p>
 <ul><li>1,000+ compute nodes, each with 128 AMD EPYC cores.</li>
 <li>16 nodes carrying 4x NVIDIA A100 GPUs each.</li>
 <li>21 nodes carrying 4x NVIDIA H100 GPUs each.</li>
-</ul><p>The hardware is the easy part. What makes a supercomputer
-<em>work</em> is the <strong>job scheduler</strong> that shares it
-fairly among hundreds of users at once. That is what you will learn to
-drive.</p>
+</ul><p>The hardware is only half the picture. The other half is the
+<strong>job scheduler</strong> that shares the machine fairly among
+hundreds of users at once. That is what you will learn to drive.</p>
 
 </div>
 <div class="section level1">
@@ -370,7 +370,7 @@ jobs, and submit work. It is <em>not</em> where heavy work is done.</p>
 training job right there, you would slow down every other person using
 the machine, so <strong>running jobs on a login node is against Anvil
 policy.</strong></p>
-<p>Instead, you write your work out as a job and submit it to the
+<p>Instead, you write your work as a job script and submit it to the
 scheduler. The scheduler places your job on a <strong>compute
 node</strong> – a full server with 128 cores, or a GPU server – and runs
 it when the resources you asked for become available.</p>
@@ -484,8 +484,8 @@ policy.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/01-introduction.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/01-introduction.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-09",
-  "datePublished": "2026-09-09"
+  "dateModified": "2026-09-10",
+  "datePublished": "2026-09-10"
 }
 
   </script><script>

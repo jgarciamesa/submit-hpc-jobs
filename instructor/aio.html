@@ -387,7 +387,7 @@
         
 <section id="aio-01-introduction"><p>Content from <a href="01-introduction.html">Introduction: AI Workloads on a Supercomputer</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/01-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 10 minutes</p>
@@ -397,11 +397,12 @@
 <div class="section level1">
 <h1 id="why-a-supercomputer-for-ai">Why a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a>
 </h1>
-<p>Your laptop is a fine machine, but it holds one (or a few) chips and
-a few tens of gigabytes of memory. Training or serving a modern AI model
-can take hundreds of gigabytes of memory and many hours of arithmetic.
-<strong>Anvil</strong> is a supercomputer built for exactly that kind of
-work, and in this lesson you will submit your own AI jobs to it.</p>
+<p>Your laptop is a capable machine, but it holds one (or a few) chips
+and a few tens of gigabytes of memory. Training or serving a modern AI
+model can take hundreds of gigabytes of memory and many hours of
+arithmetic. <strong>Anvil</strong> is a supercomputer built for that
+kind of work, and in this lesson you will submit your own AI jobs to
+it.</p>
 <p>Anvil is operated by Purdue’s <a href="https://www.rcac.purdue.edu" title="Purdue Research Computing Center (RCAC)" class="external-link">Research Computing
 Center</a> and is an NSF-funded <a href="https://access-ci.org" title="NSF ACCESS allocation program" class="external-link">ACCESS</a> resource. By the
 numbers:</p>
@@ -410,16 +411,15 @@ numbers:</p>
 <li>16 nodes carrying 4x NVIDIA A100 GPUs each.</li>
 <li>21 nodes carrying 4x NVIDIA H100 GPUs each.</li>
 </ul>
-<p>The hardware is the easy part. What makes a supercomputer
-<em>work</em> is the <strong>job scheduler</strong> that shares it
-fairly among hundreds of users at once. That is what you will learn to
-drive.</p>
+<p>The hardware is only half the picture. The other half is the
+<strong>job scheduler</strong> that shares the machine fairly among
+hundreds of users at once. That is what you will learn to drive.</p>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>You are connecting to the morning session on national-level AI and
 HPC resources. A one-line bridge earns a lot of attention: “This is the
@@ -441,7 +441,7 @@ jobs, and submit work. It is <em>not</em> where heavy work is done.</p>
 training job right there, you would slow down every other person using
 the machine, so <strong>running jobs on a login node is against Anvil
 policy.</strong></p>
-<p>Instead, you write your work out as a job and submit it to the
+<p>Instead, you write your work as a job script and submit it to the
 scheduler. The scheduler places your job on a <strong>compute
 node</strong> – a full server with 128 cores, or a GPU server – and runs
 it when the resources you asked for become available.</p>
@@ -547,7 +547,7 @@ key for next time.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>If someone’s <code>ssh</code> says
 <code>failed to map user &lt;you&gt;@access-ci.org</code>, their
@@ -600,7 +600,7 @@ lesson.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Your account string </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>It is the name that starts with your project, for example
 <code>ACCESS-2026-ai-for-all</code> (the exact string varies per
@@ -780,7 +780,7 @@ waiting to learn how to read the queue.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Ask “how many of you have run anything on a cluster before?” here. If
 most hands go up, skim the table and spend the time on the two rules. If
@@ -815,7 +815,7 @@ uses the default <code>shared</code> partition.</li>
 </h1>
 </div></section><section id="aio-04-your-first-job"><p>Content from <a href="04-your-first-job.html">Your First Job: hello, Anvil</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/04-your-first-job.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 22 minutes</p>
@@ -897,9 +897,9 @@ greeting and a few environment variables:</p>
   Node list: a042</code></pre>
 </div>
 <p>If the hostname is an <code>a...</code> node and not the machine you
-typed on, you have just seen the whole model happen: you submitted on
-the login node, the scheduler ran your job on a compute node, and wrote
-the result to a file you read back.</p>
+typed on, you have seen the whole model work: you submitted on the login
+node, the scheduler ran your job on a compute node, and wrote the result
+to a file you read back.</p>
 </div>
 <div class="section level1">
 <h1 id="manage-your-jobs">Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a>
@@ -944,17 +944,17 @@ it?</p>
   Most likely: the queue is full
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On <code>debug</code>, only one job per user may run at a time. If
-your previous <code>hello</code> job (or a neighbour’s on the same debug
-node) is still running, this one waits. Check the reason with:</p>
+your previous <code>hello</code> job (or another user’s on the same
+debug node) is still running, this one waits. Check the reason with:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">squeue</span> <span class="at">-j</span> <span class="op">&lt;</span>jobid<span class="op">&gt;</span> -o <span class="st">"%Q"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">squeue</span> <span class="at">-j</span> <span class="op">&lt;</span>jobid<span class="op">&gt;</span> -o <span class="st">"%r"</span></span></code></pre>
 </div>
-<p>which prints the hold reason. Most often it is simply
+<p>which prints the hold reason. Most often the reason is simply
 <code>Resources</code> – wait for the running job to finish, or cancel
 it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
 </div>
@@ -982,7 +982,7 @@ it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
   Missing or wrong -A account
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The <code>-A</code> line is missing, or the string does not match an
 account on your allocation. Run <code>mybalance</code>, copy the exact
@@ -1123,7 +1123,7 @@ time in the two output files. What changed, and why might fewer cores be
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Fewer cores can be faster </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>This particular model does not parallelize cleanly, so adding cores
 does not speed it up and can add overhead. The lesson is not “more is
@@ -1139,7 +1139,7 @@ run) would scale with cores instead.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>If you are running more than five minutes behind schedule at the
 start of this episode, convert it to a front-of-room demo: you submit
@@ -1174,7 +1174,7 @@ submissions do not overwrite each other.</li>
 </h1>
 </div></section><section id="aio-06-an-ai-job-on-a-gpu"><p>Content from <a href="06-an-ai-job-on-a-gpu.html">An AI Job on an A100 GPU</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/06-an-ai-job-on-a-gpu.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -1241,8 +1241,8 @@ says it trained on <code>CUDA</code>.</li>
 ...
 Final accuracy: 0.987 on CUDA</code></pre>
 </div>
-<p>That is the moment the whole lesson is about: your AI workload just
-trained on a national supercomputer GPU.</p>
+<p>That is the payoff of the whole lesson: your AI workload just trained
+on a national supercomputer GPU.</p>
 <div id="no-gpu-in-the-output" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1254,7 +1254,7 @@ trained on a national supercomputer GPU.</p>
 <p>If <code>nvidia-smi</code> is missing or the output says
 <code>[cpu]</code>, the job landed on a CPU node. The usual causes: the
 script is missing <code>--gres=gpu:1</code>, or it named a CPU
-partition. Check both, resubmit, and the next run will report a GPU.</p>
+partition. Check both and resubmit; the next run will report a GPU.</p>
 </div>
 </div>
 </div>
@@ -1276,7 +1276,7 @@ partition. Check both, resubmit, and the next run will report a GPU.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Submit-and-check-later is the real HPC experience </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>There is nothing wrong with the job – the queue is just full. Leave
 it submitted and it will run when a GPU node frees up. Note the job ID,
@@ -1293,9 +1293,9 @@ resource is available.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
-<p>This is the wow moment – protect ten minutes for it. If
+<p>This is the highlight of the session – protect ten minutes for it. If
 <code>gpu-debug</code> is saturated (check before the session), demo
 from the front and let attendees submit and check later, framed as “the
 real HPC experience.” The <code>&lt;pytorch-module&gt;</code> line in
@@ -1318,8 +1318,8 @@ GPU partition such as <code>gpu-debug</code>.</li>
 <li>A <code>g</code> node name and an <code>nvidia-smi</code> /
 <code>[cuda]</code> line in the output confirm the job ran on a
 GPU.</li>
-<li>If the GPU queue is full, the job simply waits in PENDING and runs
-when a node frees up – that is normal HPC behaviour.</li>
+<li>If the GPU queue is full, the job waits in PENDING and runs when a
+node frees up – that is normal on a shared cluster.</li>
 </ul>
 </div>
 </div>
@@ -1330,7 +1330,7 @@ when a node frees up – that is normal HPC behaviour.</li>
 </h1>
 </div></section><section id="aio-07-job-arrays"><p>Content from <a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/07-job-arrays.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -1341,7 +1341,7 @@ when a node frees up – that is normal HPC behaviour.</li>
 <h1 id="a-hyperparameter-sweep-in-one-command">A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a>
 </h1>
 <p>Real research rarely runs one setting. You sweep a hyperparameter – a
-learning rate, a regularisation strength – and compare. A <strong>job
+learning rate, a regularization strength – and compare. A <strong>job
 array</strong> is how you do that in one submission: one script, many
 near-identical jobs.</p>
 <p>The stretch script, <code>train_sweep.py</code>, trains the digits
@@ -1383,8 +1383,8 @@ output file per task:</p>
 </div>
 <p>Each of the five tasks runs the same script with a different
 <code>C</code> and writes its own <code>sweep_&lt;task&gt;.json</code>.
-One command, five experiments, five results to compare – the pattern you
-will use for every sweep in your own work.</p>
+One command gives you five experiments and five results to compare – the
+same pattern you will use for your own sweeps.</p>
 <div id="how-do-i-tell-which-result-came-from-which-setting" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1406,7 +1406,7 @@ you match each result to the <code>C</code> value that produced it?</p>
   Read the task ID
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each file is named <code>sweep_&lt;task&gt;.json</code>, where
 <code>&lt;task&gt;</code> is the array task ID (00-04), and the file
@@ -1443,7 +1443,7 @@ is.</li>
 </h1>
 </div></section><section id="aio-08-wrap-up"><p>Content from <a href="08-wrap-up.html">Wrap-Up: Allocations, Rules, and Where to Go Next</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-10 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/08-wrap-up.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 17 minutes</p>
@@ -1454,7 +1454,7 @@ is.</li>
 <h1 id="what-you-did-today">What you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a>
 </h1>
 <p>You connected to a national supercomputer, read your allocation, and
-drove its scheduler. By now you have, with your own hands:</p>
+drove its scheduler. You have now:</p>
 <ul>
 <li>Logged in to Anvil and found your allocation account with
 <code>mybalance</code>.</li>
@@ -1467,8 +1467,8 @@ drove its scheduler. By now you have, with your own hands:</p>
 the output).</li>
 <li>(Stretch) Fanned one script out into a five-task job array.</li>
 </ul>
-<p>Every one of those is a real, repeatable HPC skill. The two lines
-that make all of it work are the ones you now know by heart:
+<p>Each of those is a repeatable HPC skill. The two lines that make all
+of it work are the ones you have used all session:
 <code>#SBATCH -A &lt;account&gt;</code> and
 <code>#SBATCH -p &lt;partition&gt;</code>.</p>
 </div>
@@ -1537,9 +1537,8 @@ requests 128 cores and uses 2 holds 126 cores hostage for the whole run.
 <strong>Cancel what you do not need.</strong> A forgotten job at the
 head of the queue is blocking a colleague’s afternoon.</li>
 </ol>
-<p>These are not rules to obey and forget – they are the same etiquette
-you already use in a shared lab or office.</p>
-<p>That is the whole model, and now it is yours.</p>
+<p>These are not rules to memorize and forget – they are the same
+etiquette you already use in a shared lab or office.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1612,8 +1611,8 @@ resources you need, and cancel jobs you no longer need.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/aio.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/aio.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-09",
-  "datePublished": "2026-09-09"
+  "dateModified": "2026-09-10",
+  "datePublished": "2026-09-10"
 }
 
   </script><script>
