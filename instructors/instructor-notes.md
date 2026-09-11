@@ -42,10 +42,11 @@ Do these **before** the workshop. Accounts are the number-one success factor.
 
 ## Open items to resolve before the session
 
-1. **The account string.** Every lab's `.sbatch` uses the workshop allocation
-   `cis261672-gpu`, which reaches only `gpu-debug` and `gpu`. Confirm before the
-   session that every attendee can submit under it. Attendees who have their own
-   allocation may swap in their own `-A` value from `mybalance`.
+1. **The account string.** The GPU labs' `.sbatch` files use the workshop
+   allocation `cis261672-gpu`, which reaches only `gpu-debug` and `gpu`.
+   Confirm before the session that every attendee can submit under it.
+   Attendees who have their own allocation may swap in their own `-A` value
+   from `mybalance`.
 2. **The PyTorch module.** Pin the exact `module load <pytorch>` (or the
    Singularity/NGC container command) in `train-gpu.sbatch`. The script is
    written to load `conda` first, so a module-based PyTorch or a module-based
@@ -64,7 +65,7 @@ each lab ends on a visible success signal before you move on.
 
 | Time | Episode | Activity | Checkpoint |
 |------|---------|----------|------------|
-| 1:00--1:15 (15m) | [01][ep1], [03][ep3] | Framing: why HPC, login/compute model, the partition table | Everyone sees the partition table |
+| 1:00--1:15 (15m) | [01][ep1], [03][ep3] | Framing: why HPC, login/compute model, the partition tables | Everyone sees the workshop queue in the table |
 | 1:15--1:27 (12m) | [02][ep2] | Lab 1: connect, `mybalance`, `showpartitions`, `sfeatures` | Everyone can name their account string |
 | 1:27--1:39 (12m) | [04][ep4] | Lab 2: submit `hello.sbatch`, watch `squeue`, `cat` the output | Everyone has a `slurm-*.out` with their job ID |
 | 1:39--1:57 (18m) | [05][ep5] | Lab 3: digits CPU training job | Everyone sees a test-accuracy number |
