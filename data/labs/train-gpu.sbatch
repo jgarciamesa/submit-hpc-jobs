@@ -13,6 +13,8 @@
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1            # <-- ask for ONE GPU (each A100 node has 4, shared)
 #SBATCH -t 00:25:00             # fits inside the 30-min gpu-debug limit
+#SBATCH -o slurm-%j.out         # standard output file
+#SBATCH -e slurm-%j.err         # error output file
 
 module purge
 module load conda                # then PyTorch — see instructor-notes.md: verify the

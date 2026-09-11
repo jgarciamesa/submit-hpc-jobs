@@ -35,12 +35,12 @@ Do these **before** the workshop. Accounts are the number-one success factor.
       `module spider pytorch` and put the exact module line into
       `train-gpu.sbatch` (the commented line near the top). Until then the GPU
       script has a placeholder.
-- [ ] **Dry-run each lab** as yourself on `gpu-debug` so you know the real wall
-      time and the exact output to show. Include a CPU-only submission (no
-      `--gres`): confirm it is accepted on `gpu-debug`, since the public docs do
-      not state this explicitly.
+- [ ] **Dry-run each lab** as yourself so you know the real wall time and the
+      exact output to show. The GPU labs run on `gpu-debug` (each asks for one
+      GPU); the CPU-only digits lab (episode 5) runs on `shared` -- dry-run it
+      once the CPU allocation is provisioned (see the open items below).
 
-## The two open items to resolve before the session
+## Open items to resolve before the session
 
 1. **The account string.** Every lab's `.sbatch` uses the workshop allocation
    `cis261672-gpu`, which reaches only `gpu-debug` and `gpu`. Confirm before the
@@ -50,6 +50,11 @@ Do these **before** the workshop. Accounts are the number-one success factor.
    Singularity/NGC container command) in `train-gpu.sbatch`. The script is
    written to load `conda` first, so a module-based PyTorch or a module-based
    Singularity both fit the existing structure.
+3. **The CPU allocation (episode 5).** The digits CPU job submits to `shared`
+   and currently carries `-A cis261672-gpu`. As soon as the CPU allocation is
+   provisioned, confirm its account string with `mybalance` and update the `-A`
+   line in `train-digits-cpu.sbatch` if it differs. If it has not landed by
+   session time, see the fallback in the Fallbacks section.
 
 ## Timing (90 minutes: 15 framing / 60 hands-on / 15 wrap-up)
 
@@ -64,7 +69,7 @@ each lab ends on a visible success signal before you move on.
 | 1:27--1:39 (12m) | [04][ep4] | Lab 2: submit `hello.sbatch`, watch `squeue`, `cat` the output | Everyone has a `slurm-*.out` with their job ID |
 | 1:39--1:57 (18m) | [05][ep5] | Lab 3: digits CPU training job | Everyone sees a test-accuracy number |
 | 1:57--2:12 (15m) | [06][ep6] | Lab 4: GPU PyTorch job (`--gres=gpu:1`) | `nvidia-smi` shows `NVIDIA A100` |
-| 2:12--2:15 (if 10m+ remain) | [07][ep7] | Stretch: job-array sweep | One array of 5 tasks submitted |
+| 2:12--2:15 (if 10m+ remain) | [07][ep7] | Scale: job-array sweep | One array of 5 tasks submitted |
 | 2:15--2:30 (15m) | [08][ep8] | Wrap-up: allocations, rules of the road, help, Q&A | Everyone leaves with the reference page |
 
 ## Fallbacks (when a lab runs long)
@@ -79,18 +84,20 @@ each lab ends on a visible success signal before you move on.
 - **`gpu-debug` saturated.** Demo from the front; attendees submit and leave
   with a `PENDING` job plus instructions to check the output later. Frame it as
   the real HPC experience: *your job runs when the resource is free.*
-- **SSH keys not set up (biggest time sink).** Route those people to the
-  OnDemand browser shell; helpers roam. Do not spend the group's time on one
-  person's key.
+- **SSH keys not set up.** Route those people to the OnDemand web shell;
+  helpers roam. Do not spend the group's time on one person's key.
+- **Episode 5 (CPU allocation not ready).** If the CPU allocation has not been
+  provisioned by session time, skip episode 5 and move straight to the GPU
+  lab; no other lab depends on it.
 
 ## Differentiation by audience
 
-- **Never touched a terminal:** the OnDemand GUI runs every lab except the
-  stretch; the setup page walks SSH-key creation for anyone who wants it.
+- **Never touched a terminal:** the OnDemand web shell runs every lab except
+  the scale lab; the setup page has an SSH section for anyone who wants it.
 - **Has a cluster account elsewhere:** "if you know Slurm, you know Anvil."
   Point them to the *Anvil-specific differences* section of the reference page
   (account string, `mybalance`, the `gpu-debug` single-job rule).
-- **Fast finishers:** the job-array stretch, then explore `sacct` columns and
+- **Fast finishers:** the job-array scale lab, then explore `sacct` columns and
   the charge factors.
 
 ## Success criteria

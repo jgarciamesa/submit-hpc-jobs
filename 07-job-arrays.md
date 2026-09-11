@@ -1,5 +1,5 @@
 ---
-title: "Stretch: One Script, Many Experiments (Job Arrays)"
+title: "Scale: One Script, Many Experiments (Job Arrays)"
 teaching: 5 # teaching time in minutes
 exercises: 10 # exercise time in minutes
 ---
@@ -23,7 +23,7 @@ Real research rarely runs one setting. You sweep a hyperparameter -- a learning
 rate, a regularization strength -- and compare. A **job array** is how you do
 that in one submission: one script, many near-identical jobs.
 
-The stretch script, `train_sweep.py`, trains the digits classifier with a
+The sweep script, `train_sweep.py`, trains the digits classifier with a
 different `C` value per array task:
 
 ```python
@@ -44,8 +44,10 @@ Its script, `array.sbatch`, writes one output file per task:
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
+#SBATCH --gres=gpu:1            # jobs on gpu/gpu-debug must ask for a GPU
 #SBATCH -t 00:20:00
 #SBATCH -o slurm-array_%A_%a.out   # %A = job ID, %a = array task ID
+#SBATCH -e slurm-array_%A_%a.err   # one error file per task, to match
 
 module load conda
 cd $SLURM_SUBMIT_DIR
@@ -59,7 +61,7 @@ sbatch --array=0-4 array.sbatch
 ls slurm-array_*_*.out            # one output file per task
 ```
 
-`gpu-debug` allows one running job per user, so the five tasks usually run in turn -- you can watch them appear one by one in `squeue`. Each task runs the same script with a different `C` and writes its own `sweep_<task>.json`. One command gives you five experiments and five results to compare -- the same pattern you will use for your own sweeps. When a sweep grows beyond 30 minutes per task, the same script works on `-p gpu` with a `--gres` request and a longer limit.
+`gpu-debug` allows one running job per user, so the five tasks usually run in turn -- you can watch them appear one by one in `squeue`. Each task runs the same script with a different `C` and writes its own `sweep_<task>.json`. One command gives you five experiments and five results to compare -- the same pattern you will use for your own sweeps. When a sweep grows beyond 30 minutes per task, the same script works on `-p gpu` with a longer time limit.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 

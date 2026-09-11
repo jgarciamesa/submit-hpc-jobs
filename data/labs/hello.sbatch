@@ -10,7 +10,10 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=2G
+#SBATCH --gres=gpu:1            # jobs on gpu/gpu-debug must ask for a GPU
 #SBATCH -t 00:10:00             # 10 minutes of wall time
+#SBATCH -o slurm-%j.out         # standard output file
+#SBATCH -e slurm-%j.err         # error output file
 
 module load conda               # Anaconda distribution (provides python3)
 

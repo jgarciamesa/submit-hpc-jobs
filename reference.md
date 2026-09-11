@@ -9,21 +9,28 @@ tab while you work through the labs.
 
 ## The partitions (queues)
 
-Run `showpartitions` on Anvil to see the live version of this table. The
+Run `showpartitions` on Anvil to see the live version of these tables. The
 columns that matter most for a class are **max time**, **max running
-jobs/user**, and **GPU**. The workshop allocation `cis261672-gpu` reaches only
-`gpu-debug` and `gpu`, and every lab in this lesson uses `gpu-debug`.
+jobs/user**, and **GPU**. The workshop allocation `cis261672-gpu` reaches
+`gpu-debug` and `gpu`; the CPU-only digits job in episode 5 runs on `shared`.
 
-| Partition   | Node type      | Max nodes/job | Max time | Max running jobs/user | GPUs | Notes |
-|-------------|----------------|---------------|----------|-----------------------|------|-------|
-| `debug`     | regular CPU    | 2             | 2 hrs    | 1                     | -    | Short CPU tests (not on this allocation) |
-| `gpu-debug` | GPU (A100)     | 1             | 0.5 hrs  | 1                     | 2 max| **workshop queue** -- every lab runs here, CPU-only jobs included |
-| `shared`    | regular CPU    | 1 (128 cores) | 96 hrs   | many                  | -    | The **default** CPU partition (not on this allocation) |
-| `wholenode` | regular CPU    | 16            | 96 hrs   | 64                    | -    | Node-exclusive CPU, bills all 128 cores (not on this allocation) |
-| `wide`      | regular CPU    | 56            | 12 hrs   | 5                     | -    | Wide multi-node CPU (not on this allocation) |
-| `highmem`   | large-memory   | 1             | 48 hrs   | 2                     | -    | ~1 TB RAM, charges 4x (not on this allocation) |
-| `gpu`       | GPU (A100)     | -             | 48 hrs   | -                     | 4    | A100 production jobs (your other queue) |
-| `ai`        | GPU (H100)     | -             | 48 hrs   | -                     | 4    | H100 production jobs (not on this allocation) |
+The partitions you will use:
+
+| Partition   | Node type  | Max time | Max running jobs/user | GPUs | Notes |
+|-------------|------------|----------|-----------------------|------|-------|
+| `gpu-debug` | GPU (A100) | 0.5 hrs  | 1                     | 2 max| **workshop queue** -- every GPU lab runs here |
+| `gpu`       | GPU (A100) | 48 hrs   | -                     | 4    | A100 production jobs (your other queue) |
+
+The other partitions on Anvil:
+
+| Partition   | Node type    | Max time | Max running jobs/user | GPUs | Notes |
+|-------------|--------------|----------|-----------------------|------|-------|
+| `debug`     | regular CPU  | 2 hrs    | 1                     | -    | Short CPU tests (not on this allocation) |
+| `shared`    | regular CPU  | 96 hrs   | many                  | -    | The **default** CPU partition -- the episode 5 digits job runs here |
+| `wholenode` | regular CPU  | 96 hrs   | 64                    | -    | Node-exclusive CPU, bills all 128 cores (not on this allocation) |
+| `wide`      | regular CPU  | 12 hrs   | 5                     | -    | Wide multi-node CPU (not on this allocation) |
+| `highmem`   | large-memory | 48 hrs   | 2                     | -    | ~1 TB RAM, charges 4x (not on this allocation) |
+| `ai`        | GPU (H100)   | 48 hrs   | -                     | 4    | H100 production jobs (not on this allocation) |
 
 **Node type codes (from `sfeatures`):** `a[000-999]` are the AMD CPU nodes,
 `g[000-015]` carry NVIDIA A100 GPUs, and `h[000-020]` carry NVIDIA H100 GPUs.
@@ -33,6 +40,8 @@ If your job's node name starts with `g`, you are on an A100; `h` means H100.
 
 ```bash
 # --- connect ---
+# Preferred: log in to Open OnDemand (https://ondemand.rcac.purdue.edu) and
+# open Clusters - Shell access. With an SSH key set up:
 ssh <x-username>@anvil.rcac.purdue.edu
 
 # --- your account and the queues ---
@@ -77,9 +86,9 @@ Most of this is standard Slurm. The Anvil quirks worth knowing:
 - **Node-exclusive and memory partitions cost more.** `wholenode` bills all
   128 cores even if you use one; `highmem` charges 4x. Do not reach for these
   to make a job "faster" -- ask for the size that fits.
-- **GPUs via `--gres`.** Add `--gres=gpu:1` (or `:2`) to a job script and submit
-  to a `gpu`/`gpu-debug` partition. A CPU-only job simply omits the line and
-  still runs on `gpu-debug`, using the node's CPU cores.
+- **GPUs via `--gres`.** Every job on a `gpu`/`gpu-debug` partition asks for a
+  GPU with `--gres=gpu:1` (or `:2`), even if the program never uses one. A
+  CPU-only job goes to a CPU partition such as `shared` and omits the line.
 
 ## Lab file index
 
@@ -101,7 +110,7 @@ script, so they are fast and polite to the cluster.
 |---------|--------------|-----|
 | `failed to map user <you>@access-ci.org` on `ssh` | Allocation not attached to Anvil yet | Use Open OnDemand; flag for the allocation episode |
 | `error: invalid account specified` | Missing or wrong `-A` line | Run `mybalance`, copy the exact string into `#SBATCH -A` |
-| `sbatch: error: Invalid partition name` | Typo in `-p` | Use `gpu-debug` or `gpu` (the only two this allocation reaches) |
+| `sbatch: error: Invalid partition name` | Typo in `-p` | Use the partition the lab names: `shared` for the CPU lab, `gpu-debug` for the GPU labs |
 | Job sits in `PD` (pending) | Queue full, or a prior job of yours is still running | `scancel <oldjobid>` or wait; check reason with `squeue -j <id> -o "%r"` |
 | `nvidia-smi` missing / output says `[cpu]` | Job landed on a CPU node | Add `--gres=gpu:1` and use a `gpu` partition |
 | `No module named 'torch'` | PyTorch not loaded in the script | Add the confirmed PyTorch module line (see instructor notes) |

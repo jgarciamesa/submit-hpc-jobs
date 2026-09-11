@@ -1,4 +1,4 @@
-# train_sweep.py — Stretch lab: one script, many experiments (job arrays)
+# train_sweep.py — Scale lab: one script, many experiments (job arrays)
 # Each array task trains the digits classifier with a different C value
 # (the "hyperparameter sweep" pattern — the #1 real use of job arrays).
 

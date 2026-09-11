@@ -21,7 +21,10 @@ exercises: 15 # exercise time in minutes
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-So far every job has used only CPU cores. To run on a GPU you do two new things in the script: name a GPU partition and request a GPU with `--gres`.
+Every job in this lesson that submits to a GPU partition asks for a GPU with
+`--gres=gpu:1` -- the `hello` job included. This is the first job where the
+program actually uses one: a small neural network trains on the GPU instead
+of the CPU.
 
 Here is the new script, `train-gpu.sbatch`. It trains a small neural network
 with PyTorch on a dataset generated inside the script (again, **nothing is
@@ -39,6 +42,8 @@ landed on:
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1            # <-- ask for ONE GPU
 #SBATCH -t 00:25:00             # fits inside the 30-min gpu-debug limit
+#SBATCH -o slurm-%j.out         # standard output file
+#SBATCH -e slurm-%j.err         # error output file
 
 module load conda
 # module load <pytorch-module>   # <- confirmed before the session; see instructor notes

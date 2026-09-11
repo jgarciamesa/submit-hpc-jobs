@@ -36,7 +36,10 @@ Here is the whole script for this episode's job, `hello.sbatch`:
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=2G
+#SBATCH --gres=gpu:1            # jobs on gpu/gpu-debug must ask for a GPU
 #SBATCH -t 00:10:00             # 10 minutes of wall time
+#SBATCH -o slurm-%j.out         # standard output file
+#SBATCH -e slurm-%j.err         # error output file
 
 module load conda               # Anaconda distribution (provides python3)
 cd $SLURM_SUBMIT_DIR            # run from where you submitted the job
@@ -46,11 +49,15 @@ python3 hello.py
 Two of these lines are **mandatory on Anvil**:
 
 - `#SBATCH -A <account>` -- your allocation account. For this workshop that is `cis261672-gpu`, the shared workshop allocation (you can still check your own with `mybalance`). A job without it is rejected.
-- `#SBATCH -p <partition>` -- which queue to run in. Every lab in this lesson uses `-p gpu-debug`.
+- `#SBATCH -p <partition>` -- which queue to run in. The GPU labs use `-p gpu-debug`; the CPU-only digits job uses `-p shared`.
+
+A third line matters for this lesson: `#SBATCH --gres=gpu:1` asks for one
+GPU. Jobs on the `gpu` and `gpu-debug` partitions must request a GPU --
+even the `hello` job, which never touches one.
 
 The other lines ask for resources: how many nodes, how many cores per task,
-how much memory, and how much time. For a one-line `hello` program, two cores
-and ten minutes are more than enough.
+how much memory, how much time, and where the output goes. For a one-line
+`hello` program, two cores and ten minutes are more than enough.
 
 `hello.py`, the program the job runs, just prints a greeting and a few
 environment variables:
