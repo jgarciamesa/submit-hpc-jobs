@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -239,7 +229,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -330,7 +320,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Meeting Anvil's Queues (Partitions)</h1>
-        <p>Last updated on 2026-09-09 |
+        <p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/03-meeting-anvils-queues.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -346,6 +336,31 @@
 
 <div class="section level1">
 <h1 id="what-is-a-partition">What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a></h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>What is a partition, and why are there so many of them?</li>
+<li>Which queues are best for short testing runs, like the ones in this
+lesson?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Explain what a Slurm partition is and how to read its limits.</li>
+<li>Choose the right partition for a testing run versus a production
+run.</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <p>Slurm (Anvil’s scheduler) groups compute resources into
 <strong>partitions</strong> – the technical name for a <em>queue</em>.
 Each partition has its own machines and its own rules: how many nodes a
@@ -363,90 +378,79 @@ the previous episode). Here is what matters for this lesson:</p>
 <th>Max time</th>
 <th>Max running jobs/user</th>
 <th>Notes</th>
-</tr></thead><tbody><tr><td><code>debug</code></td>
-<td>regular CPU</td>
-<td>2</td>
-<td>2 hrs</td>
-<td>1</td>
-<td>short tests – our CPU labs use this</td>
-</tr><tr><td><code>gpu-debug</code></td>
+</tr></thead><tbody><tr><td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
 <td>1</td>
 <td>0.5 hrs</td>
 <td>1</td>
-<td>short GPU tests – our GPU lab uses this</td>
-</tr><tr><td><code>shared</code></td>
-<td>regular CPU</td>
-<td>1 (128 cores)</td>
-<td>96 hrs</td>
-<td>many</td>
-<td>the <strong>default</strong> CPU queue</td>
-</tr><tr><td><code>wholenode</code></td>
-<td>regular CPU</td>
-<td>16</td>
-<td>96 hrs</td>
-<td>64</td>
-<td>node-exclusive CPU</td>
-</tr><tr><td><code>wide</code></td>
-<td>regular CPU</td>
-<td>56</td>
-<td>12 hrs</td>
-<td>5</td>
-<td>wide multi-node CPU</td>
-</tr><tr><td><code>highmem</code></td>
-<td>large-memory</td>
-<td>1</td>
-<td>48 hrs</td>
-<td>2</td>
-<td>~1 TB RAM, charges 4x</td>
+<td>
+<strong>workshop queue</strong> – every lab in this lesson runs
+here, including the CPU-only jobs</td>
 </tr><tr><td><code>gpu</code></td>
 <td>GPU (A100)</td>
 <td>–</td>
 <td>48 hrs</td>
 <td>–</td>
-<td>A100 production jobs</td>
+<td>A100 production jobs (your other queue)</td>
+</tr><tr><td><code>debug</code></td>
+<td>regular CPU</td>
+<td>2</td>
+<td>2 hrs</td>
+<td>1</td>
+<td>CPU-only test queue (not on this allocation)</td>
+</tr><tr><td><code>shared</code></td>
+<td>regular CPU</td>
+<td>1 (128 cores)</td>
+<td>96 hrs</td>
+<td>many</td>
+<td>the <strong>default</strong> CPU queue (not on this allocation)</td>
+</tr><tr><td><code>wholenode</code></td>
+<td>regular CPU</td>
+<td>16</td>
+<td>96 hrs</td>
+<td>64</td>
+<td>node-exclusive CPU (not on this allocation)</td>
+</tr><tr><td><code>wide</code></td>
+<td>regular CPU</td>
+<td>56</td>
+<td>12 hrs</td>
+<td>5</td>
+<td>wide multi-node CPU (not on this allocation)</td>
+</tr><tr><td><code>highmem</code></td>
+<td>large-memory</td>
+<td>1</td>
+<td>48 hrs</td>
+<td>2</td>
+<td>~1 TB RAM, charges 4x (not on this allocation)</td>
 </tr><tr><td><code>ai</code></td>
 <td>GPU (H100)</td>
 <td>–</td>
 <td>48 hrs</td>
 <td>–</td>
-<td>H100 production jobs</td>
-</tr></tbody></table><div id="debug-queues-are-a-classs-best-friend" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="debug-queues-are-a-classs-best-friend" class="callout-inner">
-<h3 class="callout-title">Debug queues are a class’s best friend</h3>
-<div class="callout-content">
-<p>The <code>debug</code> and <code>gpu-debug</code> partitions exist
-for exactly what you are doing: quick tests with tight time limits and
-no cost. They are not for production work, but for a lesson they are
-perfect.</p>
-</div>
-</div>
-</div>
+<td>H100 production jobs (not on this allocation)</td>
+</tr></tbody></table><p>The workshop allocation <code>cis261672-gpu</code> only reaches the
+two starred partitions – <code>gpu-debug</code> and <code>gpu</code>.
+Every lab in this lesson therefore runs on <code>gpu-debug</code>,
+<strong>including the CPU-only jobs</strong> (they run on the CPU cores
+of an A100 node without asking for a GPU). You will not hit “access
+denied” on a queue in this lesson.</p>
 </div>
 <div class="section level1">
 <h1 id="two-rules-that-will-save-you-time">Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a></h1>
 <ol style="list-style-type: decimal"><li>
 <strong>You must name a partition with <code>-p</code> in every job
-script.</strong> If you do not, Slurm uses the default
-(<code>shared</code>). That is fine, but say it out loud in your head:
-<em>no <code>-p</code> means <code>shared</code></em>, not <em>no
-queue</em>.</li>
+script.</strong> The workshop labs always use
+<code>-p gpu-debug</code>.</li>
 <li>
-<strong>The <code>debug</code> and <code>gpu-debug</code> queues
-only let one running job per user at a time.</strong> If you submit a
-second job before the first finishes, it waits in <code>PENDING</code>.
-That is not an error – it is the queue doing its job. We will use that
-waiting to learn how to read the queue.</li>
+<strong><code>gpu-debug</code> only lets one running job per user at
+a time.</strong> Finish (or cancel) a job before you submit the next one
+– a second submission just waits in <code>PENDING</code>.</li>
 </ol><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Ask “how many of you have run anything on a cluster before?” here. If
 most hands go up, skim the table and spend the time on the two rules. If
@@ -465,17 +469,14 @@ new. Either way, do not exceed ten minutes.</p>
 <div class="callout-content">
 <ul><li>A partition is a named queue with its own machines and limits (max
 nodes, max time, max jobs per user).</li>
-<li>Use <code>debug</code> (CPU) and <code>gpu-debug</code> (A100) for
-short testing runs; use <code>shared</code>, <code>gpu</code>, or
-<code>ai</code> for production.</li>
-<li>Always name a partition with <code>-p</code>; if you omit it, Slurm
-uses the default <code>shared</code> partition.</li>
+<li>The workshop allocation reaches only <code>gpu-debug</code> (all
+labs) and <code>gpu</code> (production A100).</li>
+<li>
+<code>gpu-debug</code> runs one job per user at a time; name it with
+<code>-p</code> in every script.</li>
 </ul></div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
 </div>
 
 
@@ -540,8 +541,8 @@ uses the default <code>shared</code> partition.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/03-meeting-anvils-queues.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/03-meeting-anvils-queues.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-09",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

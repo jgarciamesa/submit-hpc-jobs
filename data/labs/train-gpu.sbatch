@@ -4,7 +4,7 @@
 # Two new ideas vs. the CPU lab: --gres (asking for a GPU) and gpu-debug (the
 # GPU test partition: 30-minute limit, 2 GPUs max — designed for exactly this).
 
-#SBATCH -A <ACCOUNT>            # MANDATORY on Anvil: allocation account (from `mybalance`)
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
 #SBATCH -p gpu-debug            # GPU test queue: 30 min, up to 2 GPUs, 1 job
 #SBATCH --job-name=digits-gpu
 #SBATCH --nodes=1

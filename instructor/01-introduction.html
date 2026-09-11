@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -239,7 +229,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -330,7 +320,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction: AI Workloads on a Supercomputer</h1>
-        <p>Last updated on 2026-09-10 |
+        <p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/01-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -346,6 +336,32 @@
 
 <div class="section level1">
 <h1 id="why-a-supercomputer-for-ai">Why a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a></h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>Why do researchers submit jobs to a queue instead of running
+programs directly on a supercomputer?</li>
+<li>What is the difference between a login node and a compute node?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Explain the login-node and compute-node model, and why work is
+submitted to a queue.</li>
+<li>Describe what Anvil is and the hardware it offers for AI
+workloads.</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <p>Your laptop is a capable machine, but it holds one (or a few) chips
 and a few tens of gigabytes of memory. Training or serving a modern AI
 model can take hundreds of gigabytes of memory and many hours of
@@ -358,9 +374,10 @@ numbers:</p>
 <ul><li>1,000+ compute nodes, each with 128 AMD EPYC cores.</li>
 <li>16 nodes carrying 4x NVIDIA A100 GPUs each.</li>
 <li>21 nodes carrying 4x NVIDIA H100 GPUs each.</li>
-</ul><p>The hardware is only half the picture. The other half is the
-<strong>job scheduler</strong> that shares the machine fairly among
-hundreds of users at once. That is what you will learn to drive.</p>
+</ul><p>These are only the hardware specifications, another imporant piece is
+the <strong>job scheduler</strong> that shares the machine fairly among
+hundreds of users at once. That is part of what you will learn to
+drive.</p>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
@@ -389,31 +406,15 @@ the machine, so <strong>running jobs on a login node is against Anvil
 policy.</strong></p>
 <p>Instead, you write your work as a job script and submit it to the
 scheduler. The scheduler places your job on a <strong>compute
-node</strong> – a full server with 128 cores, or a GPU server – and runs
-it when the resources you asked for become available.</p>
-<div id="the-whole-model-in-one-sentence" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="the-whole-model-in-one-sentence" class="callout-inner">
-<h3 class="callout-title">The whole model in one sentence</h3>
-<div class="callout-content">
-<p>You do the small stuff on the login node; you <em>submit</em> the
-heavy stuff to a queue, and the scheduler runs it on a compute node for
-you.</p>
-</div>
-</div>
-</div>
+node</strong> and runs it when the resources you asked for become
+available.</p>
 </div>
 <div class="section level1">
 <h1 id="what-you-will-be-able-to-do">What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a></h1>
 <p>By the end of this lesson you will have:</p>
-<ol style="list-style-type: decimal"><li>Logged in to Anvil (by SSH key, or through the browser if you do not
-have a key).</li>
+<ol style="list-style-type: decimal"><li>Logged in to Anvil.</li>
 <li>Submitted a first batch job and watched it run.</li>
-<li>Run a real AI job on the CPU nodes.</li>
-<li>Run an AI job on an A100 GPU.</li>
+<li>Run a CPU-only AI job, then an AI job on an A100 GPU.</li>
 <li>Seen how one script can become many experiments with a <em>job
 array</em>.</li>
 </ol><p>In the next episode you will connect to the machine and look
@@ -434,9 +435,6 @@ policy.</li>
 </ul></div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
 </div>
 
 
@@ -501,8 +499,8 @@ policy.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/01-introduction.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/01-introduction.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

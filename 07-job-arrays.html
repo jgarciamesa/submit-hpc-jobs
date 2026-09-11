@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -235,7 +225,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -330,7 +320,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Stretch: One Script, Many Experiments (Job Arrays)</h1>
-        <p>Last updated on 2026-09-10 |
+        <p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/07-job-arrays.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -341,9 +331,31 @@
         </div>
 
         
-
 <div class="section level1">
 <h1 id="a-hyperparameter-sweep-in-one-command">A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a></h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How do you run the same experiment with many settings in one
+submission?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Submit a Slurm job array and read each task’s output
+separately.</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <p>Real research rarely runs one setting. You sweep a hyperparameter – a
 learning rate, a regularization strength – and compare. A <strong>job
 array</strong> is how you do that in one submission: one script, many
@@ -364,8 +376,8 @@ output file per task:</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="co">#SBATCH -A &lt;ACCOUNT&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="co">#SBATCH -p debug</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="co">#SBATCH -p gpu-debug             # 1 running job per user: the 5 array tasks run in turn</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="co">#SBATCH --job-name=ai-sweep</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
@@ -385,10 +397,14 @@ output file per task:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">sbatch</span> <span class="at">--array</span><span class="op">=</span>0-4 array.sbatch</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">ls</span> slurm-array_<span class="pp">*</span>_<span class="pp">*</span>.out            <span class="co"># one output file per task</span></span></code></pre>
 </div>
-<p>Each of the five tasks runs the same script with a different
+<p><code>gpu-debug</code> allows one running job per user, so the five
+tasks usually run in turn – you can watch them appear one by one in
+<code>squeue</code>. Each task runs the same script with a different
 <code>C</code> and writes its own <code>sweep_&lt;task&gt;.json</code>.
 One command gives you five experiments and five results to compare – the
-same pattern you will use for your own sweeps.</p>
+same pattern you will use for your own sweeps. When a sweep grows beyond
+30 minutes per task, the same script works on <code>-p gpu</code> with a
+<code>--gres</code> request and a longer limit.</p>
 <div id="how-do-i-tell-which-result-came-from-which-setting" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -410,7 +426,7 @@ you match each result to the <code>C</code> value that produced it?</p>
   Read the task ID
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Each file is named <code>sweep_&lt;task&gt;.json</code>, where
 <code>&lt;task&gt;</code> is the array task ID (00-04), and the file
@@ -440,10 +456,6 @@ is.</li>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
-</div>
-
 
 
       </div> <!-- / div.lesson-content -->
@@ -506,8 +518,8 @@ is.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/07-job-arrays.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/07-job-arrays.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

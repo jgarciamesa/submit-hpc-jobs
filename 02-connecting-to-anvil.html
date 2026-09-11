@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -239,7 +229,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -330,7 +320,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Connecting to Anvil</h1>
-        <p>Last updated on 2026-09-09 |
+        <p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/02-connecting-to-anvil.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -344,6 +334,31 @@
 
 <div class="section level1">
 <h1 id="log-in-with-ssh">Log in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a></h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How do you log in to Anvil?</li>
+<li>How do you find the account string you will need to submit
+jobs?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Log in to Anvil using an SSH key, or through Open OnDemand in a
+browser.</li>
+<li>Read your allocation account and the list of available queues.</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <p>If you have set up an SSH key, you can log in straight from your
 laptop’s terminal:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -351,8 +366,7 @@ laptop’s terminal:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>your-anvil-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span></code></pre>
 </div>
-<p>Two things trip people up at this step, so check both before you move
-on:</p>
+<p>Two things to pay attention to at this step:</p>
 <ul><li>Your <strong>Anvil username is not your ACCESS username</strong>. It
 is derived from it and starts with <code>x-</code>. For example, if your
 ACCESS name is <code>jdoe</code>, your Anvil name is something like
@@ -393,6 +407,10 @@ handy:</p>
 account string is the <code>-A &lt;account&gt;</code> value every job
 script will need.</strong> Anvil is strict about it: submit a job
 without the right account and it is rejected.</p>
+<p>For this workshop the team attached the shared allocation
+<code>cis261672-gpu</code> to every account, so that is the string
+<code>mybalance</code> will print – and it is the <code>-A</code> value
+in every lab script in this lesson.</p>
 <p><code>showpartitions</code> and <code>sfeatures</code> show you the
 queues and the machines behind them. You do not need to memorize this
 now – the next episode walks through the table. Just notice that the
@@ -406,9 +424,9 @@ H100s.</p>
 <div id="can-you-find-your-account" class="callout-inner">
 <h3 class="callout-title">Can you find your account?</h3>
 <div class="callout-content">
-<p>Run <code>mybalance</code> in your terminal. What is the account
-string it prints? You will paste this into every job script in this
-lesson.</p>
+<p>Run <code>mybalance</code> in your terminal. It should print
+<code>cis261672-gpu</code> – the workshop allocation. That is the
+<code>-A</code> value in every job script in this lesson.</p>
 </div>
 </div>
 </div>
@@ -417,13 +435,13 @@ lesson.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Your account string </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p>It is the name that starts with your project, for example
-<code>ACCESS-2026-ai-for-all</code> (the exact string varies per
-allocation). Copy it exactly – a missing dash or capital letter is the
-most common first-submission mistake. If <code>mybalance</code> prints
-nothing, your allocation is not attached yet; ask an instructor.</p>
+<p>It should be <code>cis261672-gpu</code>, the workshop allocation the
+team attached to your account. Copy it exactly – a missing dash or
+capital letter is the most common first-submission mistake. If
+<code>mybalance</code> prints nothing, your account is not attached to
+the allocation yet; ask an instructor.</p>
 </div>
 </div>
 </div>
@@ -441,14 +459,12 @@ OnDemand’s web shell if you have no SSH key.</li>
 <li>Your Anvil username starts with <code>x-</code> and is not your
 ACCESS username.</li>
 <li>
-<code>mybalance</code> prints the account string you will pass with
-<code>-A</code> in every job script.</li>
+<code>mybalance</code> prints the account string you pass with
+<code>-A</code> in every job script (here:
+<code>cis261672-gpu</code>).</li>
 </ul></div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
 </div>
 
 
@@ -513,8 +529,8 @@ ACCESS username.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/02-connecting-to-anvil.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/02-connecting-to-anvil.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-09",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

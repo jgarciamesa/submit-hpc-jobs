@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -232,7 +222,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -318,7 +308,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Reference</h1>
-        <p>Last updated on 2026-09-10 |
+        <p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/learners/reference.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -329,7 +319,6 @@
         </div>
 
         
-
 <div class="section level1">
 <h1 id="reference-anvil-commands-and-queues">Reference: Anvil Commands and Queues<a class="anchor" aria-label="anchor" href="#reference-anvil-commands-and-queues"></a></h1>
 <p>This page is the desk reference for the whole lesson. Keep it open in
@@ -339,7 +328,9 @@ a second tab while you work through the labs.</p>
 <p>Run <code>showpartitions</code> on Anvil to see the live version of
 this table. The columns that matter most for a class are <strong>max
 time</strong>, <strong>max running jobs/user</strong>, and
-<strong>GPU</strong>.</p>
+<strong>GPU</strong>. The workshop allocation <code>cis261672-gpu</code>
+reaches only <code>gpu-debug</code> and <code>gpu</code>, and every lab
+in this lesson uses <code>gpu-debug</code>.</p>
 <table style="width:100%;" class="table"><colgroup><col width="14%"><col width="17%"><col width="16%"><col width="11%"><col width="25%"><col width="6%"><col width="7%"></colgroup><thead><tr><th>Partition</th>
 <th>Node type</th>
 <th>Max nodes/job</th>
@@ -353,56 +344,60 @@ time</strong>, <strong>max running jobs/user</strong>, and
 <td>2 hrs</td>
 <td>1</td>
 <td>-</td>
-<td>Short CPU tests – our CPU labs use this</td>
+<td>Short CPU tests (not on this allocation)</td>
 </tr><tr><td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
 <td>1</td>
 <td>0.5 hrs</td>
 <td>1</td>
 <td>2 max</td>
-<td>Short GPU tests – our GPU lab uses this</td>
+<td>
+<strong>workshop queue</strong> – every lab runs here, CPU-only jobs
+included</td>
 </tr><tr><td><code>shared</code></td>
 <td>regular CPU</td>
 <td>1 (128 cores)</td>
 <td>96 hrs</td>
 <td>many</td>
 <td>-</td>
-<td>The <strong>default</strong> CPU partition</td>
+<td>The <strong>default</strong> CPU partition (not on this
+allocation)</td>
 </tr><tr><td><code>wholenode</code></td>
 <td>regular CPU</td>
 <td>16</td>
 <td>96 hrs</td>
 <td>64</td>
 <td>-</td>
-<td>Node-exclusive CPU (bills all 128 cores)</td>
+<td>Node-exclusive CPU, bills all 128 cores (not on this
+allocation)</td>
 </tr><tr><td><code>wide</code></td>
 <td>regular CPU</td>
 <td>56</td>
 <td>12 hrs</td>
 <td>5</td>
 <td>-</td>
-<td>Wide multi-node CPU</td>
+<td>Wide multi-node CPU (not on this allocation)</td>
 </tr><tr><td><code>highmem</code></td>
 <td>large-memory</td>
 <td>1</td>
 <td>48 hrs</td>
 <td>2</td>
 <td>-</td>
-<td>~1 TB RAM, charges 4x</td>
+<td>~1 TB RAM, charges 4x (not on this allocation)</td>
 </tr><tr><td><code>gpu</code></td>
 <td>GPU (A100)</td>
 <td>-</td>
 <td>48 hrs</td>
 <td>-</td>
 <td>4</td>
-<td>A100 production jobs</td>
+<td>A100 production jobs (your other queue)</td>
 </tr><tr><td><code>ai</code></td>
 <td>GPU (H100)</td>
 <td>-</td>
 <td>48 hrs</td>
 <td>-</td>
 <td>4</td>
-<td>H100 production jobs</td>
+<td>H100 production jobs (not on this allocation)</td>
 </tr></tbody></table><p><strong>Node type codes (from <code>sfeatures</code>):</strong>
 <code>a[000-999]</code> are the AMD CPU nodes, <code>g[000-015]</code>
 carry NVIDIA A100 GPUs, and <code>h[000-020]</code> carry NVIDIA H100
@@ -437,8 +432,8 @@ A100; <code>h</code> means H100.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">#SBATCH -A &lt;ACCOUNT&gt;       # your allocation account (from `mybalance`)</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="co">#SBATCH -p &lt;partition&gt;     # the queue to run in (omit = default `shared`)</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">#SBATCH -A cis261672-gpu   # workshop allocation (or your own: `mybalance`)</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="co">#SBATCH -p gpu-debug        # workshop test queue (30-min limit, 1 job per user)</span></span></code></pre>
 </div>
 <p>A job without <code>-A</code> fails with
 <code>error: invalid account specified</code> or
@@ -459,10 +454,10 @@ it.</li>
 practice.</strong> Other clusters may let you omit the partition; on
 Anvil, name it.</li>
 <li>
-<strong>Debug queues are per-user single-job.</strong> Only one
-running job per user on <code>debug</code> and <code>gpu-debug</code> at
-a time. A second submission waits in <code>PENDING</code> – that is
-expected, not an error.</li>
+<strong><code>gpu-debug</code> is per-user single-job.</strong> Only
+one running job per user at a time (the queue this lesson uses). A
+second submission waits in <code>PENDING</code> – that is expected, not
+an error.</li>
 <li>
 <strong>Node-exclusive and memory partitions cost more.</strong>
 <code>wholenode</code> bills all 128 cores even if you use one;
@@ -471,7 +466,9 @@ expected, not an error.</li>
 <li>
 <strong>GPUs via <code>--gres</code>.</strong> Add
 <code>--gres=gpu:1</code> (or <code>:2</code>) to a job script and
-submit to a <code>gpu</code>/<code>gpu-debug</code> partition.</li>
+submit to a <code>gpu</code>/<code>gpu-debug</code> partition. A
+CPU-only job simply omits the line and still runs on
+<code>gpu-debug</code>, using the node’s CPU cores.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="lab-file-index">Lab file index<a class="anchor" aria-label="anchor" href="#lab-file-index"></a></h2>
@@ -527,8 +524,8 @@ on)</td>
 </tr><tr><td><code>sbatch: error: Invalid partition name</code></td>
 <td>Typo in <code>-p</code>
 </td>
-<td>Use a partition from <code>showpartitions</code>
-</td>
+<td>Use <code>gpu-debug</code> or <code>gpu</code> (the only two this
+allocation reaches)</td>
 </tr><tr><td>Job sits in <code>PD</code> (pending)</td>
 <td>Queue full, or a prior job of yours is still running</td>
 <td>
@@ -563,10 +560,6 @@ the right first stop for allocation and account questions.</li>
 reference page.</li>
 </ul></div>
 </div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
-</div>
-
 
 
       </div> <!-- / div.lesson-content -->
@@ -624,8 +617,8 @@ reference page.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/reference.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/reference.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

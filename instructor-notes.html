@@ -40,17 +40,8 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg">
+</div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu">
@@ -284,7 +275,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -383,7 +374,6 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Instructor Notes</h1>
         
-
 <div class="section level1">
 <h1 id="instructor-notes">Instructor Notes<a class="anchor" aria-label="anchor" href="#instructor-notes"></a>
 </h1>
@@ -415,10 +405,10 @@ Resources” talk – open by connecting to it.</li>
 number-one success factor.</p>
 <ul class="task-list">
 <li><label><input type="checkbox"><strong>Accounts
-provisioned.</strong> Every registered attendee has an Anvil account
-with their ACCESS or NAIRR allocation attached. Confirm the Anvil
-username (the <code>x-</code>-prefixed one) for the pre-provisioned
-group.</label></li>
+provisioned.</strong> Every registered attendee has an Anvil account and
+has been added to the workshop allocation <code>cis261672-gpu</code>.
+Confirm the Anvil username (the <code>x-</code>-prefixed one) for each
+attendee.</label></li>
 <li><label><input type="checkbox"><strong>Lab files staged.</strong>
 Copy the site’s <a href="data/labs/"><code>data/labs/</code></a> folder
 to a shared location on Anvil
@@ -434,9 +424,11 @@ pinned.</strong> On an Anvil login node run
 <code>module spider pytorch</code> and put the exact module line into
 <code>train-gpu.sbatch</code> (the commented line near the top). Until
 then the GPU script has a placeholder.</label></li>
-<li><label><input type="checkbox"><strong>Dry-run each lab</strong> on
-a <code>debug</code> / <code>gpu-debug</code> job as yourself so you
-know the real wall time and the exact output to show.</label></li>
+<li><label><input type="checkbox"><strong>Dry-run each lab</strong> as
+yourself on <code>gpu-debug</code> so you know the real wall time and
+the exact output to show. Include a CPU-only submission (no
+<code>--gres</code>): confirm it is accepted on <code>gpu-debug</code>,
+since the public docs do not state this explicitly.</label></li>
 </ul>
 </div>
 <div class="section level2">
@@ -445,10 +437,11 @@ know the real wall time and the exact output to show.</label></li>
 <ol style="list-style-type: decimal">
 <li>
 <strong>The account string.</strong> Every lab’s
-<code>.sbatch</code> has <code>#SBATCH -A &lt;ACCOUNT&gt;</code>. Do not
-hard-code one account into the published files – attendees each use
-their own from <code>mybalance</code>. For the <em>instructor’s</em> own
-demo jobs, note your account separately.</li>
+<code>.sbatch</code> uses the workshop allocation
+<code>cis261672-gpu</code>, which reaches only <code>gpu-debug</code>
+and <code>gpu</code>. Confirm before the session that every attendee can
+submit under it. Attendees who have their own allocation may swap in
+their own <code>-A</code> value from <code>mybalance</code>.</li>
 <li>
 <strong>The PyTorch module.</strong> Pin the exact
 <code>module load &lt;pytorch&gt;</code> (or the Singularity/NGC
@@ -541,10 +534,10 @@ demo: you submit and walk the output, attendees submit on their own and
 check the result after. <strong>Never</strong> cut Lab 2 (it is the core
 <code>sbatch</code> skill) or the wrap-up.</li>
 <li>
-<strong><code>debug</code> queue busy at 1 PM.</strong> Every lab
-also runs on <code>shared</code> (the default partition) – a one-line
-change to <code>-p shared</code>. Mention this so attendees are not
-blocked.</li>
+<strong>Anything longer than 30 minutes.</strong> The
+<code>gpu</code> partition (A100, 48-hour limit) is the other queue this
+allocation reaches; it is the fallback for a run that does not fit in
+the <code>gpu-debug</code> window.</li>
 <li>
 <strong><code>gpu-debug</code> saturated.</strong> Demo from the
 front; attendees submit and leave with a <code>PENDING</code> job plus
@@ -569,7 +562,8 @@ anyone who wants it.</li>
 <strong>Has a cluster account elsewhere:</strong> “if you know
 Slurm, you know Anvil.” Point them to the <em>Anvil-specific
 differences</em> section of the reference page (account string,
-<code>mybalance</code>, debug queues).</li>
+<code>mybalance</code>, the <code>gpu-debug</code> single-job
+rule).</li>
 <li>
 <strong>Fast finishers:</strong> the job-array stretch, then explore
 <code>sacct</code> columns and the charge factors.</li>
@@ -589,11 +583,6 @@ by heart.</li>
 </ul>
 </div>
 </div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
-</div>
-
 
       <section id="aggregate-instructor-notes"></section>
 </div>
@@ -645,8 +634,8 @@ by heart.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor-notes.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor-notes.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

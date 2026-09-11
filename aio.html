@@ -40,17 +40,8 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg">
+</div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu">
@@ -284,7 +275,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -385,7 +376,7 @@
         
 <section id="aio-01-introduction"><p>Content from <a href="01-introduction.html">Introduction: AI Workloads on a Supercomputer</a></p>
 <hr>
-<p>Last updated on 2026-09-10 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/01-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -394,6 +385,36 @@
 <div class="section level1">
 <h1 id="why-a-supercomputer-for-ai">Why a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>Why do researchers submit jobs to a queue instead of running
+programs directly on a supercomputer?</li>
+<li>What is the difference between a login node and a compute node?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Explain the login-node and compute-node model, and why work is
+submitted to a queue.</li>
+<li>Describe what Anvil is and the hardware it offers for AI
+workloads.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Your laptop is a capable machine, but it holds one (or a few) chips
 and a few tens of gigabytes of memory. Training or serving a modern AI
 model can take hundreds of gigabytes of memory and many hours of
@@ -408,9 +429,10 @@ numbers:</p>
 <li>16 nodes carrying 4x NVIDIA A100 GPUs each.</li>
 <li>21 nodes carrying 4x NVIDIA H100 GPUs each.</li>
 </ul>
-<p>The hardware is only half the picture. The other half is the
-<strong>job scheduler</strong> that shares the machine fairly among
-hundreds of users at once. That is what you will learn to drive.</p>
+<p>These are only the hardware specifications, another imporant piece is
+the <strong>job scheduler</strong> that shares the machine fairly among
+hundreds of users at once. That is part of what you will learn to
+drive.</p>
 
 </div>
 <div class="section level1">
@@ -425,33 +447,17 @@ the machine, so <strong>running jobs on a login node is against Anvil
 policy.</strong></p>
 <p>Instead, you write your work as a job script and submit it to the
 scheduler. The scheduler places your job on a <strong>compute
-node</strong> – a full server with 128 cores, or a GPU server – and runs
-it when the resources you asked for become available.</p>
-<div id="the-whole-model-in-one-sentence" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="the-whole-model-in-one-sentence" class="callout-inner">
-<h3 class="callout-title">The whole model in one sentence</h3>
-<div class="callout-content">
-<p>You do the small stuff on the login node; you <em>submit</em> the
-heavy stuff to a queue, and the scheduler runs it on a compute node for
-you.</p>
-</div>
-</div>
-</div>
+node</strong> and runs it when the resources you asked for become
+available.</p>
 </div>
 <div class="section level1">
 <h1 id="what-you-will-be-able-to-do">What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a>
 </h1>
 <p>By the end of this lesson you will have:</p>
 <ol style="list-style-type: decimal">
-<li>Logged in to Anvil (by SSH key, or through the browser if you do not
-have a key).</li>
+<li>Logged in to Anvil.</li>
 <li>Submitted a first batch job and watched it run.</li>
-<li>Run a real AI job on the CPU nodes.</li>
-<li>Run an AI job on an A100 GPU.</li>
+<li>Run a CPU-only AI job, then an AI job on an A100 GPU.</li>
 <li>Seen how one script can become many experiments with a <em>job
 array</em>.</li>
 </ol>
@@ -475,13 +481,9 @@ policy.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section><section id="aio-02-connecting-to-anvil"><p>Content from <a href="02-connecting-to-anvil.html">Connecting to Anvil</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/02-connecting-to-anvil.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -490,6 +492,35 @@ policy.</li>
 <div class="section level1">
 <h1 id="log-in-with-ssh">Log in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do you log in to Anvil?</li>
+<li>How do you find the account string you will need to submit
+jobs?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Log in to Anvil using an SSH key, or through Open OnDemand in a
+browser.</li>
+<li>Read your allocation account and the list of available queues.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>If you have set up an SSH key, you can log in straight from your
 laptop’s terminal:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -497,8 +528,7 @@ laptop’s terminal:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>your-anvil-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span></code></pre>
 </div>
-<p>Two things trip people up at this step, so check both before you move
-on:</p>
+<p>Two things to pay attention to at this step:</p>
 <ul>
 <li>Your <strong>Anvil username is not your ACCESS username</strong>. It
 is derived from it and starts with <code>x-</code>. For example, if your
@@ -542,6 +572,10 @@ handy:</p>
 account string is the <code>-A &lt;account&gt;</code> value every job
 script will need.</strong> Anvil is strict about it: submit a job
 without the right account and it is rejected.</p>
+<p>For this workshop the team attached the shared allocation
+<code>cis261672-gpu</code> to every account, so that is the string
+<code>mybalance</code> will print – and it is the <code>-A</code> value
+in every lab script in this lesson.</p>
 <p><code>showpartitions</code> and <code>sfeatures</code> show you the
 queues and the machines behind them. You do not need to memorize this
 now – the next episode walks through the table. Just notice that the
@@ -555,9 +589,9 @@ H100s.</p>
 <div id="can-you-find-your-account" class="callout-inner">
 <h3 class="callout-title">Can you find your account?</h3>
 <div class="callout-content">
-<p>Run <code>mybalance</code> in your terminal. What is the account
-string it prints? You will paste this into every job script in this
-lesson.</p>
+<p>Run <code>mybalance</code> in your terminal. It should print
+<code>cis261672-gpu</code> – the workshop allocation. That is the
+<code>-A</code> value in every job script in this lesson.</p>
 </div>
 </div>
 </div>
@@ -566,13 +600,13 @@ lesson.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Your account string </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p>It is the name that starts with your project, for example
-<code>ACCESS-2026-ai-for-all</code> (the exact string varies per
-allocation). Copy it exactly – a missing dash or capital letter is the
-most common first-submission mistake. If <code>mybalance</code> prints
-nothing, your allocation is not attached yet; ask an instructor.</p>
+<p>It should be <code>cis261672-gpu</code>, the workshop allocation the
+team attached to your account. Copy it exactly – a missing dash or
+capital letter is the most common first-submission mistake. If
+<code>mybalance</code> prints nothing, your account is not attached to
+the allocation yet; ask an instructor.</p>
 </div>
 </div>
 </div>
@@ -591,19 +625,16 @@ OnDemand’s web shell if you have no SSH key.</li>
 <li>Your Anvil username starts with <code>x-</code> and is not your
 ACCESS username.</li>
 <li>
-<code>mybalance</code> prints the account string you will pass with
-<code>-A</code> in every job script.</li>
+<code>mybalance</code> prints the account string you pass with
+<code>-A</code> in every job script (here:
+<code>cis261672-gpu</code>).</li>
 </ul>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section><section id="aio-03-meeting-anvils-queues"><p>Content from <a href="03-meeting-anvils-queues.html">Meeting Anvil's Queues (Partitions)</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/03-meeting-anvils-queues.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -612,6 +643,35 @@ ACCESS username.</li>
 <div class="section level1">
 <h1 id="what-is-a-partition">What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>What is a partition, and why are there so many of them?</li>
+<li>Which queues are best for short testing runs, like the ones in this
+lesson?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Explain what a Slurm partition is and how to read its limits.</li>
+<li>Choose the right partition for a testing run versus a production
+run.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Slurm (Anvil’s scheduler) groups compute resources into
 <strong>partitions</strong> – the technical name for a <em>queue</em>.
 Each partition has its own machines and its own rules: how many nodes a
@@ -642,52 +702,14 @@ the previous episode). Here is what matters for this lesson:</p>
 </tr></thead>
 <tbody>
 <tr>
-<td><code>debug</code></td>
-<td>regular CPU</td>
-<td>2</td>
-<td>2 hrs</td>
-<td>1</td>
-<td>short tests – our CPU labs use this</td>
-</tr>
-<tr>
 <td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
 <td>1</td>
 <td>0.5 hrs</td>
 <td>1</td>
-<td>short GPU tests – our GPU lab uses this</td>
-</tr>
-<tr>
-<td><code>shared</code></td>
-<td>regular CPU</td>
-<td>1 (128 cores)</td>
-<td>96 hrs</td>
-<td>many</td>
-<td>the <strong>default</strong> CPU queue</td>
-</tr>
-<tr>
-<td><code>wholenode</code></td>
-<td>regular CPU</td>
-<td>16</td>
-<td>96 hrs</td>
-<td>64</td>
-<td>node-exclusive CPU</td>
-</tr>
-<tr>
-<td><code>wide</code></td>
-<td>regular CPU</td>
-<td>56</td>
-<td>12 hrs</td>
-<td>5</td>
-<td>wide multi-node CPU</td>
-</tr>
-<tr>
-<td><code>highmem</code></td>
-<td>large-memory</td>
-<td>1</td>
-<td>48 hrs</td>
-<td>2</td>
-<td>~1 TB RAM, charges 4x</td>
+<td>
+<strong>workshop queue</strong> – every lab in this lesson runs
+here, including the CPU-only jobs</td>
 </tr>
 <tr>
 <td><code>gpu</code></td>
@@ -695,7 +717,47 @@ the previous episode). Here is what matters for this lesson:</p>
 <td>–</td>
 <td>48 hrs</td>
 <td>–</td>
-<td>A100 production jobs</td>
+<td>A100 production jobs (your other queue)</td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>regular CPU</td>
+<td>2</td>
+<td>2 hrs</td>
+<td>1</td>
+<td>CPU-only test queue (not on this allocation)</td>
+</tr>
+<tr>
+<td><code>shared</code></td>
+<td>regular CPU</td>
+<td>1 (128 cores)</td>
+<td>96 hrs</td>
+<td>many</td>
+<td>the <strong>default</strong> CPU queue (not on this allocation)</td>
+</tr>
+<tr>
+<td><code>wholenode</code></td>
+<td>regular CPU</td>
+<td>16</td>
+<td>96 hrs</td>
+<td>64</td>
+<td>node-exclusive CPU (not on this allocation)</td>
+</tr>
+<tr>
+<td><code>wide</code></td>
+<td>regular CPU</td>
+<td>56</td>
+<td>12 hrs</td>
+<td>5</td>
+<td>wide multi-node CPU (not on this allocation)</td>
+</tr>
+<tr>
+<td><code>highmem</code></td>
+<td>large-memory</td>
+<td>1</td>
+<td>48 hrs</td>
+<td>2</td>
+<td>~1 TB RAM, charges 4x (not on this allocation)</td>
 </tr>
 <tr>
 <td><code>ai</code></td>
@@ -703,25 +765,16 @@ the previous episode). Here is what matters for this lesson:</p>
 <td>–</td>
 <td>48 hrs</td>
 <td>–</td>
-<td>H100 production jobs</td>
+<td>H100 production jobs (not on this allocation)</td>
 </tr>
 </tbody>
 </table>
-<div id="debug-queues-are-a-classs-best-friend" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="debug-queues-are-a-classs-best-friend" class="callout-inner">
-<h3 class="callout-title">Debug queues are a class’s best friend</h3>
-<div class="callout-content">
-<p>The <code>debug</code> and <code>gpu-debug</code> partitions exist
-for exactly what you are doing: quick tests with tight time limits and
-no cost. They are not for production work, but for a lesson they are
-perfect.</p>
-</div>
-</div>
-</div>
+<p>The workshop allocation <code>cis261672-gpu</code> only reaches the
+two starred partitions – <code>gpu-debug</code> and <code>gpu</code>.
+Every lab in this lesson therefore runs on <code>gpu-debug</code>,
+<strong>including the CPU-only jobs</strong> (they run on the CPU cores
+of an A100 node without asking for a GPU). You will not hit “access
+denied” on a queue in this lesson.</p>
 </div>
 <div class="section level1">
 <h1 id="two-rules-that-will-save-you-time">Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a>
@@ -729,16 +782,12 @@ perfect.</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>You must name a partition with <code>-p</code> in every job
-script.</strong> If you do not, Slurm uses the default
-(<code>shared</code>). That is fine, but say it out loud in your head:
-<em>no <code>-p</code> means <code>shared</code></em>, not <em>no
-queue</em>.</li>
+script.</strong> The workshop labs always use
+<code>-p gpu-debug</code>.</li>
 <li>
-<strong>The <code>debug</code> and <code>gpu-debug</code> queues
-only let one running job per user at a time.</strong> If you submit a
-second job before the first finishes, it waits in <code>PENDING</code>.
-That is not an error – it is the queue doing its job. We will use that
-waiting to learn how to read the queue.</li>
+<strong><code>gpu-debug</code> only lets one running job per user at
+a time.</strong> Finish (or cancel) a job before you submit the next one
+– a second submission just waits in <code>PENDING</code>.</li>
 </ol>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -750,22 +799,18 @@ waiting to learn how to read the queue.</li>
 <ul>
 <li>A partition is a named queue with its own machines and limits (max
 nodes, max time, max jobs per user).</li>
-<li>Use <code>debug</code> (CPU) and <code>gpu-debug</code> (A100) for
-short testing runs; use <code>shared</code>, <code>gpu</code>, or
-<code>ai</code> for production.</li>
-<li>Always name a partition with <code>-p</code>; if you omit it, Slurm
-uses the default <code>shared</code> partition.</li>
+<li>The workshop allocation reaches only <code>gpu-debug</code> (all
+labs) and <code>gpu</code> (production A100).</li>
+<li>
+<code>gpu-debug</code> runs one job per user at a time; name it with
+<code>-p</code> in every script.</li>
 </ul>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section><section id="aio-04-your-first-job"><p>Content from <a href="04-your-first-job.html">Your First Job: hello, Anvil</a></p>
 <hr>
-<p>Last updated on 2026-09-10 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/04-your-first-job.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -774,6 +819,35 @@ uses the default <code>shared</code> partition.</li>
 <div class="section level1">
 <h1 id="the-job-submission-script">The job submission script<a class="anchor" aria-label="anchor" href="#the-job-submission-script"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>What does a Slurm job submission script look like?</li>
+<li>How do you submit a job and watch it run?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Write the two mandatory <code>#SBATCH</code> lines for Anvil
+(account and partition).</li>
+<li>Submit a job with <code>sbatch</code> and track it with
+<code>squeue</code> and its output file.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>A Slurm job is a small shell script with special comment lines at the
 top. Lines that start with <code>#SBATCH</code> are read by the
 scheduler; the rest of the script is what actually runs on a compute
@@ -784,8 +858,8 @@ node.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A &lt;ACCOUNT&gt;            # MANDATORY: your allocation account (from `mybalance`)</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p debug                # short-test CPU partition (2-hour limit)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co">#SBATCH --job-name=hello-ai4all</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
@@ -800,11 +874,13 @@ node.</p>
 <p>Two of these lines are <strong>mandatory on Anvil</strong>:</p>
 <ul>
 <li>
-<code>#SBATCH -A &lt;ACCOUNT&gt;</code> – your allocation account. A
-job without it is rejected.</li>
+<code>#SBATCH -A &lt;account&gt;</code> – your allocation account.
+For this workshop that is <code>cis261672-gpu</code>, the shared
+workshop allocation (you can still check your own with
+<code>mybalance</code>). A job without it is rejected.</li>
 <li>
-<code>#SBATCH -p &lt;partition&gt;</code> – which queue to run
-in.</li>
+<code>#SBATCH -p &lt;partition&gt;</code> – which queue to run in.
+Every lab in this lesson uses <code>-p gpu-debug</code>.</li>
 </ul>
 <p>The other lines ask for resources: how many nodes, how many cores per
 task, how much memory, and how much time. For a one-line
@@ -826,9 +902,11 @@ greeting and a few environment variables:</p>
 <div class="section level1">
 <h1 id="submit-it-and-watch-it-run">Submit it and watch it run<a class="anchor" aria-label="anchor" href="#submit-it-and-watch-it-run"></a>
 </h1>
-<p>First, open <code>hello.sbatch</code> in any text editor and replace
-<code>&lt;ACCOUNT&gt;</code> with the account string you found with
-<code>mybalance</code>. Then submit and follow:</p>
+<p>The script already names the workshop allocation
+(<code>cis261672-gpu</code>) and the <code>gpu-debug</code> queue. If
+you have your own allocation and want to use it, replace that
+<code>-A</code> value with the account string <code>mybalance</code>
+shows you. Then submit and follow:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -842,13 +920,13 @@ greeting and a few environment variables:</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Hello from Anvil!
-  Hostname : a042
-  Node list: a042</code></pre>
+  Hostname : g012
+  Node list: g012</code></pre>
 </div>
-<p>If the hostname is an <code>a...</code> node and not the machine you
-typed on, you have seen the whole model work: you submitted on the login
-node, the scheduler ran your job on a compute node, and wrote the result
-to a file you read back.</p>
+<p>If the hostname is a <code>g...</code> node (an A100 node) and not
+the machine you typed on, you have seen the whole model work: you
+submitted on the login node, the scheduler ran your job on a compute
+node, and wrote the result to a file you read back.</p>
 </div>
 <div class="section level1">
 <h1 id="manage-your-jobs">Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a>
@@ -893,11 +971,11 @@ it?</p>
   Most likely: the queue is full
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>On <code>debug</code>, only one job per user may run at a time. If
-your previous <code>hello</code> job (or another user’s on the same
-debug node) is still running, this one waits. Check the reason with:</p>
+<p>On <code>gpu-debug</code>, only one job per user may run at a time.
+If your previous <code>hello</code> job is still running, this one
+waits. Check the reason with:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -931,7 +1009,7 @@ it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
   Missing or wrong -A account
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The <code>-A</code> line is missing, or the string does not match an
 account on your allocation. Run <code>mybalance</code>, copy the exact
@@ -961,13 +1039,9 @@ lines request resources; the rest runs on a compute node.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
-</div></section><section id="aio-05-an-ai-job-on-cpu"><p>Content from <a href="05-an-ai-job-on-cpu.html">A Real AI Job on the CPU Nodes</a></p>
+</div></section><section id="aio-05-an-ai-job-on-cpu"><p>Content from <a href="05-an-ai-job-on-cpu.html">A CPU-Only AI Job</a></p>
 <hr>
-<p>Last updated on 2026-09-09 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/05-an-ai-job-on-cpu.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -976,6 +1050,37 @@ lines request resources; the rest runs on a compute node.</li>
 <div class="section level1">
 <h1 id="train-a-digit-classifier">Train a digit classifier<a class="anchor" aria-label="anchor" href="#train-a-digit-classifier"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do you run a machine-learning job that does not ask for a
+GPU?</li>
+<li>How do you ask for more cores and more memory?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Submit a scikit-learn training job on the CPU cores of a GPU node,
+without <code>--gres</code>.</li>
+<li>Request more cores and memory with <code>--cpus-per-task</code> and
+<code>--mem</code>.</li>
+<li>Read the job’s output and the metrics file it writes.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>This is the first <em>real</em> AI job: a small machine-learning
 program that trains a classifier on 1,797 images of handwritten digits
 and reports test accuracy. It uses <a href="https://scikit-learn.org" title="scikit-learn" class="external-link">scikit-learn</a>, which is already part of the
@@ -991,20 +1096,23 @@ polite to the cluster.</p>
 <li>Prints test accuracy and writes a <code>digits_metrics.json</code>
 file.</li>
 </ol>
+<p>Your allocation only reaches the GPU partitions, so this CPU-only job
+runs on <code>gpu-debug</code> <em>without</em> a <code>--gres</code>
+request – it uses the fast CPU cores that sit on the A100 node.</p>
 <p>Its job script, <code>train-digits-cpu.sbatch</code>, asks for more
 than the <code>hello</code> job did:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A &lt;ACCOUNT&gt;            # MANDATORY: your allocation account</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p debug</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co">#SBATCH --job-name=digits-cpu</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="co">#SBATCH --cpus-per-task=16      # ask for 16 cores</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=16G               # ask for 16 GB of memory</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:30:00</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:30:00             # fills the 30-min gpu-debug limit</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -o digits-cpu_%j.out    # name the output file ourselves</span></span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a></span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">module</span> load conda</span>
@@ -1101,13 +1209,9 @@ submissions do not overwrite each other.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section><section id="aio-06-an-ai-job-on-a-gpu"><p>Content from <a href="06-an-ai-job-on-a-gpu.html">An AI Job on an A100 GPU</a></p>
 <hr>
-<p>Last updated on 2026-09-10 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/06-an-ai-job-on-a-gpu.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1116,8 +1220,36 @@ submissions do not overwrite each other.</li>
 <div class="section level1">
 <h1 id="ask-for-a-gpu">Ask for a GPU<a class="anchor" aria-label="anchor" href="#ask-for-a-gpu"></a>
 </h1>
-<p>So far every job has run on CPU nodes. To run on a GPU you do two new
-things in the script: name a GPU partition and request a GPU with
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do you ask a Slurm job for a GPU?</li>
+<li>How can you tell your job actually ran on a GPU and not a CPU?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Request a GPU with <code>--gres</code> and submit a PyTorch job to
+the <code>gpu-debug</code> partition.</li>
+<li>Confirm GPU use from the job’s <code>nvidia-smi</code> output.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>So far every job has used only CPU cores. To run on a GPU you do two
+new things in the script: name a GPU partition and request a GPU with
 <code>--gres</code>.</p>
 <p>Here is the new script, <code>train-gpu.sbatch</code>. It trains a
 small neural network with PyTorch on a dataset generated inside the
@@ -1127,8 +1259,8 @@ script (again, <strong>nothing is downloaded</strong>) and prints the
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A &lt;ACCOUNT&gt;            # MANDATORY: your allocation account</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p gpu-debug            # GPU test queue: 30 min, up to 2 GPUs</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p gpu-debug            # GPU test queue: 30 min, up to 2 GPUs, 1 job</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co">#SBATCH --job-name=digits-gpu</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
@@ -1184,9 +1316,10 @@ on a national supercomputer GPU.</p>
 <h3 class="callout-title">No GPU in the output?</h3>
 <div class="callout-content">
 <p>If <code>nvidia-smi</code> is missing or the output says
-<code>[cpu]</code>, the job landed on a CPU node. The usual causes: the
-script is missing <code>--gres=gpu:1</code>, or it named a CPU
-partition. Check both and resubmit; the next run will report a GPU.</p>
+<code>[cpu]</code>, the job did not land on a GPU. The usual causes: the
+script is missing <code>--gres=gpu:1</code>, or the <code>-p</code> line
+does not name a GPU partition. Check both and resubmit; the next run
+will report a GPU.</p>
 </div>
 </div>
 </div>
@@ -1208,14 +1341,15 @@ partition. Check both and resubmit; the next run will report a GPU.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Submit-and-check-later is the real HPC experience </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>There is nothing wrong with the job – the queue is just full. Leave
 it submitted and it will run when a GPU node frees up. Note the job ID,
 and check the output later with <code>squeue -j &lt;jobid&gt;</code> and
 <code>cat slurm-&lt;jobid&gt;.out</code>. This is exactly how research
 jobs work on a shared machine: you submit, and the job runs when the
-resource is available.</p>
+resource is available. (For a longer production run, the
+<code>gpu</code> partition offers a 48-hour limit.)</p>
 </div>
 </div>
 </div>
@@ -1240,13 +1374,9 @@ node frees up – that is normal on a shared cluster.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section><section id="aio-07-job-arrays"><p>Content from <a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)</a></p>
 <hr>
-<p>Last updated on 2026-09-10 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/07-job-arrays.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1255,6 +1385,33 @@ node frees up – that is normal on a shared cluster.</li>
 <div class="section level1">
 <h1 id="a-hyperparameter-sweep-in-one-command">A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do you run the same experiment with many settings in one
+submission?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Submit a Slurm job array and read each task’s output
+separately.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Real research rarely runs one setting. You sweep a hyperparameter – a
 learning rate, a regularization strength – and compare. A <strong>job
 array</strong> is how you do that in one submission: one script, many
@@ -1275,8 +1432,8 @@ output file per task:</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="co">#SBATCH -A &lt;ACCOUNT&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="co">#SBATCH -p debug</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="co">#SBATCH -p gpu-debug             # 1 running job per user: the 5 array tasks run in turn</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="co">#SBATCH --job-name=ai-sweep</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
@@ -1296,10 +1453,14 @@ output file per task:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">sbatch</span> <span class="at">--array</span><span class="op">=</span>0-4 array.sbatch</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">ls</span> slurm-array_<span class="pp">*</span>_<span class="pp">*</span>.out            <span class="co"># one output file per task</span></span></code></pre>
 </div>
-<p>Each of the five tasks runs the same script with a different
+<p><code>gpu-debug</code> allows one running job per user, so the five
+tasks usually run in turn – you can watch them appear one by one in
+<code>squeue</code>. Each task runs the same script with a different
 <code>C</code> and writes its own <code>sweep_&lt;task&gt;.json</code>.
 One command gives you five experiments and five results to compare – the
-same pattern you will use for your own sweeps.</p>
+same pattern you will use for your own sweeps. When a sweep grows beyond
+30 minutes per task, the same script works on <code>-p gpu</code> with a
+<code>--gres</code> request and a longer limit.</p>
 <div id="how-do-i-tell-which-result-came-from-which-setting" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1321,7 +1482,7 @@ you match each result to the <code>C</code> value that produced it?</p>
   Read the task ID
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Each file is named <code>sweep_&lt;task&gt;.json</code>, where
 <code>&lt;task&gt;</code> is the array task ID (00-04), and the file
@@ -1352,13 +1513,9 @@ is.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section><section id="aio-08-wrap-up"><p>Content from <a href="08-wrap-up.html">Wrap-Up: Allocations, Rules, and Where to Go Next</a></p>
 <hr>
-<p>Last updated on 2026-09-10 |
+<p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/08-wrap-up.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1367,6 +1524,34 @@ is.</li>
 <div class="section level1">
 <h1 id="what-you-did-today">What you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a>
 </h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do you get your own allocation on Anvil?</li>
+<li>What are the rules of the road on a shared supercomputer?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Explain the ACCESS and NAIRR allocation paths.</li>
+<li>State the etiquette that keeps a shared supercomputer usable.</li>
+<li>Locate the documentation and support channels for follow-up.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>You connected to a national supercomputer, read your allocation, and
 drove its scheduler. You have now:</p>
 <ul>
@@ -1376,7 +1561,7 @@ drove its scheduler. You have now:</p>
 <code>PENDING</code> to <code>RUNNING</code>.</li>
 <li>Managed jobs with <code>squeue</code>, <code>sacct</code>, and
 <code>scancel</code>.</li>
-<li>Trained a machine-learning model on the CPU nodes.</li>
+<li>Trained a machine-learning model on CPU cores, without a GPU.</li>
 <li>Trained a neural network on an A100 GPU (<code>nvidia-smi</code> in
 the output).</li>
 <li>(Stretch) Fanned one script out into a five-task job array.</li>
@@ -1439,9 +1624,9 @@ the partition table and every command in one place. Save it.</li>
 <strong>Do not run heavy work on the login node.</strong> Edit and
 submit there; compute nodes do the computing.</li>
 <li>
-<strong>Use <code>debug</code> / <code>gpu-debug</code> for
-testing</strong>, and the production partitions (<code>shared</code>,
-<code>gpu</code>, <code>ai</code>) for the real work.</li>
+<strong>Use <code>gpu-debug</code> for testing</strong>, and the
+production <code>gpu</code> partition for the real work (on this
+allocation).</li>
 <li>
 <strong>Ask for what you need, not more.</strong> A job that
 requests 128 cores and uses 2 holds 126 cores hostage for the whole run.
@@ -1461,8 +1646,8 @@ etiquette you already use in a shared lab or office.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>Testing is free on <code>debug</code>/<code>gpu-debug</code>; real
-work needs an ACCESS or NAIRR allocation.</li>
+<li>Testing is free on <code>gpu-debug</code>; real work needs an ACCESS
+or NAIRR allocation.</li>
 <li>Get help from the Anvil docs, <code>rcac-help@purdue.edu</code>, or
 the reference page on this site.</li>
 <li>Be a good citizen: no heavy work on login nodes, request only the
@@ -1471,10 +1656,6 @@ resources you need, and cancel jobs you no longer need.</li>
 </div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 </div></section>
 </div>
     </main>
@@ -1525,8 +1706,8 @@ resources you need, and cancel jobs you no longer need.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/aio.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/aio.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

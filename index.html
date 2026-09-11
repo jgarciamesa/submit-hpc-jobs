@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -236,7 +226,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -319,108 +309,61 @@
       </div>
     </nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
-
 <div class="section level1">
 <h1 id="submitting-ai-jobs-to-the-anvil-supercomputer">Submitting AI Jobs to the Anvil Supercomputer<a class="anchor" aria-label="anchor" href="#submitting-ai-jobs-to-the-anvil-supercomputer"></a></h1>
 <p>You will learn to submit, monitor, and manage artificial-intelligence
 workloads on <strong>Anvil</strong>, a national supercomputer operated
-by Purdue’s Research Computing Center (RCAC) and funded by the NSF’s
-ACCESS and NAIRR allocation programs.</p>
+by Purdue’s Research Computing Center and funded by the NSF’s <a href="https://access-ci.org/" class="external-link">ACCESS</a> program.</p>
 <p>This lesson was written for the <strong>“AI for All: Practical and
 Accessible AI for Research and Education”</strong> workshop (MSU
-Starkville, September 15, 2026). It is a 90-minute, hands-on, beginner
-session: no prior HPC experience is assumed, and by the end you will
-have run your own AI job on a supercomputer – on both CPU and GPU
-nodes.</p>
+Starkville, September 15, 2026). It is a hands-on, beginner session: no
+prior HPC experience is assumed, and by the end you will have run an AI
+job on a supercomputer.</p>
 <div class="section level2">
 <h2 id="what-you-will-be-able-to-do">What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a></h2>
-<ol style="list-style-type: decimal"><li>Explain the <strong>login-node vs. compute-node</strong> model and
-why jobs are submitted to a queue instead of run interactively.</li>
+<ol style="list-style-type: decimal"><li>Understand the <strong>login-node vs. compute-node</strong> model
+and why jobs are submitted to a queue instead of run interactively.</li>
 <li>
 <strong>Log in</strong> to Anvil using an SSH key, or through Open
 OnDemand in a browser.</li>
 <li>
 <strong>Submit</strong> a batch job with <code>sbatch</code> using a
-correct submission script (account, partition, time, resources).</li>
+submission script (account, partition, time, resources).</li>
 <li>
 <strong>Monitor and manage</strong> jobs with <code>squeue</code>,
 <code>sacct</code>, and <code>scancel</code>, and read the output files
 they produce.</li>
 <li>
 <strong>Escalate to an AI workload</strong>: run a machine-learning
-training job on the CPU nodes, then a PyTorch job on an A100 GPU,
-requesting GPUs with <code>--gres</code>.</li>
+training job on the CPU nodes, then a PyTorch job on an A100 GPU.</li>
 <li>
 <strong>Know where to go next</strong>: ACCESS and NAIRR
 allocations, documentation, and the support channels.</li>
 </ol></div>
-<div class="section level2">
-<h2 id="how-this-lesson-is-organised">How this lesson is organised<a class="anchor" aria-label="anchor" href="#how-this-lesson-is-organised"></a></h2>
-<p>The lesson is a sequence of short episodes, each built around doing
-something real. The two you will use constantly are:</p>
-<ul><li>
-<strong>The lab files</strong> live in the repo’s
-<code>episodes/data/labs/</code> folder – each lab is a small Python
-script plus a <code>.sbatch</code> submission script. They are copied to
-the <code>data/labs/</code> folder of the built site.</li>
-<li>
-<strong>The reference page</strong> (<a href="reference.html">learners/reference.md</a>) holds the partition
-table, a command cheat sheet, and a troubleshooting table. Keep it open
-in a second tab.</li>
-</ul><blockquote>
-<p>[!NOTE] If you are an instructor, see the <a href="instructor-notes.html">instructor notes</a> for the pre-session
-checklist, minute-by-minute timing, and fallbacks for when a lab runs
-long.</p>
-</blockquote>
-<p>Let’s begin with [why a supercomputer for AI][01-introduction].</p>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
-</div>
-
 
       <section id="setup"><div class="section level1">
 <h1 id="getting-set-up">Getting Set Up<a class="anchor" aria-label="anchor" href="#getting-set-up"></a></h1>
-<p>This lesson is <strong>hands-on on a real supercomputer</strong>.
-Everything you need is a laptop, a way to reach Anvil, and the lab
-files. The single biggest factor in finishing all four labs is having a
-working connection, so take a little time here rather than getting stuck
-mid-lab.</p>
 <div class="section level2">
 <h2 id="what-you-will-need">What you will need<a class="anchor" aria-label="anchor" href="#what-you-will-need"></a></h2>
-<ul><li>A laptop (macOS or Linux, or Windows 10/11).</li>
-<li>An <strong>Anvil account</strong>. If you registered for the
-workshop, your ACCESS or NAIRR allocation has been attached to an Anvil
-account for you. If you are here on your own, you will need an
-allocation first – see the <a href="08-wrap-up.html">wrap-up episode</a>
-for the ACCESS and NAIRR paths, or ask the workshop’s HPC team.</li>
+<ul><li>A laptop (MacOS or Linux, or Windows 10/11).</li>
+<li>An <strong>Anvil account</strong> with the workshop allocation
+attached. The workshop staff add registered attendees to the shared
+workshop allocation (<code>cis261672-gpu</code>); every lab in this
+lesson uses it, so you do not need your own allocation.</li>
 <li>A way to connect, one of:
 <ul><li>
-<strong>SSH</strong> from your terminal (fastest), or</li>
+<strong>Open OnDemand in a browser</strong> (preferred), or</li>
 <li>
-<strong>Open OnDemand in a browser</strong> (the zero-install
-fallback – every lab in this lesson also works in the OnDemand web
-shell).</li>
+<strong>SSH</strong> (requires additional setup).</li>
 </ul></li>
-</ul></div>
-<div class="section level2">
-<h2 id="connect-with-ssh-recommended">Connect with SSH (recommended)<a class="anchor" aria-label="anchor" href="#connect-with-ssh-recommended"></a></h2>
-<p>SSH is the standard way to reach a Unix supercomputer. The connection
-string is always:</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>your-anvil-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span></code></pre>
-</div>
-<div class="section level3">
+</ul><div class="section level3">
 <h3 id="find-your-anvil-username">Find your Anvil username<a class="anchor" aria-label="anchor" href="#find-your-anvil-username"></a></h3>
 <p>Your Anvil username is <strong>not</strong> your ACCESS username. It
 is derived from it and starts with the prefix <code>x-</code>. For
-example, if your ACCESS name is <code>jdoe</code>, your Anvil name is
-something like <code>x-jdoe</code>. If you are not sure of the exact
-string, the OnDemand account page and the workshop team both know
-it.</p>
+example, if your ACCESS name is <code>jdoe</code>, your Anvil username
+is likely <code>x-jdoe</code>. If you are not sure of the exact string,
+the OnDemand account page and the workshop team both know it.</p>
 </div>
 <div class="section level3">
 <h3 id="no-ssh-key-yet-create-one-five-minutes">No SSH key yet? Create one (five minutes)<a class="anchor" aria-label="anchor" href="#no-ssh-key-yet-create-one-five-minutes"></a></h3>
@@ -428,17 +371,17 @@ it.</p>
 passwords. If you have never generated a key, do it now; you will want
 one for every cluster you ever use.</p>
 <p>On macOS or Linux:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"my-laptop"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"my-laptop"</span></span></code></pre>
 </div>
 <p>Press <strong>Return</strong> at each prompt (an empty passphrase is
 fine for a workshop). Then show the public half of the key:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub</span></code></pre>
 </div>
 <p>Copy that whole line. On a new Anvil account, register it through
 <strong>Open OnDemand</strong> (your account page has an “Add SSH Key”
@@ -453,34 +396,15 @@ commands work.</p>
 <div class="section level2">
 <h2 id="get-the-lab-files">Get the lab files<a class="anchor" aria-label="anchor" href="#get-the-lab-files"></a></h2>
 <p>Each lab is two files: a Python script and a <code>.sbatch</code>
-submission script. You have three ways to get them onto Anvil:</p>
-<ol style="list-style-type: decimal"><li><p><strong>They are already there.</strong> If you were given a
-pre-staged directory (typically <code>~/ai-workshop-submit-jobs</code>),
-just <code>cd</code> into it. This is the fastest path and the one the
-workshop uses.</p></li>
-<li>
-<p><strong>Clone the repository.</strong> On Anvil:</p>
-<div class="codewrapper sourceCode" id="cb4">
+submission script. You can get them onto Anvil by cloning the GitHub
+repository or by downloading them from the lesson website.</p>
+<p>On Anvil:</p>
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="fu">git</span> clone https://github.com/jgarciamesa/submit-hpc-jobs.git</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="bu">cd</span> submit-hpc-jobs/episodes/data/labs</span></code></pre>
-</div>
-</li>
-<li>
-<p><strong>Copy from your laptop</strong> with <code>scp</code>, if
-you have the files locally:</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="fu">scp</span> <span class="op">&lt;</span>file<span class="op">&gt;</span> <span class="op">&lt;</span>your-anvil-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu:~/</span></code></pre>
-</div>
-</li>
-</ol><p>Whichever way you get them, confirm you can see them:</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="fu">ls</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="fu">git</span> clone https://github.com/jgarciamesa/submit-hpc-jobs.git</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="bu">cd</span> submit-hpc-jobs/episodes/data/labs</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="fu">ls</span></span></code></pre>
 </div>
 <p>You should see <code>hello.py</code>, <code>hello.sbatch</code>,
 <code>train_digits.py</code>, <code>train-digits-cpu.sbatch</code>,
@@ -488,16 +412,14 @@ you have the files locally:</p>
 <code>train_sweep.py</code>, and <code>array.sbatch</code>.</p>
 </div>
 <div class="section level2">
-<h2 id="you-are-ready">You are ready<a class="anchor" aria-label="anchor" href="#you-are-ready"></a></h2>
-<p>Open a second tab to the <a href="reference.html">reference page</a>
-– the partition table and the command cheat sheet are the two things you
-will look up most. Then start with <a href="01-introduction.html">Episode 1</a>.</p>
+<h2 id="you-are-ready">You are ready!<a class="anchor" aria-label="anchor" href="#you-are-ready"></a></h2>
+<p>Additional information can be found in the <a href="reference.html">reference page</a>, including the partition table
+(the workshop allocation reaches only the <code>gpu</code> and
+<code>gpu-debug</code> partitions) and a command cheat sheet.</p>
+<p>Start the lesson with <a href="01-introduction.html">Episode
+1</a>.</p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="references-1">References<a class="anchor" aria-label="anchor" href="#references-1"></a></h1>
-</div>
-
 
       </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="01-introduction.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -550,8 +472,8 @@ will look up most. Then start with <a href="01-introduction.html">Episode 1</a>.
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/index.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/index.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

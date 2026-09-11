@@ -18,9 +18,8 @@ created: '2026-09-08'
 # Comma-separated list of keywords for the lesson
 keywords: 'HPC, Slurm, supercomputing, machine learning, GPU, AI, Anvil, ACCESS, NAIRR'
 
-# Life cycle stage of the lesson
-# possible values: pre-alpha, alpha, beta, stable
-life_cycle: 'pre-alpha'
+# Life cycle stage (pre-alpha, alpha, beta, stable). Intentionally left
+# unset: an unset life_cycle suppresses the lifecycle badge in the header.
 
 # License of the lesson
 license: 'CC-BY 4.0'

@@ -24,17 +24,7 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"></div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -235,7 +225,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -330,7 +320,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Wrap-Up: Allocations, Rules, and Where to Go Next</h1>
-        <p>Last updated on 2026-09-10 |
+        <p>Last updated on 2026-09-11 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/08-wrap-up.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -346,6 +336,30 @@
 
 <div class="section level1">
 <h1 id="what-you-did-today">What you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a></h1>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How do you get your own allocation on Anvil?</li>
+<li>What are the rules of the road on a shared supercomputer?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Explain the ACCESS and NAIRR allocation paths.</li>
+<li>State the etiquette that keeps a shared supercomputer usable.</li>
+<li>Locate the documentation and support channels for follow-up.</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <p>You connected to a national supercomputer, read your allocation, and
 drove its scheduler. You have now:</p>
 <ul><li>Logged in to Anvil and found your allocation account with
@@ -354,7 +368,7 @@ drove its scheduler. You have now:</p>
 <code>PENDING</code> to <code>RUNNING</code>.</li>
 <li>Managed jobs with <code>squeue</code>, <code>sacct</code>, and
 <code>scancel</code>.</li>
-<li>Trained a machine-learning model on the CPU nodes.</li>
+<li>Trained a machine-learning model on CPU cores, without a GPU.</li>
 <li>Trained a neural network on an A100 GPU (<code>nvidia-smi</code> in
 the output).</li>
 <li>(Stretch) Fanned one script out into a five-task job array.</li>
@@ -409,9 +423,9 @@ the partition table and every command in one place. Save it.</li>
 <strong>Do not run heavy work on the login node.</strong> Edit and
 submit there; compute nodes do the computing.</li>
 <li>
-<strong>Use <code>debug</code> / <code>gpu-debug</code> for
-testing</strong>, and the production partitions (<code>shared</code>,
-<code>gpu</code>, <code>ai</code>) for the real work.</li>
+<strong>Use <code>gpu-debug</code> for testing</strong>, and the
+production <code>gpu</code> partition for the real work (on this
+allocation).</li>
 <li>
 <strong>Ask for what you need, not more.</strong> A job that
 requests 128 cores and uses 2 holds 126 cores hostage for the whole run.
@@ -429,8 +443,8 @@ etiquette you already use in a shared lab or office.</p>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>Testing is free on <code>debug</code>/<code>gpu-debug</code>; real
-work needs an ACCESS or NAIRR allocation.</li>
+<ul><li>Testing is free on <code>gpu-debug</code>; real work needs an ACCESS
+or NAIRR allocation.</li>
 <li>Get help from the Anvil docs, <code>rcac-help@purdue.edu</code>, or
 the reference page on this site.</li>
 <li>Be a good citizen: no heavy work on login nodes, request only the
@@ -438,9 +452,6 @@ resources you need, and cancel jobs you no longer need.</li>
 </ul></div>
 </div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
 </div>
 
 
@@ -505,8 +516,8 @@ resources you need, and cancel jobs you no longer need.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/08-wrap-up.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/08-wrap-up.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>

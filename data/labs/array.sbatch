@@ -4,8 +4,8 @@
 # Watch with:   squeue -u $USER
 # Output lands in: slurm-array_%A_%a.out  (%A = job ID, %a = array task ID)
 
-#SBATCH -A <ACCOUNT>            # MANDATORY on Anvil: allocation account (from `mybalance`)
-#SBATCH -p debug
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug             # 1 running job per user: the 5 array tasks run in turn
 #SBATCH --job-name=ai-sweep
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

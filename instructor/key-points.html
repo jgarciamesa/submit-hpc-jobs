@@ -40,17 +40,8 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
-            </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
-          </abbr>
-        </span>
-
-      </div>
+        <img id="incubator-logo" alt="Lesson Description" src="../assets/images/incubator-logo.svg">
+</div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu">
@@ -285,7 +276,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-an-ai-job-on-cpu.html">5. A Real AI Job on the CPU Nodes</a>
+        <a href="05-an-ai-job-on-cpu.html">5. A CPU-Only AI Job</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -385,7 +376,7 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Key Points</h1>
         
-<section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction: AI Workloads on a SupercomputerWhy a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a>Login nodes and compute nodes<a class="anchor" aria-label="anchor" href="#login-nodes-and-compute-nodes"></a>What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction: AI Workloads on a SupercomputerWhy a supercomputer for AI?<a class="anchor" aria-label="anchor" href="#why-a-supercomputer-for-ai"></a>Login nodes and compute nodes<a class="anchor" aria-label="anchor" href="#login-nodes-and-compute-nodes"></a>What you will be able to do<a class="anchor" aria-label="anchor" href="#what-you-will-be-able-to-do"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>Anvil is an NSF-funded ACCESS supercomputer: ~1,000 CPU nodes, 16
@@ -394,7 +385,7 @@ A100 GPU nodes, 21 H100 GPU nodes.</li>
 runs them on compute nodes.</li>
 <li>Running heavy work directly on the login node is against Anvil
 policy.</li>
-</ul></section><section id="02-connecting-to-anvil"><h2 class="section-heading"><a href="02-connecting-to-anvil.html">Connecting to AnvilLog in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a>Look around: your account and the queues<a class="anchor" aria-label="anchor" href="#look-around-your-account-and-the-queues"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+</ul></section><section id="02-connecting-to-anvil"><h2 class="section-heading"><a href="02-connecting-to-anvil.html">Connecting to AnvilLog in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a>Look around: your account and the queues<a class="anchor" aria-label="anchor" href="#look-around-your-account-and-the-queues"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>Log in with
@@ -403,19 +394,20 @@ OnDemand’s web shell if you have no SSH key.</li>
 <li>Your Anvil username starts with <code>x-</code> and is not your
 ACCESS username.</li>
 <li>
-<code>mybalance</code> prints the account string you will pass with
-<code>-A</code> in every job script.</li>
-</ul></section><section id="03-meeting-anvils-queues"><h2 class="section-heading"><a href="03-meeting-anvils-queues.html">Meeting Anvil's Queues (Partitions)What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a>Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<code>mybalance</code> prints the account string you pass with
+<code>-A</code> in every job script (here:
+<code>cis261672-gpu</code>).</li>
+</ul></section><section id="03-meeting-anvils-queues"><h2 class="section-heading"><a href="03-meeting-anvils-queues.html">Meeting Anvil's Queues (Partitions)What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a>Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>A partition is a named queue with its own machines and limits (max
 nodes, max time, max jobs per user).</li>
-<li>Use <code>debug</code> (CPU) and <code>gpu-debug</code> (A100) for
-short testing runs; use <code>shared</code>, <code>gpu</code>, or
-<code>ai</code> for production.</li>
-<li>Always name a partition with <code>-p</code>; if you omit it, Slurm
-uses the default <code>shared</code> partition.</li>
-</ul></section><section id="04-your-first-job"><h2 class="section-heading"><a href="04-your-first-job.html">Your First Job: hello, AnvilThe job submission script<a class="anchor" aria-label="anchor" href="#the-job-submission-script"></a>Submit it and watch it run<a class="anchor" aria-label="anchor" href="#submit-it-and-watch-it-run"></a>Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+<li>The workshop allocation reaches only <code>gpu-debug</code> (all
+labs) and <code>gpu</code> (production A100).</li>
+<li>
+<code>gpu-debug</code> runs one job per user at a time; name it with
+<code>-p</code> in every script.</li>
+</ul></section><section id="04-your-first-job"><h2 class="section-heading"><a href="04-your-first-job.html">Your First Job: hello, AnvilThe job submission script<a class="anchor" aria-label="anchor" href="#the-job-submission-script"></a>Submit it and watch it run<a class="anchor" aria-label="anchor" href="#submit-it-and-watch-it-run"></a>Manage your jobs<a class="anchor" aria-label="anchor" href="#manage-your-jobs"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>A Slurm job script is a shell script whose <code>#SBATCH</code>
@@ -426,7 +418,7 @@ lines request resources; the rest runs on a compute node.</li>
 <li>Submit with <code>sbatch &lt;script&gt;</code>, follow with
 <code>squeue -u $USER</code>, and read the
 <code>slurm-&lt;jobid&gt;.out</code> file.</li>
-</ul></section><section id="05-an-ai-job-on-cpu"><h2 class="section-heading"><a href="05-an-ai-job-on-cpu.html">A Real AI Job on the CPU NodesTrain a digit classifier<a class="anchor" aria-label="anchor" href="#train-a-digit-classifier"></a>Submit and read the result<a class="anchor" aria-label="anchor" href="#submit-and-read-the-result"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+</ul></section><section id="05-an-ai-job-on-cpu"><h2 class="section-heading"><a href="05-an-ai-job-on-cpu.html">A CPU-Only AI JobTrain a digit classifier<a class="anchor" aria-label="anchor" href="#train-a-digit-classifier"></a>Submit and read the result<a class="anchor" aria-label="anchor" href="#submit-and-read-the-result"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>A CPU AI job is just a Python program run under <code>sbatch</code>;
@@ -435,7 +427,7 @@ load <code>conda</code> in the script for scikit-learn and numpy.</li>
 with <code>--mem</code>.</li>
 <li>Name the output file with <code>%j</code> (job ID) so repeated
 submissions do not overwrite each other.</li>
-</ul></section><section id="06-an-ai-job-on-a-gpu"><h2 class="section-heading"><a href="06-an-ai-job-on-a-gpu.html">An AI Job on an A100 GPUAsk for a GPU<a class="anchor" aria-label="anchor" href="#ask-for-a-gpu"></a>Submit and confirm you got a GPU<a class="anchor" aria-label="anchor" href="#submit-and-confirm-you-got-a-gpu"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+</ul></section><section id="06-an-ai-job-on-a-gpu"><h2 class="section-heading"><a href="06-an-ai-job-on-a-gpu.html">An AI Job on an A100 GPUAsk for a GPU<a class="anchor" aria-label="anchor" href="#ask-for-a-gpu"></a>Submit and confirm you got a GPU<a class="anchor" aria-label="anchor" href="#submit-and-confirm-you-got-a-gpu"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>Request a GPU with <code>--gres=gpu:&lt;n&gt;</code> and submit to a
@@ -445,7 +437,7 @@ GPU partition such as <code>gpu-debug</code>.</li>
 GPU.</li>
 <li>If the GPU queue is full, the job waits in PENDING and runs when a
 node frees up – that is normal on a shared cluster.</li>
-</ul></section><section id="07-job-arrays"><h2 class="section-heading"><a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+</ul></section><section id="07-job-arrays"><h2 class="section-heading"><a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)A hyperparameter sweep in one command<a class="anchor" aria-label="anchor" href="#a-hyperparameter-sweep-in-one-command"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>A job array runs the same script many times in one submission;
@@ -455,11 +447,11 @@ node frees up – that is normal on a shared cluster.</li>
 is.</li>
 <li>Name output files with <code>%A</code> (job ID) and <code>%a</code>
 (task ID) so each task writes its own file.</li>
-</ul></section><section id="08-wrap-up"><h2 class="section-heading"><a href="08-wrap-up.html">Wrap-Up: Allocations, Rules, and Where to Go NextWhat you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a>Your next job is the hard one: getting your own allocation<a class="anchor" aria-label="anchor" href="#your-next-job-is-the-hard-one-getting-your-own-allocation"></a>Rules of the road<a class="anchor" aria-label="anchor" href="#rules-of-the-road"></a>References<a class="anchor" aria-label="anchor" href="#references"></a></a></h2>
+</ul></section><section id="08-wrap-up"><h2 class="section-heading"><a href="08-wrap-up.html">Wrap-Up: Allocations, Rules, and Where to Go NextWhat you did today<a class="anchor" aria-label="anchor" href="#what-you-did-today"></a>Your next job is the hard one: getting your own allocation<a class="anchor" aria-label="anchor" href="#your-next-job-is-the-hard-one-getting-your-own-allocation"></a>Rules of the road<a class="anchor" aria-label="anchor" href="#rules-of-the-road"></a></a></h2>
 <hr class="half-width">
 <ul>
-<li>Testing is free on <code>debug</code>/<code>gpu-debug</code>; real
-work needs an ACCESS or NAIRR allocation.</li>
+<li>Testing is free on <code>gpu-debug</code>; real work needs an ACCESS
+or NAIRR allocation.</li>
 <li>Get help from the Anvil docs, <code>rcac-help@purdue.edu</code>, or
 the reference page on this site.</li>
 <li>Be a good citizen: no heavy work on login nodes, request only the
@@ -514,8 +506,8 @@ resources you need, and cancel jobs you no longer need.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/key-points.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/instructor/key-points.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-10",
-  "datePublished": "2026-09-10"
+  "dateModified": "2026-09-11",
+  "datePublished": "2026-09-11"
 }
 
   </script><script>
