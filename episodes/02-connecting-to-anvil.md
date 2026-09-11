@@ -4,7 +4,7 @@ teaching: 10 # teaching time in minutes
 exercises: 12 # exercise time in minutes
 ---
 
-# Log in with SSH
+# Get a shell on Anvil
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
@@ -15,43 +15,41 @@ exercises: 12 # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Log in to Anvil using an SSH key, or through Open OnDemand in a browser.
+- Log in to Anvil through Open OnDemand's web shell (or with SSH, if you already have a key set up).
 - Read your allocation account and the list of available queues.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-If you have set up an SSH key, you can log in straight from your laptop's
-terminal:
+## The web shell (recommended)
+
+Log in to [Open OnDemand][ondemand] with your ACCESS credentials, then open
+*Clusters - Shell access*. A terminal opens in your browser -- no software to
+install -- and everything in this lesson runs in it.
+
+## SSH (advanced, optional)
+
+If you already have an SSH key registered on Anvil, you can log in from your
+own laptop's terminal instead:
 
 ```bash
 ssh <your-anvil-username>@anvil.rcac.purdue.edu
 ```
 
-Two things to pay attention to at this step:
+Two things to pay attention to:
 
-- Your **Anvil username is not your ACCESS username**. It is derived from it and
-  starts with `x-`. For example, if your ACCESS name is `jdoe`, your Anvil name
-  is something like `x-jdoe`.
+- Your **Anvil username is not your ACCESS username**. It is derived from it
+  and starts with `x-`. For example, if your ACCESS name is `jdoe`, your Anvil
+  name is something like `x-jdoe`.
 - Anvil does **not** accept passwords. Only SSH keys. If you do not have a key
-  yet, use the browser path below -- do not spend lab time generating one.
-
-::::::::::::::::::::::::::::::::::::: callout
-
-## No SSH key? Use the browser.
-
-Log in to [Open OnDemand][ondemand], then open *Clusters - Shell access*.
-Everything in this lesson works in that web terminal too, and from OnDemand you
-can also register an SSH key for next time.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
+  yet, use the web shell above -- do not spend lab time generating one.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
 If someone's `ssh` says `failed to map user <you>@access-ci.org`, their
-allocation is not attached to Anvil yet. Route them to the browser path and flag
-them for the "getting your own allocation" episode. Do not let the group wait on
-one connection problem.
+allocation is not attached to Anvil yet. Have them continue in the web shell
+and flag them for the "getting your own allocation" episode. Do not let the
+group wait on one connection problem.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -77,7 +75,7 @@ print -- and it is the `-A` value in every lab script in this lesson.
 
 `showpartitions` and `sfeatures` show you the queues and the machines behind
 them. You do not need to memorize this now -- the next episode walks through
-the table. Just notice that the `g` nodes are A100s and the `h` nodes are H100s.
+the tables. Just notice that the `g` nodes are A100s and the `h` nodes are H100s.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
@@ -101,8 +99,8 @@ not attached to the allocation yet; ask an instructor.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Log in with `ssh <x-username>@anvil.rcac.purdue.edu`, or use Open OnDemand's web shell if you have no SSH key.
-- Your Anvil username starts with `x-` and is not your ACCESS username.
+- Open a shell through Open OnDemand (*Clusters - Shell access*); SSH is the advanced alternative.
+- Your Anvil username starts with `x-` and is not your ACCESS username (needed only for SSH).
 - `mybalance` prints the account string you pass with `-A` in every job script (here: `cis261672-gpu`).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

@@ -15,7 +15,7 @@ exercises: 18 # exercise time in minutes
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Submit a scikit-learn training job on the CPU cores of a GPU node, without `--gres`.
+- Submit a scikit-learn training job to the `shared` CPU partition, without a `--gres` request.
 - Request more cores and memory with `--cpus-per-task` and `--mem`.
 - Read the job's output and the metrics file it writes.
 
@@ -36,22 +36,25 @@ The program, `train_digits.py`, does five things:
 4. Trains a support-vector machine.
 5. Prints test accuracy and writes a `digits_metrics.json` file.
 
-Your allocation only reaches the GPU partitions, so this CPU-only job runs on `gpu-debug` *without* a `--gres` request -- it uses the fast CPU cores that sit on the A100 node.
+This job uses no GPU, so it goes to a CPU partition instead: `shared`, the
+default CPU queue on Anvil. The script submits there and leaves the `--gres`
+line out entirely -- everything else works just like the `hello` job.
 
 Its job script, `train-digits-cpu.sbatch`, asks for more than the `hello` job
 did:
 
 ```bash
 #!/bin/sh -l
-#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
-#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop allocation (confirm with `mybalance`)
+#SBATCH -p shared                # Anvil's default CPU partition
 #SBATCH --job-name=digits-cpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16      # ask for 16 cores
 #SBATCH --mem=16G               # ask for 16 GB of memory
-#SBATCH -t 00:30:00             # fills the 30-min gpu-debug limit
+#SBATCH -t 00:30:00             # 30 minutes of wall time
 #SBATCH -o digits-cpu_%j.out    # name the output file ourselves
+#SBATCH -e digits-cpu_%j.err    # name the error file to match
 
 module load conda
 cd $SLURM_SUBMIT_DIR

@@ -30,7 +30,7 @@ scheduler. You have now:
 - Managed jobs with `squeue`, `sacct`, and `scancel`.
 - Trained a machine-learning model on CPU cores, without a GPU.
 - Trained a neural network on an A100 GPU (`nvidia-smi` in the output).
-- (Stretch) Fanned one script out into a five-task job array.
+- (Scale) Fanned one script out into a five-task job array.
 
 Each of those is a repeatable HPC skill. The two lines that make all of it work
 are the ones you have used all session: `#SBATCH -A <account>` and

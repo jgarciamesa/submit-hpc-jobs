@@ -17,7 +17,7 @@ by the end you will have run an AI job on a supercomputer.
 
 1. Understand the **login-node vs. compute-node** model and why jobs are submitted
    to a queue instead of run interactively.
-2. **Log in** to Anvil using an SSH key, or through Open OnDemand in a browser.
+2. **Log in** to Anvil through Open OnDemand in a browser (or with an SSH key, if you have one set up).
 3. **Submit** a batch job with `sbatch` using a submission script
    (account, partition, time, resources).
 4. **Monitor and manage** jobs with `squeue`, `sacct`, and `scancel`, and read
