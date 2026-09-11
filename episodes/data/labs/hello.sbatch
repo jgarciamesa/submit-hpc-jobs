@@ -3,8 +3,8 @@
 # Submit with:  sbatch hello.sbatch
 # then:         squeue -u $USER ; cat slurm-<jobid>.out
 
-#SBATCH -A <ACCOUNT>            # MANDATORY on Anvil: your allocation account (from `mybalance`)
-#SBATCH -p debug                # short-queue partition for testing (2-hour limit)
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user
 #SBATCH --job-name=hello-ai4all
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

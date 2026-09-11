@@ -23,8 +23,8 @@ carries the whole-session logistics.
 Do these **before** the workshop. Accounts are the number-one success factor.
 
 - [ ] **Accounts provisioned.** Every registered attendee has an Anvil account
-      with their ACCESS or NAIRR allocation attached. Confirm the Anvil
-      username (the `x-`-prefixed one) for the pre-provisioned group.
+      and has been added to the workshop allocation `cis261672-gpu`. Confirm the
+      Anvil username (the `x-`-prefixed one) for each attendee.
 - [ ] **Lab files staged.** Copy the site's [`data/labs/`](data/labs/) folder to a shared location on
       Anvil (e.g. `~/ai-workshop-submit-jobs` for a workshop user) *and* confirm
       the GitHub repo is public so attendees can `git clone` it.
@@ -35,15 +35,17 @@ Do these **before** the workshop. Accounts are the number-one success factor.
       `module spider pytorch` and put the exact module line into
       `train-gpu.sbatch` (the commented line near the top). Until then the GPU
       script has a placeholder.
-- [ ] **Dry-run each lab** on a `debug` / `gpu-debug` job as yourself so you
-      know the real wall time and the exact output to show.
+- [ ] **Dry-run each lab** as yourself on `gpu-debug` so you know the real wall
+      time and the exact output to show. Include a CPU-only submission (no
+      `--gres`): confirm it is accepted on `gpu-debug`, since the public docs do
+      not state this explicitly.
 
 ## The two open items to resolve before the session
 
-1. **The account string.** Every lab's `.sbatch` has `#SBATCH -A <ACCOUNT>`.
-   Do not hard-code one account into the published files -- attendees each use
-   their own from `mybalance`. For the *instructor's* own demo jobs, note your
-   account separately.
+1. **The account string.** Every lab's `.sbatch` uses the workshop allocation
+   `cis261672-gpu`, which reaches only `gpu-debug` and `gpu`. Confirm before the
+   session that every attendee can submit under it. Attendees who have their own
+   allocation may swap in their own `-A` value from `mybalance`.
 2. **The PyTorch module.** Pin the exact `module load <pytorch>` (or the
    Singularity/NGC container command) in `train-gpu.sbatch`. The script is
    written to load `conda` first, so a module-based PyTorch or a module-based
@@ -71,9 +73,9 @@ each lab ends on a visible success signal before you move on.
   start of Lab 3, convert it to a front-of-room demo: you submit and walk the
   output, attendees submit on their own and check the result after. **Never**
   cut Lab 2 (it is the core `sbatch` skill) or the wrap-up.
-- **`debug` queue busy at 1 PM.** Every lab also runs on `shared` (the default
-  partition) -- a one-line change to `-p shared`. Mention this so attendees are
-  not blocked.
+- **Anything longer than 30 minutes.** The `gpu` partition (A100, 48-hour
+  limit) is the other queue this allocation reaches; it is the fallback for a
+  run that does not fit in the `gpu-debug` window.
 - **`gpu-debug` saturated.** Demo from the front; attendees submit and leave
   with a `PENDING` job plus instructions to check the output later. Frame it as
   the real HPC experience: *your job runs when the resource is free.*
@@ -87,7 +89,7 @@ each lab ends on a visible success signal before you move on.
   stretch; the setup page walks SSH-key creation for anyone who wants it.
 - **Has a cluster account elsewhere:** "if you know Slurm, you know Anvil."
   Point them to the *Anvil-specific differences* section of the reference page
-  (account string, `mybalance`, debug queues).
+  (account string, `mybalance`, the `gpu-debug` single-job rule).
 - **Fast finishers:** the job-array stretch, then explore `sacct` columns and
   the charge factors.
 

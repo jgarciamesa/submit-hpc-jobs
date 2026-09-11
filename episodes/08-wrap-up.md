@@ -2,16 +2,25 @@
 title: "Wrap-Up: Allocations, Rules, and Where to Go Next"
 teaching: 12 # teaching time in minutes
 exercises: 5 # exercise time in minutes
-questions:
-- How do you get your own allocation on Anvil?
-- What are the rules of the road on a shared supercomputer?
-objectives:
-- Explain the ACCESS and NAIRR allocation paths.
-- State the etiquette that keeps a shared supercomputer usable.
-- Locate the documentation and support channels for follow-up.
 ---
 
 # What you did today
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do you get your own allocation on Anvil?
+- What are the rules of the road on a shared supercomputer?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain the ACCESS and NAIRR allocation paths.
+- State the etiquette that keeps a shared supercomputer usable.
+- Locate the documentation and support channels for follow-up.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 You connected to a national supercomputer, read your allocation, and drove its
 scheduler. You have now:
@@ -19,7 +28,7 @@ scheduler. You have now:
 - Logged in to Anvil and found your allocation account with `mybalance`.
 - Submitted a batch job with `sbatch` and watched it go `PENDING` to `RUNNING`.
 - Managed jobs with `squeue`, `sacct`, and `scancel`.
-- Trained a machine-learning model on the CPU nodes.
+- Trained a machine-learning model on CPU cores, without a GPU.
 - Trained a neural network on an A100 GPU (`nvidia-smi` in the output).
 - (Stretch) Fanned one script out into a five-task job array.
 
@@ -61,8 +70,8 @@ A few norms keep a shared machine pleasant for everyone:
 
 1. **Do not run heavy work on the login node.** Edit and submit there; compute
    nodes do the computing.
-2. **Use `debug` / `gpu-debug` for testing**, and the production partitions
-   (`shared`, `gpu`, `ai`) for the real work.
+2. **Use `gpu-debug` for testing**, and the production `gpu` partition for
+   the real work (on this allocation).
 3. **Ask for what you need, not more.** A job that requests 128 cores and uses 2
    holds 126 cores hostage for the whole run. `highmem` nodes charge 4x and
    node-exclusive queues bill all 128 cores even if you use one.
@@ -74,7 +83,7 @@ already use in a shared lab or office.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Testing is free on `debug`/`gpu-debug`; real work needs an ACCESS or NAIRR allocation.
+- Testing is free on `gpu-debug`; real work needs an ACCESS or NAIRR allocation.
 - Get help from the Anvil docs, `rcac-help@purdue.edu`, or the reference page on this site.
 - Be a good citizen: no heavy work on login nodes, request only the resources you need, and cancel jobs you no longer need.
 

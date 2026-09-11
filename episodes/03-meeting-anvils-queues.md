@@ -2,15 +2,24 @@
 title: "Meeting Anvil's Queues (Partitions)"
 teaching: 10 # teaching time in minutes
 exercises: 5 # exercise time in minutes
-questions:
-- What is a partition, and why are there so many of them?
-- Which queues are best for short testing runs, like the ones in this lesson?
-objectives:
-- Explain what a Slurm partition is and how to read its limits.
-- Choose the right partition for a testing run versus a production run.
 ---
 
 # What is a partition?
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What is a partition, and why are there so many of them?
+- Which queues are best for short testing runs, like the ones in this lesson?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain what a Slurm partition is and how to read its limits.
+- Choose the right partition for a testing run versus a production run.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 Slurm (Anvil's scheduler) groups compute resources into **partitions** -- the
 technical name for a *queue*. Each partition has its own machines and its own
@@ -26,35 +35,28 @@ Here is what matters for this lesson:
 
 | Partition   | Node type      | Max nodes/job | Max time | Max running jobs/user | Notes |
 |-------------|----------------|---------------|----------|-----------------------|-------|
-| `debug`     | regular CPU    | 2             | 2 hrs    | 1                     | short tests -- our CPU labs use this |
-| `gpu-debug` | GPU (A100)     | 1             | 0.5 hrs  | 1                     | short GPU tests -- our GPU lab uses this |
-| `shared`    | regular CPU    | 1 (128 cores) | 96 hrs   | many                  | the **default** CPU queue |
-| `wholenode` | regular CPU    | 16            | 96 hrs   | 64                    | node-exclusive CPU |
-| `wide`      | regular CPU    | 56            | 12 hrs   | 5                     | wide multi-node CPU |
-| `highmem`   | large-memory   | 1             | 48 hrs   | 2                     | ~1 TB RAM, charges 4x |
-| `gpu`       | GPU (A100)     | --            | 48 hrs   | --                    | A100 production jobs |
-| `ai`        | GPU (H100)     | --            | 48 hrs   | --                    | H100 production jobs |
+| `gpu-debug` | GPU (A100)     | 1             | 0.5 hrs  | 1                     | **workshop queue** -- every lab in this lesson runs here, including the CPU-only jobs |
+| `gpu`       | GPU (A100)     | --            | 48 hrs   | --                    | A100 production jobs (your other queue) |
+| `debug`     | regular CPU    | 2             | 2 hrs    | 1                     | CPU-only test queue (not on this allocation) |
+| `shared`    | regular CPU    | 1 (128 cores) | 96 hrs   | many                  | the **default** CPU queue (not on this allocation) |
+| `wholenode` | regular CPU    | 16            | 96 hrs   | 64                    | node-exclusive CPU (not on this allocation) |
+| `wide`      | regular CPU    | 56            | 12 hrs   | 5                     | wide multi-node CPU (not on this allocation) |
+| `highmem`   | large-memory   | 1             | 48 hrs   | 2                     | ~1 TB RAM, charges 4x (not on this allocation) |
+| `ai`        | GPU (H100)     | --            | 48 hrs   | --                    | H100 production jobs (not on this allocation) |
 
-::::::::::::::::::::::::::::::::::::: callout
-
-## Debug queues are a class's best friend
-
-The `debug` and `gpu-debug` partitions exist for exactly what you are doing:
-quick tests with tight time limits and no cost. They are not for production
-work, but for a lesson they are perfect.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
+The workshop allocation `cis261672-gpu` only reaches the two starred
+partitions -- `gpu-debug` and `gpu`. Every lab in this lesson therefore runs on
+`gpu-debug`, **including the CPU-only jobs** (they run on the CPU cores of an
+A100 node without asking for a GPU). You will not hit "access denied" on a
+queue in this lesson.
 
 # Two rules that will save you time
 
-1. **You must name a partition with `-p` in every job script.** If you do not,
-   Slurm uses the default (`shared`). That is fine, but say it out loud in your
-   head: *no `-p` means `shared`*, not *no queue*.
-2. **The `debug` and `gpu-debug` queues only let one running job per user at a
-   time.** If you submit a second job before the first finishes, it waits in
-   `PENDING`. That is not an error -- it is the queue doing its job. We will
-   use that waiting to learn how to read the queue.
+1. **You must name a partition with `-p` in every job script.** The workshop labs
+   always use `-p gpu-debug`.
+2. **`gpu-debug` only lets one running job per user at a time.** Finish (or cancel)
+   a job before you submit the next one -- a second submission just waits in
+   `PENDING`.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -68,8 +70,8 @@ way, do not exceed ten minutes.
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - A partition is a named queue with its own machines and limits (max nodes, max time, max jobs per user).
-- Use `debug` (CPU) and `gpu-debug` (A100) for short testing runs; use `shared`, `gpu`, or `ai` for production.
-- Always name a partition with `-p`; if you omit it, Slurm uses the default `shared` partition.
+- The workshop allocation reaches only `gpu-debug` (all labs) and `gpu` (production A100).
+- `gpu-debug` runs one job per user at a time; name it with `-p` in every script.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

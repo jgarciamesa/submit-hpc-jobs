@@ -2,18 +2,26 @@
 title: "An AI Job on an A100 GPU"
 teaching: 10 # teaching time in minutes
 exercises: 15 # exercise time in minutes
-questions:
-- How do you ask a Slurm job for a GPU?
-- How can you tell your job actually ran on a GPU and not a CPU?
-objectives:
-- Request a GPU with `--gres` and submit a PyTorch job to the `gpu-debug` partition.
-- Confirm GPU use from the job's `nvidia-smi` output.
 ---
 
 # Ask for a GPU
 
-So far every job has run on CPU nodes. To run on a GPU you do two new things in
-the script: name a GPU partition and request a GPU with `--gres`.
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do you ask a Slurm job for a GPU?
+- How can you tell your job actually ran on a GPU and not a CPU?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Request a GPU with `--gres` and submit a PyTorch job to the `gpu-debug` partition.
+- Confirm GPU use from the job's `nvidia-smi` output.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+So far every job has used only CPU cores. To run on a GPU you do two new things in the script: name a GPU partition and request a GPU with `--gres`.
 
 Here is the new script, `train-gpu.sbatch`. It trains a small neural network
 with PyTorch on a dataset generated inside the script (again, **nothing is
@@ -22,8 +30,8 @@ landed on:
 
 ```bash
 #!/bin/sh -l
-#SBATCH -A <ACCOUNT>            # MANDATORY: your allocation account
-#SBATCH -p gpu-debug            # GPU test queue: 30 min, up to 2 GPUs
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug            # GPU test queue: 30 min, up to 2 GPUs, 1 job
 #SBATCH --job-name=digits-gpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -70,9 +78,7 @@ a national supercomputer GPU.
 
 ## No GPU in the output?
 
-If `nvidia-smi` is missing or the output says `[cpu]`, the job landed on a CPU
-node. The usual causes: the script is missing `--gres=gpu:1`, or it named a CPU
-partition. Check both and resubmit; the next run will report a GPU.
+If `nvidia-smi` is missing or the output says `[cpu]`, the job did not land on a GPU. The usual causes: the script is missing `--gres=gpu:1`, or the `-p` line does not name a GPU partition. Check both and resubmit; the next run will report a GPU.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -87,11 +93,7 @@ free node. What do you do?
 
 ## Submit-and-check-later is the real HPC experience
 
-There is nothing wrong with the job -- the queue is just full. Leave it
-submitted and it will run when a GPU node frees up. Note the job ID, and check
-the output later with `squeue -j <jobid>` and `cat slurm-<jobid>.out`. This is
-exactly how research jobs work on a shared machine: you submit, and the job
-runs when the resource is available.
+There is nothing wrong with the job -- the queue is just full. Leave it submitted and it will run when a GPU node frees up. Note the job ID, and check the output later with `squeue -j <jobid>` and `cat slurm-<jobid>.out`. This is exactly how research jobs work on a shared machine: you submit, and the job runs when the resource is available. (For a longer production run, the `gpu` partition offers a 48-hour limit.)
 
 :::::::::::::::::::::::::::::::::
 

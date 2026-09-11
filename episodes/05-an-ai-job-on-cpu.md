@@ -1,17 +1,26 @@
 ---
-title: "A Real AI Job on the CPU Nodes"
+title: "A CPU-Only AI Job"
 teaching: 10 # teaching time in minutes
 exercises: 18 # exercise time in minutes
-questions:
-- How do you run a Python machine-learning job on Anvil's CPU nodes?
-- How do you ask for more cores and more memory?
-objectives:
-- Submit a scikit-learn training job on the CPU nodes.
-- Request more cores and memory with `--cpus-per-task` and `--mem`.
-- Read the job's output and the metrics file it writes.
 ---
 
 # Train a digit classifier
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do you run a machine-learning job that does not ask for a GPU?
+- How do you ask for more cores and more memory?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Submit a scikit-learn training job on the CPU cores of a GPU node, without `--gres`.
+- Request more cores and memory with `--cpus-per-task` and `--mem`.
+- Read the job's output and the metrics file it writes.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 This is the first *real* AI job: a small machine-learning program that trains a
 classifier on 1,797 images of handwritten digits and reports test accuracy. It
@@ -27,19 +36,21 @@ The program, `train_digits.py`, does five things:
 4. Trains a support-vector machine.
 5. Prints test accuracy and writes a `digits_metrics.json` file.
 
+Your allocation only reaches the GPU partitions, so this CPU-only job runs on `gpu-debug` *without* a `--gres` request -- it uses the fast CPU cores that sit on the A100 node.
+
 Its job script, `train-digits-cpu.sbatch`, asks for more than the `hello` job
 did:
 
 ```bash
 #!/bin/sh -l
-#SBATCH -A <ACCOUNT>            # MANDATORY: your allocation account
-#SBATCH -p debug
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user
 #SBATCH --job-name=digits-cpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16      # ask for 16 cores
 #SBATCH --mem=16G               # ask for 16 GB of memory
-#SBATCH -t 00:30:00
+#SBATCH -t 00:30:00             # fills the 30-min gpu-debug limit
 #SBATCH -o digits-cpu_%j.out    # name the output file ourselves
 
 module load conda

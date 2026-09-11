@@ -2,15 +2,24 @@
 title: "Your First Job: hello, Anvil"
 teaching: 10 # teaching time in minutes
 exercises: 12 # exercise time in minutes
-questions:
-- What does a Slurm job submission script look like?
-- How do you submit a job and watch it run?
-objectives:
-- Write the two mandatory `#SBATCH` lines for Anvil (account and partition).
-- Submit a job with `sbatch` and track it with `squeue` and its output file.
 ---
 
 # The job submission script
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What does a Slurm job submission script look like?
+- How do you submit a job and watch it run?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Write the two mandatory `#SBATCH` lines for Anvil (account and partition).
+- Submit a job with `sbatch` and track it with `squeue` and its output file.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 A Slurm job is a small shell script with special comment lines at the top. Lines
 that start with `#SBATCH` are read by the scheduler; the rest of the script is
@@ -20,8 +29,8 @@ Here is the whole script for this episode's job, `hello.sbatch`:
 
 ```bash
 #!/bin/sh -l
-#SBATCH -A <ACCOUNT>            # MANDATORY: your allocation account (from `mybalance`)
-#SBATCH -p debug                # short-test CPU partition (2-hour limit)
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user
 #SBATCH --job-name=hello-ai4all
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -36,8 +45,8 @@ python3 hello.py
 
 Two of these lines are **mandatory on Anvil**:
 
-- `#SBATCH -A <ACCOUNT>` -- your allocation account. A job without it is rejected.
-- `#SBATCH -p <partition>` -- which queue to run in.
+- `#SBATCH -A <account>` -- your allocation account. For this workshop that is `cis261672-gpu`, the shared workshop allocation (you can still check your own with `mybalance`). A job without it is rejected.
+- `#SBATCH -p <partition>` -- which queue to run in. Every lab in this lesson uses `-p gpu-debug`.
 
 The other lines ask for resources: how many nodes, how many cores per task,
 how much memory, and how much time. For a one-line `hello` program, two cores
@@ -57,8 +66,10 @@ print("  Node list: " + os.environ.get("SLURM_JOB_NODELIST", "not run under Slur
 
 # Submit it and watch it run
 
-First, open `hello.sbatch` in any text editor and replace `<ACCOUNT>` with the
-account string you found with `mybalance`. Then submit and follow:
+The script already names the workshop allocation (`cis261672-gpu`) and the
+`gpu-debug` queue. If you have your own allocation and want to use it, replace
+that `-A` value with the account string `mybalance` shows you. Then submit and
+follow:
 
 ```bash
 sbatch hello.sbatch        # -> "Submitted batch job 123456"
@@ -70,13 +81,11 @@ cat slurm-<jobid>.out      # read the output (replace <jobid> with your number)
 
 ```output
 Hello from Anvil!
-  Hostname : a042
-  Node list: a042
+  Hostname : g012
+  Node list: g012
 ```
 
-If the hostname is an `a...` node and not the machine you typed on, you have
-seen the whole model work: you submitted on the login node, the scheduler ran
-your job on a compute node, and wrote the result to a file you read back.
+If the hostname is a `g...` node (an A100 node) and not the machine you typed on, you have seen the whole model work: you submitted on the login node, the scheduler ran your job on a compute node, and wrote the result to a file you read back.
 
 # Manage your jobs
 
@@ -98,20 +107,18 @@ A good habit: submit, then immediately note the job ID and re-check with `squeue
 in a couple of minutes. When something is not working, `sacct -j <jobid>` tells
 you *why*.
 
-::::::::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Why is my job stuck in PENDING?
 
 You submitted `hello.sbatch` and `squeue -u $USER` shows it as `PD` (pending)
 for more than a minute. What is the most likely cause, and how do you check it?
 
-:::::::::::::::::::::::: solution 
+:::::::::::::::::::::::: solution
 
 ## Most likely: the queue is full
 
-On `debug`, only one job per user may run at a time. If your previous `hello`
-job (or another user's on the same debug node) is still running, this one
-waits. Check the reason with:
+On `gpu-debug`, only one job per user may run at a time. If your previous `hello` job is still running, this one waits. Check the reason with:
 
 ```bash
 squeue -j <jobid> -o "%r"
@@ -124,14 +131,14 @@ wait for the running job to finish, or cancel it first with `scancel <oldjobid>`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## I got an account error
 
 You submitted and Slurm replied with something like `error: invalid account
 specified` or `failed to map user`. What went wrong?
 
-:::::::::::::::::::::::: solution 
+:::::::::::::::::::::::: solution
 
 ## Missing or wrong -A account
 

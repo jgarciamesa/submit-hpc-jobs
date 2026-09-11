@@ -2,15 +2,24 @@
 title: "Connecting to Anvil"
 teaching: 10 # teaching time in minutes
 exercises: 12 # exercise time in minutes
-questions:
-- How do you log in to Anvil?
-- How do you find the account string you will need to submit jobs?
-objectives:
-- Log in to Anvil using an SSH key, or through Open OnDemand in a browser.
-- Read your allocation account and the list of available queues.
 ---
 
 # Log in with SSH
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do you log in to Anvil?
+- How do you find the account string you will need to submit jobs?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Log in to Anvil using an SSH key, or through Open OnDemand in a browser.
+- Read your allocation account and the list of available queues.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 If you have set up an SSH key, you can log in straight from your laptop's
 terminal:
@@ -19,7 +28,7 @@ terminal:
 ssh <your-anvil-username>@anvil.rcac.purdue.edu
 ```
 
-Two things trip people up at this step, so check both before you move on:
+Two things to pay attention to at this step:
 
 - Your **Anvil username is not your ACCESS username**. It is derived from it and
   starts with `x-`. For example, if your ACCESS name is `jdoe`, your Anvil name
@@ -62,26 +71,29 @@ sfeatures        # the node types: a* CPU, g* A100, h* H100
 `-A <account>` value every job script will need.** Anvil is strict about it:
 submit a job without the right account and it is rejected.
 
+For this workshop the team attached the shared allocation
+`cis261672-gpu` to every account, so that is the string `mybalance` will
+print -- and it is the `-A` value in every lab script in this lesson.
+
 `showpartitions` and `sfeatures` show you the queues and the machines behind
 them. You do not need to memorize this now -- the next episode walks through
 the table. Just notice that the `g` nodes are A100s and the `h` nodes are H100s.
 
-::::::::::::::::::::::::::::::::::::: challenge 
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Can you find your account?
 
-Run `mybalance` in your terminal. What is the account string it prints?
-You will paste this into every job script in this lesson.
+Run `mybalance` in your terminal. It should print `cis261672-gpu` -- the
+workshop allocation. That is the `-A` value in every job script in this lesson.
 
-:::::::::::::::::::::::: solution 
+:::::::::::::::::::::::: solution
 
 ## Your account string
 
-It is the name that starts with your project, for example
-`ACCESS-2026-ai-for-all` (the exact string varies per allocation). Copy it
-exactly -- a missing dash or capital letter is the most common
-first-submission mistake. If `mybalance` prints nothing, your allocation is not
-attached yet; ask an instructor.
+It should be `cis261672-gpu`, the workshop allocation the team attached to
+your account. Copy it exactly -- a missing dash or capital letter is the most
+common first-submission mistake. If `mybalance` prints nothing, your account is
+not attached to the allocation yet; ask an instructor.
 
 :::::::::::::::::::::::::::::::::
 
@@ -91,7 +103,7 @@ attached yet; ask an instructor.
 
 - Log in with `ssh <x-username>@anvil.rcac.purdue.edu`, or use Open OnDemand's web shell if you have no SSH key.
 - Your Anvil username starts with `x-` and is not your ACCESS username.
-- `mybalance` prints the account string you will pass with `-A` in every job script.
+- `mybalance` prints the account string you pass with `-A` in every job script (here: `cis261672-gpu`).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
