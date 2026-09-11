@@ -1,8 +1,6 @@
 ---
 ---
 
-# References
-
 [rcac]: https://www.rcac.purdue.edu "Purdue Research Computing Center (RCAC)"
 [access]: https://access-ci.org "NSF ACCESS allocation program"
 [nairr]: https://nairr.org "NSF NAIRR allocation program"

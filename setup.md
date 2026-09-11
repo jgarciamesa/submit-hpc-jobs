@@ -4,38 +4,21 @@ title: "Getting Set Up"
 
 # Getting Set Up
 
-This lesson is **hands-on on a real supercomputer**. Everything you need is a
-laptop, a way to reach Anvil, and the lab files. The single biggest factor in
-finishing all four labs is having a working connection, so take a little time
-here rather than getting stuck mid-lab.
-
 ## What you will need
 
-- A laptop (macOS or Linux, or Windows 10/11).
-- An **Anvil account**. If you registered for the workshop, your ACCESS or
-  NAIRR allocation has been attached to an Anvil account for you. If you are
-  here on your own, you will need an allocation first -- see the
-  [wrap-up episode](08-wrap-up.html) for the ACCESS and NAIRR paths, or ask the
-  workshop's HPC team.
+- A laptop (MacOS or Linux, or Windows 10/11).
+- An **Anvil account** with the workshop allocation attached. The workshop staff
+  add registered attendees to the shared workshop allocation (`cis261672-gpu`);
+  every lab in this lesson uses it, so you do not need your own allocation.
 - A way to connect, one of:
-  - **SSH** from your terminal (fastest), or
-  - **Open OnDemand in a browser** (the zero-install fallback -- every lab in
-    this lesson also works in the OnDemand web shell).
-
-## Connect with SSH (recommended)
-
-SSH is the standard way to reach a Unix supercomputer. The connection string is
-always:
-
-```bash
-ssh <your-anvil-username>@anvil.rcac.purdue.edu
-```
+  - **Open OnDemand in a browser** (preferred), or
+  - **SSH** (requires additional setup).
 
 ### Find your Anvil username
 
 Your Anvil username is **not** your ACCESS username. It is derived from it and
 starts with the prefix `x-`. For example, if your ACCESS name is `jdoe`, your
-Anvil name is something like `x-jdoe`. If you are not sure of the exact string,
+Anvil username is likely `x-jdoe`. If you are not sure of the exact string,
 the OnDemand account page and the workshop team both know it.
 
 ### No SSH key yet? Create one (five minutes)
@@ -68,27 +51,14 @@ same `ssh-keygen` commands work.
 ## Get the lab files
 
 Each lab is two files: a Python script and a `.sbatch` submission script. You
-have three ways to get them onto Anvil:
+can get them onto Anvil by cloning the GitHub repository or by downloading them
+from the lesson website.
 
-1. **They are already there.** If you were given a pre-staged directory
-   (typically `~/ai-workshop-submit-jobs`), just `cd` into it. This is the
-   fastest path and the one the workshop uses.
-2. **Clone the repository.** On Anvil:
-
-   ```bash
-   git clone https://github.com/jgarciamesa/submit-hpc-jobs.git
-   cd submit-hpc-jobs/episodes/data/labs
-   ```
-
-3. **Copy from your laptop** with `scp`, if you have the files locally:
-
-   ```bash
-   scp <file> <your-anvil-username>@anvil.rcac.purdue.edu:~/
-   ```
-
-Whichever way you get them, confirm you can see them:
+On Anvil:
 
 ```bash
+git clone https://github.com/jgarciamesa/submit-hpc-jobs.git
+cd submit-hpc-jobs/episodes/data/labs
 ls
 ```
 
@@ -96,10 +66,12 @@ You should see `hello.py`, `hello.sbatch`, `train_digits.py`,
 `train-digits-cpu.sbatch`, `train_gpu.py`, `train-gpu.sbatch`,
 `train_sweep.py`, and `array.sbatch`.
 
-## You are ready
+## You are ready!
 
-Open a second tab to the [reference page](reference.html) -- the partition table
-and the command cheat sheet are the two things you will look up most. Then
-start with [Episode 1](01-introduction.html).
+Additional information can be found in the [reference page](reference.html),
+including the partition table (the workshop allocation reaches only the `gpu` and
+`gpu-debug` partitions) and a command cheat sheet.
+
+Start the lesson with [Episode 1](01-introduction.html).
 
 [01-introduction.html]: 01-introduction.html

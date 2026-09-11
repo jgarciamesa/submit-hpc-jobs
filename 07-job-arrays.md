@@ -2,13 +2,22 @@
 title: "Stretch: One Script, Many Experiments (Job Arrays)"
 teaching: 5 # teaching time in minutes
 exercises: 10 # exercise time in minutes
-questions:
-- How do you run the same experiment with many settings in one submission?
-objectives:
-- Submit a Slurm job array and read each task's output separately.
 ---
 
 # A hyperparameter sweep in one command
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do you run the same experiment with many settings in one submission?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Submit a Slurm job array and read each task's output separately.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 Real research rarely runs one setting. You sweep a hyperparameter -- a learning
 rate, a regularization strength -- and compare. A **job array** is how you do
@@ -28,8 +37,8 @@ Its script, `array.sbatch`, writes one output file per task:
 
 ```bash
 #!/bin/sh -l
-#SBATCH -A <ACCOUNT>
-#SBATCH -p debug
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug             # 1 running job per user: the 5 array tasks run in turn
 #SBATCH --job-name=ai-sweep
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -50,9 +59,7 @@ sbatch --array=0-4 array.sbatch
 ls slurm-array_*_*.out            # one output file per task
 ```
 
-Each of the five tasks runs the same script with a different `C` and writes its
-own `sweep_<task>.json`. One command gives you five experiments and five
-results to compare -- the same pattern you will use for your own sweeps.
+`gpu-debug` allows one running job per user, so the five tasks usually run in turn -- you can watch them appear one by one in `squeue`. Each task runs the same script with a different `C` and writes its own `sweep_<task>.json`. One command gives you five experiments and five results to compare -- the same pattern you will use for your own sweeps. When a sweep grows beyond 30 minutes per task, the same script works on `-p gpu` with a `--gres` request and a longer limit.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 

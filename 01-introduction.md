@@ -2,15 +2,24 @@
 title: "Introduction: AI Workloads on a Supercomputer"
 teaching: 10 # teaching time in minutes
 exercises: 0 # exercise time in minutes
-questions:
-- Why do researchers submit jobs to a queue instead of running programs directly on a supercomputer?
-- What is the difference between a login node and a compute node?
-objectives:
-- Explain the login-node and compute-node model, and why work is submitted to a queue.
-- Describe what Anvil is and the hardware it offers for AI workloads.
 ---
 
 # Why a supercomputer for AI?
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- Why do researchers submit jobs to a queue instead of running programs directly on a supercomputer?
+- What is the difference between a login node and a compute node?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain the login-node and compute-node model, and why work is submitted to a queue.
+- Describe what Anvil is and the hardware it offers for AI workloads.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 Your laptop is a capable machine, but it holds one (or a few) chips and a few
 tens of gigabytes of memory. Training or serving a modern AI model can take
@@ -25,9 +34,9 @@ Center][rcac] and is an NSF-funded [ACCESS][access] resource. By the numbers:
 - 16 nodes carrying 4x NVIDIA A100 GPUs each.
 - 21 nodes carrying 4x NVIDIA H100 GPUs each.
 
-The hardware is only half the picture. The other half is the **job scheduler**
-that shares the machine fairly among hundreds of users at once. That is what
-you will learn to drive.
+These are only the hardware specifications, another imporant piece is the
+**job scheduler** that shares the machine fairly among hundreds of users at
+once. That is part of what you will learn to drive.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -51,29 +60,17 @@ right there, you would slow down every other person using the machine, so
 **running jobs on a login node is against Anvil policy.**
 
 Instead, you write your work as a job script and submit it to the scheduler.
-The scheduler places your job on a **compute node** -- a full server with 128
-cores, or a GPU server -- and runs it when the resources you asked for become
-available.
-
-::::::::::::::::::::::::::::::::::::: callout
-
-## The whole model in one sentence
-
-You do the small stuff on the login node; you *submit* the heavy stuff to a
-queue, and the scheduler runs it on a compute node for you.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
+The scheduler places your job on a **compute node** and runs it when the
+resources you asked for become available.
 
 # What you will be able to do
 
 By the end of this lesson you will have:
 
-1. Logged in to Anvil (by SSH key, or through the browser if you do not have a key).
+1. Logged in to Anvil.
 2. Submitted a first batch job and watched it run.
-3. Run a real AI job on the CPU nodes.
-4. Run an AI job on an A100 GPU.
-5. Seen how one script can become many experiments with a *job array*.
+3. Run a CPU-only AI job, then an AI job on an A100 GPU.
+4. Seen how one script can become many experiments with a *job array*.
 
 In the next episode you will connect to the machine and look around.
 

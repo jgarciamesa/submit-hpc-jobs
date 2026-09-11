@@ -1,11 +1,13 @@
 #!/bin/sh -l
-# train-digits-cpu.sbatch — Lab 3: a real AI job on Anvil's CPU nodes
+# train-digits-cpu.sbatch — Lab 3: a CPU-only AI job (no GPU requested)
+# It runs on the CPU cores of an A100 node, because the workshop allocation
+# (cis261672-gpu) only reaches the gpu and gpu-debug partitions.
 # Trains a digits classifier (scikit-learn, part of the Anaconda `conda` module).
 # Runs in ~1 minute even on 1 core; we request several cores to show resource asks.
 # Submit with:  sbatch train-digits-cpu.sbatch
 
-#SBATCH -A <ACCOUNT>            # MANDATORY on Anvil: allocation account (from `mybalance`)
-#SBATCH -p debug                # 2-hour limit — perfect for a class
+#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)
+#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user
 #SBATCH --job-name=digits-cpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
