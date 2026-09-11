@@ -247,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -333,7 +333,6 @@
         </div>
 
         
-
 <div class="section level1">
 <h1 id="what-is-a-partition">What is a partition?<a class="anchor" aria-label="anchor" href="#what-is-a-partition"></a></h1>
 <div class="overview card">
@@ -371,80 +370,43 @@ Some need GPUs, some need lots of memory, some only run for a minute.
 Keeping them in separate queues lets the scheduler run the system
 efficiently and fairly.</p>
 <p>You can see all of them with <code>showpartitions</code> (run it in
-the previous episode). Here is what matters for this lesson:</p>
-<table class="table"><colgroup><col width="15%"><col width="19%"><col width="17%"><col width="11%"><col width="27%"><col width="8%"></colgroup><thead><tr><th>Partition</th>
+the previous episode). Here are the partitions you will use in this
+lesson:</p>
+<table class="table"><colgroup><col width="18%"><col width="16%"><col width="14%"><col width="32%"><col width="8%"><col width="9%"></colgroup><thead><tr><th>Partition</th>
 <th>Node type</th>
-<th>Max nodes/job</th>
 <th>Max time</th>
 <th>Max running jobs/user</th>
+<th>GPUs</th>
 <th>Notes</th>
 </tr></thead><tbody><tr><td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
-<td>1</td>
 <td>0.5 hrs</td>
 <td>1</td>
+<td>2 max</td>
 <td>
-<strong>workshop queue</strong> – every lab in this lesson runs
-here, including the CPU-only jobs</td>
+<strong>workshop queue</strong> – the GPU labs run here</td>
 </tr><tr><td><code>gpu</code></td>
 <td>GPU (A100)</td>
-<td>–</td>
 <td>48 hrs</td>
 <td>–</td>
+<td>4</td>
 <td>A100 production jobs (your other queue)</td>
-</tr><tr><td><code>debug</code></td>
-<td>regular CPU</td>
-<td>2</td>
-<td>2 hrs</td>
-<td>1</td>
-<td>CPU-only test queue (not on this allocation)</td>
-</tr><tr><td><code>shared</code></td>
-<td>regular CPU</td>
-<td>1 (128 cores)</td>
-<td>96 hrs</td>
-<td>many</td>
-<td>the <strong>default</strong> CPU queue (not on this allocation)</td>
-</tr><tr><td><code>wholenode</code></td>
-<td>regular CPU</td>
-<td>16</td>
-<td>96 hrs</td>
-<td>64</td>
-<td>node-exclusive CPU (not on this allocation)</td>
-</tr><tr><td><code>wide</code></td>
-<td>regular CPU</td>
-<td>56</td>
-<td>12 hrs</td>
-<td>5</td>
-<td>wide multi-node CPU (not on this allocation)</td>
-</tr><tr><td><code>highmem</code></td>
-<td>large-memory</td>
-<td>1</td>
-<td>48 hrs</td>
-<td>2</td>
-<td>~1 TB RAM, charges 4x (not on this allocation)</td>
-</tr><tr><td><code>ai</code></td>
-<td>GPU (H100)</td>
-<td>–</td>
-<td>48 hrs</td>
-<td>–</td>
-<td>H100 production jobs (not on this allocation)</td>
-</tr></tbody></table><p>The workshop allocation <code>cis261672-gpu</code> only reaches the
-two starred partitions – <code>gpu-debug</code> and <code>gpu</code>.
-Every lab in this lesson therefore runs on <code>gpu-debug</code>,
-<strong>including the CPU-only jobs</strong> (they run on the CPU cores
-of an A100 node without asking for a GPU). You will not hit “access
-denied” on a queue in this lesson.</p>
-</div>
-<div class="section level1">
-<h1 id="two-rules-that-will-save-you-time">Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a></h1>
+</tr></tbody></table><p>Everything else on Anvil is listed on the <a href="reference.html">reference page</a> – you will not need it in this
+lesson. The one exception is <code>shared</code>, the <strong>default
+CPU partition</strong>: the CPU-only digits job in episode 5 submits
+there.</p>
+<p>Two things to remember about the queues in this lesson:</p>
 <ol style="list-style-type: decimal"><li>
-<strong>You must name a partition with <code>-p</code> in every job
-script.</strong> The workshop labs always use
-<code>-p gpu-debug</code>.</li>
+<strong>Jobs on <code>gpu</code> or <code>gpu-debug</code> must ask
+for a GPU</strong> – with <code>--gres=gpu:1</code> – even if the
+program never uses one. (That is why even the <code>hello</code> job
+carries the line.) CPU-only jobs go to <code>shared</code> and skip
+it.</li>
 <li>
 <strong><code>gpu-debug</code> only lets one running job per user at
 a time.</strong> Finish (or cancel) a job before you submit the next one
-– a second submission just waits in <code>PENDING</code>.</li>
+– a second submission just waits in <code>PENDING</code>.
+<code>shared</code> has no such per-user cap.</li>
 </ol><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
@@ -453,9 +415,9 @@ a time.</strong> Finish (or cancel) a job before you submit the next one
 <div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Ask “how many of you have run anything on a cluster before?” here. If
-most hands go up, skim the table and spend the time on the two rules. If
-most hands go down, slow down on the table – the partition concept is
-new. Either way, do not exceed ten minutes.</p>
+most hands go up, skim the tables and move on. If most hands go down,
+slow down on the first table – the partition concept is new. Either way,
+do not exceed ten minutes.</p>
 </div>
 </div>
 </div>
@@ -468,17 +430,18 @@ new. Either way, do not exceed ten minutes.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul><li>A partition is a named queue with its own machines and limits (max
-nodes, max time, max jobs per user).</li>
-<li>The workshop allocation reaches only <code>gpu-debug</code> (all
-labs) and <code>gpu</code> (production A100).</li>
+time, max nodes, max jobs per user).</li>
+<li>The workshop allocation reaches only <code>gpu-debug</code> (the GPU
+labs) and <code>gpu</code> (production A100); the CPU-only digits job
+runs on <code>shared</code>.</li>
 <li>
-<code>gpu-debug</code> runs one job per user at a time; name it with
-<code>-p</code> in every script.</li>
+<code>gpu-debug</code> runs one job per user at a time; jobs on
+<code>gpu</code> or <code>gpu-debug</code> must ask for a GPU with
+<code>--gres</code>.</li>
 </ul></div>
 </div>
 </div>
 </div>
-
 
 
       </div> <!-- / div.lesson-content -->

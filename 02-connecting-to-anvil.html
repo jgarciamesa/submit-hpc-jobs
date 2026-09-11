@@ -247,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -333,7 +333,7 @@
         
 
 <div class="section level1">
-<h1 id="log-in-with-ssh">Log in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a></h1>
+<h1 id="get-a-shell-on-anvil">Get a shell on Anvil<a class="anchor" aria-label="anchor" href="#get-a-shell-on-anvil"></a></h1>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -351,45 +351,39 @@ jobs?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Log in to Anvil using an SSH key, or through Open OnDemand in a
-browser.</li>
+<ul><li>Log in to Anvil through Open OnDemand’s web shell (or with SSH, if
+you already have a key set up).</li>
 <li>Read your allocation account and the list of available queues.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<p>If you have set up an SSH key, you can log in straight from your
-laptop’s terminal:</p>
+<div class="section level2">
+<h2 id="the-web-shell-recommended">The web shell (recommended)<a class="anchor" aria-label="anchor" href="#the-web-shell-recommended"></a></h2>
+<p>Log in to <a href="https://ondemand.rcac.purdue.edu" title="Purdue Open OnDemand portal" class="external-link">Open OnDemand</a> with your ACCESS
+credentials, then open <em>Clusters - Shell access</em>. A terminal
+opens in your browser – no software to install – and everything in this
+lesson runs in it.</p>
+</div>
+<div class="section level2">
+<h2 id="ssh-advanced-optional">SSH (advanced, optional)<a class="anchor" aria-label="anchor" href="#ssh-advanced-optional"></a></h2>
+<p>If you already have an SSH key registered on Anvil, you can log in
+from your own laptop’s terminal instead:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>your-anvil-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span></code></pre>
 </div>
-<p>Two things to pay attention to at this step:</p>
+<p>Two things to pay attention to:</p>
 <ul><li>Your <strong>Anvil username is not your ACCESS username</strong>. It
 is derived from it and starts with <code>x-</code>. For example, if your
 ACCESS name is <code>jdoe</code>, your Anvil name is something like
 <code>x-jdoe</code>.</li>
 <li>Anvil does <strong>not</strong> accept passwords. Only SSH keys. If
-you do not have a key yet, use the browser path below – do not spend lab
+you do not have a key yet, use the web shell above – do not spend lab
 time generating one.</li>
-</ul><div id="no-ssh-key-use-the-browser." class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="no-ssh-key-use-the-browser." class="callout-inner">
-<h3 class="callout-title">No SSH key? Use the browser.</h3>
-<div class="callout-content">
-<p>Log in to <a href="https://ondemand.rcac.purdue.edu" title="Purdue Open OnDemand portal" class="external-link">Open OnDemand</a>, then open
-<em>Clusters - Shell access</em>. Everything in this lesson works in
-that web terminal too, and from OnDemand you can also register an SSH
-key for next time.</p>
-</div>
-</div>
-</div>
-
+</ul></div>
 </div>
 <div class="section level1">
 <h1 id="look-around-your-account-and-the-queues">Look around: your account and the queues<a class="anchor" aria-label="anchor" href="#look-around-your-account-and-the-queues"></a></h1>
@@ -413,7 +407,7 @@ without the right account and it is rejected.</p>
 in every lab script in this lesson.</p>
 <p><code>showpartitions</code> and <code>sfeatures</code> show you the
 queues and the machines behind them. You do not need to memorize this
-now – the next episode walks through the table. Just notice that the
+now – the next episode walks through the tables. Just notice that the
 <code>g</code> nodes are A100s and the <code>h</code> nodes are
 H100s.</p>
 <div id="can-you-find-your-account" class="callout challenge">
@@ -453,11 +447,10 @@ the allocation yet; ask an instructor.</p>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>Log in with
-<code>ssh &lt;x-username&gt;@anvil.rcac.purdue.edu</code>, or use Open
-OnDemand’s web shell if you have no SSH key.</li>
+<ul><li>Open a shell through Open OnDemand (<em>Clusters - Shell
+access</em>); SSH is the advanced alternative.</li>
 <li>Your Anvil username starts with <code>x-</code> and is not your
-ACCESS username.</li>
+ACCESS username (needed only for SSH).</li>
 <li>
 <code>mybalance</code> prints the account string you pass with
 <code>-A</code> in every job script (here:

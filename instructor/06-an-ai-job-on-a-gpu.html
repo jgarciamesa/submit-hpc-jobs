@@ -247,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -314,7 +314,7 @@
           Previous: A CPU-Only AI Job...
         </a>
         <a class="chapter-link float-end" href="../instructor/07-job-arrays.html" rel="next">
-          Next: Stretch: One Script, Many Experiments...
+          Next: Scale: One Script, Many Experiments (Job...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -360,9 +360,10 @@ the <code>gpu-debug</code> partition.</li>
 </div>
 </div>
 </div>
-<p>So far every job has used only CPU cores. To run on a GPU you do two
-new things in the script: name a GPU partition and request a GPU with
-<code>--gres</code>.</p>
+<p>Every job in this lesson that submits to a GPU partition asks for a
+GPU with <code>--gres=gpu:1</code> – the <code>hello</code> job
+included. This is the first job where the program actually uses one: a
+small neural network trains on the GPU instead of the CPU.</p>
 <p>Here is the new script, <code>train-gpu.sbatch</code>. It trains a
 small neural network with PyTorch on a dataset generated inside the
 script (again, <strong>nothing is downloaded</strong>) and prints the
@@ -380,11 +381,13 @@ script (again, <strong>nothing is downloaded</strong>) and prints the
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=32G</span></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH --gres=gpu:1            # &lt;-- ask for ONE GPU</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -t 00:25:00             # fits inside the 30-min gpu-debug limit</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">module</span> load conda</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="co"># module load &lt;pytorch-module&gt;   # &lt;- confirmed before the session; see instructor notes</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ex">python3</span> train_gpu.py</span></code></pre>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH -o slurm-%j.out         # standard output file</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="co">#SBATCH -e slurm-%j.err         # error output file</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">module</span> load conda</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="co"># module load &lt;pytorch-module&gt;   # &lt;- confirmed before the session; see instructor notes</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="ex">python3</span> train_gpu.py</span></code></pre>
 </div>
 <p><code>--gres=gpu:1</code> is the line that matters: each A100 node
 carries four GPUs, and you are asking for one of them. The
@@ -513,7 +516,7 @@ node frees up – that is normal on a shared cluster.</li>
           Previous: A CPU-Only AI Job...
         </a>
         <a class="chapter-link float-end" href="../instructor/07-job-arrays.html" rel="next">
-          Next: Stretch: One Script, Many Experiments...
+          Next: Scale: One Script, Many Experiments (Job...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>

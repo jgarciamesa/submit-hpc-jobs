@@ -300,7 +300,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -509,7 +509,7 @@ policy.</li>
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
 <div class="section level1">
-<h1 id="log-in-with-ssh">Log in with SSH<a class="anchor" aria-label="anchor" href="#log-in-with-ssh"></a>
+<h1 id="get-a-shell-on-anvil">Get a shell on Anvil<a class="anchor" aria-label="anchor" href="#get-a-shell-on-anvil"></a>
 </h1>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
@@ -531,8 +531,8 @@ jobs?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Log in to Anvil using an SSH key, or through Open OnDemand in a
-browser.</li>
+<li>Log in to Anvil through Open OnDemand’s web shell (or with SSH, if
+you already have a key set up).</li>
 <li>Read your allocation account and the list of available queues.</li>
 </ul>
 </div>
@@ -540,38 +540,34 @@ browser.</li>
 </div>
 </div>
 </div>
-<p>If you have set up an SSH key, you can log in straight from your
-laptop’s terminal:</p>
+<div class="section level2">
+<h2 id="the-web-shell-recommended">The web shell (recommended)<a class="anchor" aria-label="anchor" href="#the-web-shell-recommended"></a>
+</h2>
+<p>Log in to <a href="https://ondemand.rcac.purdue.edu" title="Purdue Open OnDemand portal" class="external-link">Open OnDemand</a> with your ACCESS
+credentials, then open <em>Clusters - Shell access</em>. A terminal
+opens in your browser – no software to install – and everything in this
+lesson runs in it.</p>
+</div>
+<div class="section level2">
+<h2 id="ssh-advanced-optional">SSH (advanced, optional)<a class="anchor" aria-label="anchor" href="#ssh-advanced-optional"></a>
+</h2>
+<p>If you already have an SSH key registered on Anvil, you can log in
+from your own laptop’s terminal instead:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>your-anvil-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span></code></pre>
 </div>
-<p>Two things to pay attention to at this step:</p>
+<p>Two things to pay attention to:</p>
 <ul>
 <li>Your <strong>Anvil username is not your ACCESS username</strong>. It
 is derived from it and starts with <code>x-</code>. For example, if your
 ACCESS name is <code>jdoe</code>, your Anvil name is something like
 <code>x-jdoe</code>.</li>
 <li>Anvil does <strong>not</strong> accept passwords. Only SSH keys. If
-you do not have a key yet, use the browser path below – do not spend lab
+you do not have a key yet, use the web shell above – do not spend lab
 time generating one.</li>
 </ul>
-<div id="no-ssh-key-use-the-browser." class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="no-ssh-key-use-the-browser." class="callout-inner">
-<h3 class="callout-title">No SSH key? Use the browser.</h3>
-<div class="callout-content">
-<p>Log in to <a href="https://ondemand.rcac.purdue.edu" title="Purdue Open OnDemand portal" class="external-link">Open OnDemand</a>, then open
-<em>Clusters - Shell access</em>. Everything in this lesson works in
-that web terminal too, and from OnDemand you can also register an SSH
-key for next time.</p>
-</div>
-</div>
-</div>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
@@ -581,9 +577,10 @@ key for next time.</p>
 <div class="accordion-body">
 <p>If someone’s <code>ssh</code> says
 <code>failed to map user &lt;you&gt;@access-ci.org</code>, their
-allocation is not attached to Anvil yet. Route them to the browser path
-and flag them for the “getting your own allocation” episode. Do not let
-the group wait on one connection problem.</p>
+allocation is not attached to Anvil yet. Have them continue in the web
+shell and flag them for the “getting your own allocation” episode. Do
+not let the group wait on one connection problem.</p>
+</div>
 </div>
 </div>
 </div>
@@ -612,7 +609,7 @@ without the right account and it is rejected.</p>
 in every lab script in this lesson.</p>
 <p><code>showpartitions</code> and <code>sfeatures</code> show you the
 queues and the machines behind them. You do not need to memorize this
-now – the next episode walks through the table. Just notice that the
+now – the next episode walks through the tables. Just notice that the
 <code>g</code> nodes are A100s and the <code>h</code> nodes are
 H100s.</p>
 <div id="can-you-find-your-account" class="callout challenge">
@@ -653,11 +650,10 @@ the allocation yet; ask an instructor.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>Log in with
-<code>ssh &lt;x-username&gt;@anvil.rcac.purdue.edu</code>, or use Open
-OnDemand’s web shell if you have no SSH key.</li>
+<li>Open a shell through Open OnDemand (<em>Clusters - Shell
+access</em>); SSH is the advanced alternative.</li>
 <li>Your Anvil username starts with <code>x-</code> and is not your
-ACCESS username.</li>
+ACCESS username (needed only for SSH).</li>
 <li>
 <code>mybalance</code> prints the account string you pass with
 <code>-A</code> in every job script (here:
@@ -717,112 +713,62 @@ Some need GPUs, some need lots of memory, some only run for a minute.
 Keeping them in separate queues lets the scheduler run the system
 efficiently and fairly.</p>
 <p>You can see all of them with <code>showpartitions</code> (run it in
-the previous episode). Here is what matters for this lesson:</p>
+the previous episode). Here are the partitions you will use in this
+lesson:</p>
 <table class="table">
 <colgroup>
-<col width="15%">
-<col width="19%">
-<col width="17%">
-<col width="11%">
-<col width="27%">
+<col width="18%">
+<col width="16%">
+<col width="14%">
+<col width="32%">
 <col width="8%">
+<col width="9%">
 </colgroup>
 <thead><tr>
 <th>Partition</th>
 <th>Node type</th>
-<th>Max nodes/job</th>
 <th>Max time</th>
 <th>Max running jobs/user</th>
+<th>GPUs</th>
 <th>Notes</th>
 </tr></thead>
 <tbody>
 <tr>
 <td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
-<td>1</td>
 <td>0.5 hrs</td>
 <td>1</td>
+<td>2 max</td>
 <td>
-<strong>workshop queue</strong> – every lab in this lesson runs
-here, including the CPU-only jobs</td>
+<strong>workshop queue</strong> – the GPU labs run here</td>
 </tr>
 <tr>
 <td><code>gpu</code></td>
 <td>GPU (A100)</td>
-<td>–</td>
 <td>48 hrs</td>
 <td>–</td>
+<td>4</td>
 <td>A100 production jobs (your other queue)</td>
-</tr>
-<tr>
-<td><code>debug</code></td>
-<td>regular CPU</td>
-<td>2</td>
-<td>2 hrs</td>
-<td>1</td>
-<td>CPU-only test queue (not on this allocation)</td>
-</tr>
-<tr>
-<td><code>shared</code></td>
-<td>regular CPU</td>
-<td>1 (128 cores)</td>
-<td>96 hrs</td>
-<td>many</td>
-<td>the <strong>default</strong> CPU queue (not on this allocation)</td>
-</tr>
-<tr>
-<td><code>wholenode</code></td>
-<td>regular CPU</td>
-<td>16</td>
-<td>96 hrs</td>
-<td>64</td>
-<td>node-exclusive CPU (not on this allocation)</td>
-</tr>
-<tr>
-<td><code>wide</code></td>
-<td>regular CPU</td>
-<td>56</td>
-<td>12 hrs</td>
-<td>5</td>
-<td>wide multi-node CPU (not on this allocation)</td>
-</tr>
-<tr>
-<td><code>highmem</code></td>
-<td>large-memory</td>
-<td>1</td>
-<td>48 hrs</td>
-<td>2</td>
-<td>~1 TB RAM, charges 4x (not on this allocation)</td>
-</tr>
-<tr>
-<td><code>ai</code></td>
-<td>GPU (H100)</td>
-<td>–</td>
-<td>48 hrs</td>
-<td>–</td>
-<td>H100 production jobs (not on this allocation)</td>
 </tr>
 </tbody>
 </table>
-<p>The workshop allocation <code>cis261672-gpu</code> only reaches the
-two starred partitions – <code>gpu-debug</code> and <code>gpu</code>.
-Every lab in this lesson therefore runs on <code>gpu-debug</code>,
-<strong>including the CPU-only jobs</strong> (they run on the CPU cores
-of an A100 node without asking for a GPU). You will not hit “access
-denied” on a queue in this lesson.</p>
-</div>
-<div class="section level1">
-<h1 id="two-rules-that-will-save-you-time">Two rules that will save you time<a class="anchor" aria-label="anchor" href="#two-rules-that-will-save-you-time"></a>
-</h1>
+<p>Everything else on Anvil is listed on the <a href="reference.html">reference page</a> – you will not need it in this
+lesson. The one exception is <code>shared</code>, the <strong>default
+CPU partition</strong>: the CPU-only digits job in episode 5 submits
+there.</p>
+<p>Two things to remember about the queues in this lesson:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>You must name a partition with <code>-p</code> in every job
-script.</strong> The workshop labs always use
-<code>-p gpu-debug</code>.</li>
+<strong>Jobs on <code>gpu</code> or <code>gpu-debug</code> must ask
+for a GPU</strong> – with <code>--gres=gpu:1</code> – even if the
+program never uses one. (That is why even the <code>hello</code> job
+carries the line.) CPU-only jobs go to <code>shared</code> and skip
+it.</li>
 <li>
 <strong><code>gpu-debug</code> only lets one running job per user at
 a time.</strong> Finish (or cancel) a job before you submit the next one
-– a second submission just waits in <code>PENDING</code>.</li>
+– a second submission just waits in <code>PENDING</code>.
+<code>shared</code> has no such per-user cap.</li>
 </ol>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
@@ -832,9 +778,9 @@ a time.</strong> Finish (or cancel) a job before you submit the next one
 <div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Ask “how many of you have run anything on a cluster before?” here. If
-most hands go up, skim the table and spend the time on the two rules. If
-most hands go down, slow down on the table – the partition concept is
-new. Either way, do not exceed ten minutes.</p>
+most hands go up, skim the tables and move on. If most hands go down,
+slow down on the first table – the partition concept is new. Either way,
+do not exceed ten minutes.</p>
 </div>
 </div>
 </div>
@@ -848,12 +794,14 @@ new. Either way, do not exceed ten minutes.</p>
 <div class="callout-content">
 <ul>
 <li>A partition is a named queue with its own machines and limits (max
-nodes, max time, max jobs per user).</li>
-<li>The workshop allocation reaches only <code>gpu-debug</code> (all
-labs) and <code>gpu</code> (production A100).</li>
+time, max nodes, max jobs per user).</li>
+<li>The workshop allocation reaches only <code>gpu-debug</code> (the GPU
+labs) and <code>gpu</code> (production A100); the CPU-only digits job
+runs on <code>shared</code>.</li>
 <li>
-<code>gpu-debug</code> runs one job per user at a time; name it with
-<code>-p</code> in every script.</li>
+<code>gpu-debug</code> runs one job per user at a time; jobs on
+<code>gpu</code> or <code>gpu-debug</code> must ask for a GPU with
+<code>--gres</code>.</li>
 </ul>
 </div>
 </div>
@@ -916,11 +864,14 @@ node.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=2G</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:10:00             # 10 minutes of wall time</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="ex">module</span> load conda               <span class="co"># Anaconda distribution (provides python3)</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span>            <span class="co"># run from where you submitted the job</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ex">python3</span> hello.py</span></code></pre>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH --gres=gpu:1            # jobs on gpu/gpu-debug must ask for a GPU</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -t 00:10:00             # 10 minutes of wall time</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH -o slurm-%j.out         # standard output file</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="co">#SBATCH -e slurm-%j.err         # error output file</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">module</span> load conda               <span class="co"># Anaconda distribution (provides python3)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span>            <span class="co"># run from where you submitted the job</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="ex">python3</span> hello.py</span></code></pre>
 </div>
 <p>Two of these lines are <strong>mandatory on Anvil</strong>:</p>
 <ul>
@@ -931,12 +882,17 @@ workshop allocation (you can still check your own with
 <code>mybalance</code>). A job without it is rejected.</li>
 <li>
 <code>#SBATCH -p &lt;partition&gt;</code> – which queue to run in.
-Every lab in this lesson uses <code>-p gpu-debug</code>.</li>
+The GPU labs use <code>-p gpu-debug</code>; the CPU-only digits job uses
+<code>-p shared</code>.</li>
 </ul>
+<p>A third line matters for this lesson:
+<code>#SBATCH --gres=gpu:1</code> asks for one GPU. Jobs on the
+<code>gpu</code> and <code>gpu-debug</code> partitions must request a
+GPU – even the <code>hello</code> job, which never touches one.</p>
 <p>The other lines ask for resources: how many nodes, how many cores per
-task, how much memory, and how much time. For a one-line
-<code>hello</code> program, two cores and ten minutes are more than
-enough.</p>
+task, how much memory, how much time, and where the output goes. For a
+one-line <code>hello</code> program, two cores and ten minutes are more
+than enough.</p>
 <p><code>hello.py</code>, the program the job runs, just prints a
 greeting and a few environment variables:</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -1122,8 +1078,8 @@ GPU?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Submit a scikit-learn training job on the CPU cores of a GPU node,
-without <code>--gres</code>.</li>
+<li>Submit a scikit-learn training job to the <code>shared</code> CPU
+partition, without a <code>--gres</code> request.</li>
 <li>Request more cores and memory with <code>--cpus-per-task</code> and
 <code>--mem</code>.</li>
 <li>Read the job’s output and the metrics file it writes.</li>
@@ -1148,28 +1104,30 @@ polite to the cluster.</p>
 <li>Prints test accuracy and writes a <code>digits_metrics.json</code>
 file.</li>
 </ol>
-<p>Your allocation only reaches the GPU partitions, so this CPU-only job
-runs on <code>gpu-debug</code> <em>without</em> a <code>--gres</code>
-request – it uses the fast CPU cores that sit on the A100 node.</p>
+<p>This job uses no GPU, so it goes to a CPU partition instead:
+<code>shared</code>, the default CPU queue on Anvil. The script submits
+there and leaves the <code>--gres</code> line out entirely – everything
+else works just like the <code>hello</code> job.</p>
 <p>Its job script, <code>train-digits-cpu.sbatch</code>, asks for more
 than the <code>hello</code> job did:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop allocation (confirm with `mybalance`)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p shared                # Anvil's default CPU partition</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co">#SBATCH --job-name=digits-cpu</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="co">#SBATCH --cpus-per-task=16      # ask for 16 cores</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=16G               # ask for 16 GB of memory</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:30:00             # fills the 30-min gpu-debug limit</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:30:00             # 30 minutes of wall time</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -o digits-cpu_%j.out    # name the output file ourselves</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">module</span> load conda</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">python3</span> train_digits.py</span></code></pre>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH -e digits-cpu_%j.err    # name the error file to match</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ex">module</span> load conda</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ex">python3</span> train_digits.py</span></code></pre>
 </div>
 <p><code>%j</code> in the output filename is replaced by the job ID, so
 each submission gets its own
@@ -1316,9 +1274,10 @@ the <code>gpu-debug</code> partition.</li>
 </div>
 </div>
 </div>
-<p>So far every job has used only CPU cores. To run on a GPU you do two
-new things in the script: name a GPU partition and request a GPU with
-<code>--gres</code>.</p>
+<p>Every job in this lesson that submits to a GPU partition asks for a
+GPU with <code>--gres=gpu:1</code> – the <code>hello</code> job
+included. This is the first job where the program actually uses one: a
+small neural network trains on the GPU instead of the CPU.</p>
 <p>Here is the new script, <code>train-gpu.sbatch</code>. It trains a
 small neural network with PyTorch on a dataset generated inside the
 script (again, <strong>nothing is downloaded</strong>) and prints the
@@ -1336,11 +1295,13 @@ script (again, <strong>nothing is downloaded</strong>) and prints the
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=32G</span></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH --gres=gpu:1            # &lt;-- ask for ONE GPU</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -t 00:25:00             # fits inside the 30-min gpu-debug limit</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">module</span> load conda</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="co"># module load &lt;pytorch-module&gt;   # &lt;- confirmed before the session; see instructor notes</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ex">python3</span> train_gpu.py</span></code></pre>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH -o slurm-%j.out         # standard output file</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="co">#SBATCH -e slurm-%j.err         # error output file</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">module</span> load conda</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="co"># module load &lt;pytorch-module&gt;   # &lt;- confirmed before the session; see instructor notes</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="ex">python3</span> train_gpu.py</span></code></pre>
 </div>
 <p><code>--gres=gpu:1</code> is the line that matters: each A100 node
 carries four GPUs, and you are asking for one of them. The
@@ -1458,7 +1419,7 @@ node frees up – that is normal on a shared cluster.</li>
 </div>
 </div>
 </div>
-</div></section><section id="aio-07-job-arrays"><p>Content from <a href="07-job-arrays.html">Stretch: One Script, Many Experiments (Job Arrays)</a></p>
+</div></section><section id="aio-07-job-arrays"><p>Content from <a href="07-job-arrays.html">Scale: One Script, Many Experiments (Job Arrays)</a></p>
 <hr>
 <p>Last updated on 2026-09-11 |
 
@@ -1501,7 +1462,7 @@ separately.</li>
 learning rate, a regularization strength – and compare. A <strong>job
 array</strong> is how you do that in one submission: one script, many
 near-identical jobs.</p>
-<p>The stretch script, <code>train_sweep.py</code>, trains the digits
+<p>The sweep script, <code>train_sweep.py</code>, trains the digits
 classifier with a different <code>C</code> value per array task:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1524,12 +1485,14 @@ output file per task:</p>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1" aria-label="code-block-2-7"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1" aria-label="code-block-2-8"></a><span class="co">#SBATCH --mem=8G</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a><span class="co">#SBATCH -t 00:20:00</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a><span class="co">#SBATCH -o slurm-array_%A_%a.out   # %A = job ID, %a = array task ID</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a><span class="ex">module</span> load conda</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ex">python3</span> train_sweep.py</span></code></pre>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a><span class="co">#SBATCH --gres=gpu:1            # jobs on gpu/gpu-debug must ask for a GPU</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a><span class="co">#SBATCH -t 00:20:00</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a><span class="co">#SBATCH -o slurm-array_%A_%a.out   # %A = job ID, %a = array task ID</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a><span class="co">#SBATCH -e slurm-array_%A_%a.err   # one error file per task, to match</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ex">module</span> load conda</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a><span class="ex">python3</span> train_sweep.py</span></code></pre>
 </div>
 <p>Submit the whole sweep with the <code>--array</code> flag:</p>
 <div class="codewrapper sourceCode" id="cb3">
@@ -1545,7 +1508,7 @@ tasks usually run in turn – you can watch them appear one by one in
 One command gives you five experiments and five results to compare – the
 same pattern you will use for your own sweeps. When a sweep grows beyond
 30 minutes per task, the same script works on <code>-p gpu</code> with a
-<code>--gres</code> request and a longer limit.</p>
+longer time limit.</p>
 <div id="how-do-i-tell-which-result-came-from-which-setting" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1650,7 +1613,7 @@ drove its scheduler. You have now:</p>
 <li>Trained a machine-learning model on CPU cores, without a GPU.</li>
 <li>Trained a neural network on an A100 GPU (<code>nvidia-smi</code> in
 the output).</li>
-<li>(Stretch) Fanned one script out into a five-task job array.</li>
+<li>(Scale) Fanned one script out into a five-task job array.</li>
 </ul>
 <p>Each of those is a repeatable HPC skill. The two lines that make all
 of it work are the ones you have used all session:

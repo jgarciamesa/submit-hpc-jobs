@@ -244,7 +244,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -324,8 +324,8 @@ job on a supercomputer.</p>
 <ol style="list-style-type: decimal"><li>Understand the <strong>login-node vs. compute-node</strong> model
 and why jobs are submitted to a queue instead of run interactively.</li>
 <li>
-<strong>Log in</strong> to Anvil using an SSH key, or through Open
-OnDemand in a browser.</li>
+<strong>Log in</strong> to Anvil through Open OnDemand in a browser
+(or with an SSH key, if you have one set up).</li>
 <li>
 <strong>Submit</strong> a batch job with <code>sbatch</code> using a
 submission script (account, partition, time, resources).</li>
@@ -410,7 +410,7 @@ actually ran on a GPU and not a CPU?
 <span class="visually-hidden">Duration: </span>02h 02m
 </td>
 <td>
- 7. <a href="07-job-arrays.html">Stretch: One Script, Many Experiments
+ 7. <a href="07-job-arrays.html">Scale: One Script, Many Experiments
 (Job Arrays)</a>
 </td>
 <td>
@@ -445,27 +445,34 @@ Finish
 <ul><li>A laptop (MacOS or Linux, or Windows 10/11).</li>
 <li>An <strong>Anvil account</strong> with the workshop allocation
 attached. The workshop staff add registered attendees to the shared
-workshop allocation (<code>cis261672-gpu</code>); every lab in this
-lesson uses it, so you do not need your own allocation.</li>
-<li>A way to connect, one of:
-<ul><li>
-<strong>Open OnDemand in a browser</strong> (preferred), or</li>
-<li>
-<strong>SSH</strong> (requires additional setup).</li>
-</ul></li>
+workshop allocation (<code>cis261672-gpu</code>); the GPU labs use it,
+so you do not need your own allocation.</li>
+<li>A web browser. You will get your shell from the <strong>Open
+OnDemand</strong> portal – no software to install. (Already have an SSH
+key on Anvil? The SSH route in episode 2 works too.)</li>
 </ul><div class="section level3">
+<h3 id="open-a-shell-recommended">Open a shell (recommended)<a class="anchor" aria-label="anchor" href="#open-a-shell-recommended"></a></h3>
+<p>Log in to <a href="https://ondemand.rcac.purdue.edu" title="Purdue Open OnDemand portal" class="external-link">Open OnDemand</a> with your ACCESS
+credentials, then open <em>Clusters - Shell access</em>. A terminal
+opens in your browser, and every command in this lesson runs in it. You
+do not need to install or configure anything.</p>
+</div>
+<div class="section level3">
 <h3 id="find-your-anvil-username">Find your Anvil username<a class="anchor" aria-label="anchor" href="#find-your-anvil-username"></a></h3>
 <p>Your Anvil username is <strong>not</strong> your ACCESS username. It
 is derived from it and starts with the prefix <code>x-</code>. For
 example, if your ACCESS name is <code>jdoe</code>, your Anvil username
-is likely <code>x-jdoe</code>. If you are not sure of the exact string,
+is likely <code>x-jdoe</code>. You only need it for the SSH route; the
+web shell does not ask for it. If you are not sure of the exact string,
 the OnDemand account page and the workshop team both know it.</p>
 </div>
 <div class="section level3">
-<h3 id="no-ssh-key-yet-create-one-five-minutes">No SSH key yet? Create one (five minutes)<a class="anchor" aria-label="anchor" href="#no-ssh-key-yet-create-one-five-minutes"></a></h3>
-<p>Anvil accepts <strong>SSH keys only</strong> – it does not accept
-passwords. If you have never generated a key, do it now; you will want
-one for every cluster you ever use.</p>
+<h3 id="ssh-advanced-optional">SSH (advanced, optional)<a class="anchor" aria-label="anchor" href="#ssh-advanced-optional"></a></h3>
+<p>If you are comfortable with a terminal on your own laptop, you can
+also log in with SSH. Anvil accepts <strong>SSH keys only</strong> – it
+does not accept passwords. You do not need SSH for this lesson: the web
+shell covers everything. If you want a key for next time, generating and
+registering one takes about five minutes.</p>
 <p>On macOS or Linux:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -493,8 +500,8 @@ commands work.</p>
 <h2 id="get-the-lab-files">Get the lab files<a class="anchor" aria-label="anchor" href="#get-the-lab-files"></a></h2>
 <p>Each lab is two files: a Python script and a <code>.sbatch</code>
 submission script. You can get them onto Anvil by cloning the GitHub
-repository or by downloading them from the lesson website.</p>
-<p>On Anvil:</p>
+repository or by downloading them from the lesson website. In the web
+shell, the commands below work as is:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -510,8 +517,7 @@ repository or by downloading them from the lesson website.</p>
 <div class="section level2">
 <h2 id="you-are-ready">You are ready!<a class="anchor" aria-label="anchor" href="#you-are-ready"></a></h2>
 <p>Additional information can be found in the <a href="reference.html">reference page</a>, including the partition table
-(the workshop allocation reaches only the <code>gpu</code> and
-<code>gpu-debug</code> partitions) and a command cheat sheet.</p>
+and a command cheat sheet.</p>
 <p>Start the lesson with <a href="01-introduction.html">Episode
 1</a>.</p>
 </div>

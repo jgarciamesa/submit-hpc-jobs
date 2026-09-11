@@ -240,7 +240,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -326,45 +326,53 @@ a second tab while you work through the labs.</p>
 <div class="section level2">
 <h2 id="the-partitions-queues">The partitions (queues)<a class="anchor" aria-label="anchor" href="#the-partitions-queues"></a></h2>
 <p>Run <code>showpartitions</code> on Anvil to see the live version of
-this table. The columns that matter most for a class are <strong>max
+these tables. The columns that matter most for a class are <strong>max
 time</strong>, <strong>max running jobs/user</strong>, and
 <strong>GPU</strong>. The workshop allocation <code>cis261672-gpu</code>
-reaches only <code>gpu-debug</code> and <code>gpu</code>, and every lab
-in this lesson uses <code>gpu-debug</code>.</p>
-<table style="width:100%;" class="table"><colgroup><col width="14%"><col width="17%"><col width="16%"><col width="11%"><col width="25%"><col width="6%"><col width="7%"></colgroup><thead><tr><th>Partition</th>
+reaches <code>gpu-debug</code> and <code>gpu</code>; the CPU-only digits
+job in episode 5 runs on <code>shared</code>.</p>
+<p>The partitions you will use:</p>
+<table class="table"><colgroup><col width="18%"><col width="16%"><col width="14%"><col width="32%"><col width="8%"><col width="9%"></colgroup><thead><tr><th>Partition</th>
 <th>Node type</th>
-<th>Max nodes/job</th>
+<th>Max time</th>
+<th>Max running jobs/user</th>
+<th>GPUs</th>
+<th>Notes</th>
+</tr></thead><tbody><tr><td><code>gpu-debug</code></td>
+<td>GPU (A100)</td>
+<td>0.5 hrs</td>
+<td>1</td>
+<td>2 max</td>
+<td>
+<strong>workshop queue</strong> – every GPU lab runs here</td>
+</tr><tr><td><code>gpu</code></td>
+<td>GPU (A100)</td>
+<td>48 hrs</td>
+<td>-</td>
+<td>4</td>
+<td>A100 production jobs (your other queue)</td>
+</tr></tbody></table><p>The other partitions on Anvil:</p>
+<table class="table"><colgroup><col width="17%"><col width="19%"><col width="13%"><col width="31%"><col width="8%"><col width="9%"></colgroup><thead><tr><th>Partition</th>
+<th>Node type</th>
 <th>Max time</th>
 <th>Max running jobs/user</th>
 <th>GPUs</th>
 <th>Notes</th>
 </tr></thead><tbody><tr><td><code>debug</code></td>
 <td>regular CPU</td>
-<td>2</td>
 <td>2 hrs</td>
 <td>1</td>
 <td>-</td>
 <td>Short CPU tests (not on this allocation)</td>
-</tr><tr><td><code>gpu-debug</code></td>
-<td>GPU (A100)</td>
-<td>1</td>
-<td>0.5 hrs</td>
-<td>1</td>
-<td>2 max</td>
-<td>
-<strong>workshop queue</strong> – every lab runs here, CPU-only jobs
-included</td>
 </tr><tr><td><code>shared</code></td>
 <td>regular CPU</td>
-<td>1 (128 cores)</td>
 <td>96 hrs</td>
 <td>many</td>
 <td>-</td>
-<td>The <strong>default</strong> CPU partition (not on this
-allocation)</td>
+<td>The <strong>default</strong> CPU partition – the episode 5 digits
+job runs here</td>
 </tr><tr><td><code>wholenode</code></td>
 <td>regular CPU</td>
-<td>16</td>
 <td>96 hrs</td>
 <td>64</td>
 <td>-</td>
@@ -372,28 +380,18 @@ allocation)</td>
 allocation)</td>
 </tr><tr><td><code>wide</code></td>
 <td>regular CPU</td>
-<td>56</td>
 <td>12 hrs</td>
 <td>5</td>
 <td>-</td>
 <td>Wide multi-node CPU (not on this allocation)</td>
 </tr><tr><td><code>highmem</code></td>
 <td>large-memory</td>
-<td>1</td>
 <td>48 hrs</td>
 <td>2</td>
 <td>-</td>
 <td>~1 TB RAM, charges 4x (not on this allocation)</td>
-</tr><tr><td><code>gpu</code></td>
-<td>GPU (A100)</td>
-<td>-</td>
-<td>48 hrs</td>
-<td>-</td>
-<td>4</td>
-<td>A100 production jobs (your other queue)</td>
 </tr><tr><td><code>ai</code></td>
 <td>GPU (H100)</td>
-<td>-</td>
 <td>48 hrs</td>
 <td>-</td>
 <td>4</td>
@@ -410,21 +408,23 @@ A100; <code>h</code> means H100.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co"># --- connect ---</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="fu">ssh</span> <span class="op">&lt;</span>x-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co"># --- your account and the queues ---</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="ex">mybalance</span>          <span class="co"># your allocation account string (the -A value)</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="ex">showpartitions</span>     <span class="co"># all partitions, free cores, time limits</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="ex">sfeatures</span>          <span class="co"># node types: a* CPU, g* A100, h* H100</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co"># --- submit and manage ---</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="ex">sbatch</span> <span class="op">&lt;</span>script<span class="op">&gt;</span>            <span class="co"># submit a job -&gt; prints the job ID</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span>            <span class="co"># your jobs currently in the queue</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">sacct</span> <span class="at">-u</span> <span class="va">$USER</span>             <span class="co"># accounting ledger of all your jobs (past + present)</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ex">scancel</span> <span class="op">&lt;</span>jobid<span class="op">&gt;</span>            <span class="co"># cancel a running or pending job</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="co"># --- read results ---</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="fu">cat</span> slurm-<span class="op">&lt;</span>jobid<span class="op">&gt;</span>.out      <span class="co"># the job's standard output</span></span></code></pre>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co"># Preferred: log in to Open OnDemand (https://ondemand.rcac.purdue.edu) and</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co"># open Clusters - Shell access. With an SSH key set up:</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="fu">ssh</span> <span class="op">&lt;</span>x-username<span class="op">&gt;</span>@anvil.rcac.purdue.edu</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co"># --- your account and the queues ---</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="ex">mybalance</span>          <span class="co"># your allocation account string (the -A value)</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="ex">showpartitions</span>     <span class="co"># all partitions, free cores, time limits</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="ex">sfeatures</span>          <span class="co"># node types: a* CPU, g* A100, h* H100</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co"># --- submit and manage ---</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">sbatch</span> <span class="op">&lt;</span>script<span class="op">&gt;</span>            <span class="co"># submit a job -&gt; prints the job ID</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span>            <span class="co"># your jobs currently in the queue</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">sacct</span> <span class="at">-u</span> <span class="va">$USER</span>             <span class="co"># accounting ledger of all your jobs (past + present)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ex">scancel</span> <span class="op">&lt;</span>jobid<span class="op">&gt;</span>            <span class="co"># cancel a running or pending job</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="co"># --- read results ---</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1" aria-label="code-block-1-18"></a><span class="fu">cat</span> slurm-<span class="op">&lt;</span>jobid<span class="op">&gt;</span>.out      <span class="co"># the job's standard output</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="the-two-mandatory-sbatch-lines">The two mandatory <code>#SBATCH</code> lines<a class="anchor" aria-label="anchor" href="#the-two-mandatory-sbatch-lines"></a></h3>
@@ -464,11 +464,11 @@ an error.</li>
 <code>highmem</code> charges 4x. Do not reach for these to make a job
 “faster” – ask for the size that fits.</li>
 <li>
-<strong>GPUs via <code>--gres</code>.</strong> Add
-<code>--gres=gpu:1</code> (or <code>:2</code>) to a job script and
-submit to a <code>gpu</code>/<code>gpu-debug</code> partition. A
-CPU-only job simply omits the line and still runs on
-<code>gpu-debug</code>, using the node’s CPU cores.</li>
+<strong>GPUs via <code>--gres</code>.</strong> Every job on a
+<code>gpu</code>/<code>gpu-debug</code> partition asks for a GPU with
+<code>--gres=gpu:1</code> (or <code>:2</code>), even if the program
+never uses one. A CPU-only job goes to a CPU partition such as
+<code>shared</code> and omits the line.</li>
 </ul></div>
 <div class="section level2">
 <h2 id="lab-file-index">Lab file index<a class="anchor" aria-label="anchor" href="#lab-file-index"></a></h2>
@@ -524,8 +524,8 @@ on)</td>
 </tr><tr><td><code>sbatch: error: Invalid partition name</code></td>
 <td>Typo in <code>-p</code>
 </td>
-<td>Use <code>gpu-debug</code> or <code>gpu</code> (the only two this
-allocation reaches)</td>
+<td>Use the partition the lab names: <code>shared</code> for the CPU
+lab, <code>gpu-debug</code> for the GPU labs</td>
 </tr><tr><td>Job sits in <code>PD</code> (pending)</td>
 <td>Queue full, or a prior job of yours is still running</td>
 <td>

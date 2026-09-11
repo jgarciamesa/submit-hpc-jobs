@@ -247,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -353,8 +353,8 @@ GPU?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Submit a scikit-learn training job on the CPU cores of a GPU node,
-without <code>--gres</code>.</li>
+<ul><li>Submit a scikit-learn training job to the <code>shared</code> CPU
+partition, without a <code>--gres</code> request.</li>
 <li>Request more cores and memory with <code>--cpus-per-task</code> and
 <code>--mem</code>.</li>
 <li>Read the job’s output and the metrics file it writes.</li>
@@ -376,28 +376,30 @@ polite to the cluster.</p>
 <li>Trains a support-vector machine.</li>
 <li>Prints test accuracy and writes a <code>digits_metrics.json</code>
 file.</li>
-</ol><p>Your allocation only reaches the GPU partitions, so this CPU-only job
-runs on <code>gpu-debug</code> <em>without</em> a <code>--gres</code>
-request – it uses the fast CPU cores that sit on the A100 node.</p>
+</ol><p>This job uses no GPU, so it goes to a CPU partition instead:
+<code>shared</code>, the default CPU queue on Anvil. The script submits
+there and leaves the <code>--gres</code> line out entirely – everything
+else works just like the <code>hello</code> job.</p>
 <p>Its job script, <code>train-digits-cpu.sbatch</code>, asks for more
 than the <code>hello</code> job did:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co">#!/bin/sh -l</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop GPU allocation (confirm with `mybalance`)</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p gpu-debug             # workshop test queue: 30-min limit, 1 running job per user</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="co">#SBATCH -A cis261672-gpu        # MANDATORY on Anvil: workshop allocation (confirm with `mybalance`)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="co">#SBATCH -p shared                # Anvil's default CPU partition</span></span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a><span class="co">#SBATCH --job-name=digits-cpu</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="co">#SBATCH --cpus-per-task=16      # ask for 16 cores</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=16G               # ask for 16 GB of memory</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:30:00             # fills the 30-min gpu-debug limit</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:30:00             # 30 minutes of wall time</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -o digits-cpu_%j.out    # name the output file ourselves</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ex">module</span> load conda</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">python3</span> train_digits.py</span></code></pre>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH -e digits-cpu_%j.err    # name the error file to match</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ex">module</span> load conda</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ex">python3</span> train_digits.py</span></code></pre>
 </div>
 <p><code>%j</code> in the output filename is replaced by the job ID, so
 each submission gets its own

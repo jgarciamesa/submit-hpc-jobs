@@ -299,7 +299,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -425,14 +425,15 @@ pinned.</strong> On an Anvil login node run
 <code>train-gpu.sbatch</code> (the commented line near the top). Until
 then the GPU script has a placeholder.</label></li>
 <li><label><input type="checkbox"><strong>Dry-run each lab</strong> as
-yourself on <code>gpu-debug</code> so you know the real wall time and
-the exact output to show. Include a CPU-only submission (no
-<code>--gres</code>): confirm it is accepted on <code>gpu-debug</code>,
-since the public docs do not state this explicitly.</label></li>
+yourself so you know the real wall time and the exact output to show.
+The GPU labs run on <code>gpu-debug</code> (each asks for one GPU); the
+CPU-only digits lab (episode 5) runs on <code>shared</code> – dry-run it
+once the CPU allocation is provisioned (see the open items
+below).</label></li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="the-two-open-items-to-resolve-before-the-session">The two open items to resolve before the session<a class="anchor" aria-label="anchor" href="#the-two-open-items-to-resolve-before-the-session"></a>
+<h2 id="open-items-to-resolve-before-the-session">Open items to resolve before the session<a class="anchor" aria-label="anchor" href="#open-items-to-resolve-before-the-session"></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>
@@ -448,6 +449,14 @@ their own <code>-A</code> value from <code>mybalance</code>.</li>
 container command) in <code>train-gpu.sbatch</code>. The script is
 written to load <code>conda</code> first, so a module-based PyTorch or a
 module-based Singularity both fit the existing structure.</li>
+<li>
+<strong>The CPU allocation (episode 5).</strong> The digits CPU job
+submits to <code>shared</code> and currently carries
+<code>-A cis261672-gpu</code>. As soon as the CPU allocation is
+provisioned, confirm its account string with <code>mybalance</code> and
+update the <code>-A</code> line in <code>train-digits-cpu.sbatch</code>
+if it differs. If it has not landed by session time, see the fallback in
+the Fallbacks section.</li>
 </ol>
 </div>
 <div class="section level2">
@@ -511,7 +520,7 @@ signal before you move on.</p>
 <tr>
 <td>2:12–2:15 (if 10m+ remain)</td>
 <td><a href="07-job-arrays.html">07</a></td>
-<td>Stretch: job-array sweep</td>
+<td>Scale: job-array sweep</td>
 <td>One array of 5 tasks submitted</td>
 </tr>
 <tr>
@@ -545,9 +554,13 @@ instructions to check the output later. Frame it as the real HPC
 experience: <em>your job runs when the resource is free.</em>
 </li>
 <li>
-<strong>SSH keys not set up (biggest time sink).</strong> Route
-those people to the OnDemand browser shell; helpers roam. Do not spend
-the group’s time on one person’s key.</li>
+<strong>SSH keys not set up.</strong> Route those people to the
+OnDemand web shell; helpers roam. Do not spend the group’s time on one
+person’s key.</li>
+<li>
+<strong>Episode 5 (CPU allocation not ready).</strong> If the CPU
+allocation has not been provisioned by session time, skip episode 5 and
+move straight to the GPU lab; no other lab depends on it.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -555,9 +568,9 @@ the group’s time on one person’s key.</li>
 </h2>
 <ul>
 <li>
-<strong>Never touched a terminal:</strong> the OnDemand GUI runs
-every lab except the stretch; the setup page walks SSH-key creation for
-anyone who wants it.</li>
+<strong>Never touched a terminal:</strong> the OnDemand web shell
+runs every lab except the scale lab; the setup page has an SSH section
+for anyone who wants it.</li>
 <li>
 <strong>Has a cluster account elsewhere:</strong> “if you know
 Slurm, you know Anvil.” Point them to the <em>Anvil-specific
@@ -565,8 +578,8 @@ differences</em> section of the reference page (account string,
 <code>mybalance</code>, the <code>gpu-debug</code> single-job
 rule).</li>
 <li>
-<strong>Fast finishers:</strong> the job-array stretch, then explore
-<code>sacct</code> columns and the charge factors.</li>
+<strong>Fast finishers:</strong> the job-array scale lab, then
+explore <code>sacct</code> columns and the charge factors.</li>
 </ul>
 </div>
 <div class="section level2">

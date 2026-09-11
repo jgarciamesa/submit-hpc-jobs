@@ -247,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-job-arrays.html">7. Stretch: One Script, Many Experiments (Job Arrays)</a>
+        <a href="07-job-arrays.html">7. Scale: One Script, Many Experiments (Job Arrays)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -376,11 +376,14 @@ node.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="co">#SBATCH --ntasks=1</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="co">#SBATCH --mem=2G</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH -t 00:10:00             # 10 minutes of wall time</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="ex">module</span> load conda               <span class="co"># Anaconda distribution (provides python3)</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span>            <span class="co"># run from where you submitted the job</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ex">python3</span> hello.py</span></code></pre>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="co">#SBATCH --gres=gpu:1            # jobs on gpu/gpu-debug must ask for a GPU</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="co">#SBATCH -t 00:10:00             # 10 minutes of wall time</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="co">#SBATCH -o slurm-%j.out         # standard output file</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="co">#SBATCH -e slurm-%j.err         # error output file</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ex">module</span> load conda               <span class="co"># Anaconda distribution (provides python3)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="bu">cd</span> <span class="va">$SLURM_SUBMIT_DIR</span>            <span class="co"># run from where you submitted the job</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="ex">python3</span> hello.py</span></code></pre>
 </div>
 <p>Two of these lines are <strong>mandatory on Anvil</strong>:</p>
 <ul><li>
@@ -390,11 +393,16 @@ workshop allocation (you can still check your own with
 <code>mybalance</code>). A job without it is rejected.</li>
 <li>
 <code>#SBATCH -p &lt;partition&gt;</code> – which queue to run in.
-Every lab in this lesson uses <code>-p gpu-debug</code>.</li>
-</ul><p>The other lines ask for resources: how many nodes, how many cores per
-task, how much memory, and how much time. For a one-line
-<code>hello</code> program, two cores and ten minutes are more than
-enough.</p>
+The GPU labs use <code>-p gpu-debug</code>; the CPU-only digits job uses
+<code>-p shared</code>.</li>
+</ul><p>A third line matters for this lesson:
+<code>#SBATCH --gres=gpu:1</code> asks for one GPU. Jobs on the
+<code>gpu</code> and <code>gpu-debug</code> partitions must request a
+GPU – even the <code>hello</code> job, which never touches one.</p>
+<p>The other lines ask for resources: how many nodes, how many cores per
+task, how much memory, how much time, and where the output goes. For a
+one-line <code>hello</code> program, two cores and ten minutes are more
+than enough.</p>
 <p><code>hello.py</code>, the program the job runs, just prints a
 greeting and a few environment variables:</p>
 <div class="codewrapper sourceCode" id="cb2">
