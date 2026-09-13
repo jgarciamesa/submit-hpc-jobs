@@ -483,7 +483,7 @@ policy.</li>
 </div>
 </div></section><section id="aio-02-connecting-to-anvil"><p>Content from <a href="02-connecting-to-anvil.html">Connecting to Anvil</a></p>
 <hr>
-<p>Last updated on 2026-09-11 |
+<p>Last updated on 2026-09-13 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/02-connecting-to-anvil.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -550,6 +550,22 @@ you do not have a key yet, use the web shell above – do not spend lab
 time generating one.</li>
 </ul>
 </div>
+</div>
+<div class="section level1">
+<h1 id="a-quick-word-about-the-shell">A quick word about the shell<a class="anchor" aria-label="anchor" href="#a-quick-word-about-the-shell"></a>
+</h1>
+<p>The terminal you just opened – the web shell or an SSH session – is
+running a program called a <strong>shell</strong> (sometimes called a
+terminal or command line). The shell is the text-based window between
+you and the operating system: you type a command and press Return, and
+the shell runs it and shows you the output. Anvil’s shell is the same
+tool you would use in a terminal on your own laptop, and every command
+in this lesson is one you would type there.</p>
+<p>If you have never used a shell, no worries – this lesson covers
+everything you need. If you would like to go deeper, <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">The Unix Shell</a> is
+a free, self-paced lesson from The Carpentries, a non-profit
+organization that teaches computational skills worldwide, and it makes a
+great follow-up.</p>
 </div>
 <div class="section level1">
 <h1 id="look-around-your-account-and-the-queues">Look around: your account and the queues<a class="anchor" aria-label="anchor" href="#look-around-your-account-and-the-queues"></a>
@@ -926,7 +942,7 @@ it?</p>
   Most likely: the queue is full
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On <code>gpu-debug</code>, only one job per user may run at a time.
 If your previous <code>hello</code> job is still running, this one
@@ -964,7 +980,7 @@ it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
   Missing or wrong -A account
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The <code>-A</code> line is missing, or the string does not match an
 account on your allocation. Run <code>mybalance</code>, copy the exact
@@ -1301,7 +1317,7 @@ will report a GPU.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Submit-and-check-later is the real HPC experience </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>There is nothing wrong with the job – the queue is just full. Leave
 it submitted and it will run when a GPU node frees up. Note the job ID,
@@ -1444,7 +1460,7 @@ you match each result to the <code>C</code> value that produced it?</p>
   Read the task ID
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Each file is named <code>sweep_&lt;task&gt;.json</code>, where
 <code>&lt;task&gt;</code> is the array task ID (00-04), and the file
@@ -1668,8 +1684,8 @@ resources you need, and cancel jobs you no longer need.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/aio.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/aio.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-11",
-  "datePublished": "2026-09-11"
+  "dateModified": "2026-09-13",
+  "datePublished": "2026-09-13"
 }
 
   </script><script>
