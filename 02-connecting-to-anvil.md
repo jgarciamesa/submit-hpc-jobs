@@ -54,6 +54,22 @@ group wait on one connection problem.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+# A quick word about the shell
+
+The terminal you just opened -- the web shell or an SSH session -- is running
+a program called a **shell** (sometimes called a terminal or command line).
+The shell is the text-based window between you and the operating system: you
+type a command and press Return, and the shell runs it and shows you the
+output. Anvil's shell is the same tool you would use in a terminal on your
+own laptop, and every command in this lesson is one you would type there.
+
+If you have never used a shell, no worries -- this lesson covers everything
+you need. If you would like to go deeper,
+[The Unix Shell](https://swcarpentry.github.io/shell-novice/) is a free,
+self-paced lesson from The Carpentries, a non-profit organization that
+teaches computational skills worldwide, and it makes a great follow-up.
+
+
 # Look around: your account and the queues
 
 Once you are logged in, three commands tell you everything you need to know to
