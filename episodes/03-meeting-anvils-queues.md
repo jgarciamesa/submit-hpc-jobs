@@ -33,14 +33,15 @@ separate queues lets the scheduler run the system efficiently and fairly.
 You can see all of them with `showpartitions` (run it in the previous episode).
 Here are the partitions you will use in this lesson:
 
-| Partition   | Node type  | Max time | Max running jobs/user | GPUs | Notes |
-|-------------|------------|----------|-----------------------|------|-------|
-| `gpu-debug` | GPU (A100) | 0.5 hrs  | 1                     | 2 max| **workshop queue** -- the GPU labs run here |
-| `gpu`       | GPU (A100) | 48 hrs   | --                    | 4    | A100 production jobs (your other queue) |
+| Partition   | Node type   | Max time | Max running jobs/user | GPUs | Notes |
+|-------------|-------------|----------|-----------------------|------|-------|
+| `debug`     | regular CPU | 2 hrs    | 1                     | --   | Short CPU tests |
+| `shared`    | regular CPU | 96 hrs   | many                  | --   | Default CPU partition -- episode 5 runs here |
+| `gpu-debug` | GPU (A100)  | 0.5 hrs  | 1                     | 2 max| **workshop queue** -- the GPU labs run here |
+| `gpu`       | GPU (A100)  | 48 hrs   | --                    | 4    | A100 production jobs (your other queue) |
 
 Everything else on Anvil is listed on the [reference page](reference.html) --
-you will not need it in this lesson. The one exception is `shared`, the
-**default CPU partition**: the CPU-only digits job in episode 5 submits there.
+you will not need it in this lesson.
 
 Two things to remember about the queues in this lesson:
 
@@ -49,7 +50,7 @@ Two things to remember about the queues in this lesson:
    `hello` job carries the line.) CPU-only jobs go to `shared` and skip it.
 2. **`gpu-debug` only lets one running job per user at a time.** Finish (or
    cancel) a job before you submit the next one -- a second submission just
-   waits in `PENDING`. `shared` has no such per-user cap.
+   waits in `PENDING`. `shared` does not have that single-job workshop cap.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
@@ -63,8 +64,7 @@ exceed ten minutes.
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - A partition is a named queue with its own machines and limits (max time, max nodes, max jobs per user).
-- The workshop allocation reaches only `gpu-debug` (the GPU labs) and `gpu` (production A100); the CPU-only digits job runs on `shared`.
+- The lesson uses `debug` and `shared` for CPU work, plus `gpu-debug` and `gpu` for A100 work.
 - `gpu-debug` runs one job per user at a time; jobs on `gpu` or `gpu-debug` must ask for a GPU with `--gres`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
