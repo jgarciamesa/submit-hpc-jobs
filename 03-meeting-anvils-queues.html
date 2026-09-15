@@ -320,7 +320,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Meeting Anvil's Queues (Partitions)</h1>
-        <p>Last updated on 2026-09-11 |
+        <p>Last updated on 2026-09-15 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/03-meeting-anvils-queues.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -370,13 +370,25 @@ efficiently and fairly.</p>
 <p>You can see all of them with <code>showpartitions</code> (run it in
 the previous episode). Here are the partitions you will use in this
 lesson:</p>
-<table class="table"><colgroup><col width="18%"><col width="16%"><col width="14%"><col width="32%"><col width="8%"><col width="9%"></colgroup><thead><tr><th>Partition</th>
+<table class="table"><colgroup><col width="18%"><col width="18%"><col width="13%"><col width="31%"><col width="8%"><col width="9%"></colgroup><thead><tr><th>Partition</th>
 <th>Node type</th>
 <th>Max time</th>
 <th>Max running jobs/user</th>
 <th>GPUs</th>
 <th>Notes</th>
-</tr></thead><tbody><tr><td><code>gpu-debug</code></td>
+</tr></thead><tbody><tr><td><code>debug</code></td>
+<td>regular CPU</td>
+<td>2 hrs</td>
+<td>1</td>
+<td>–</td>
+<td>Short CPU tests</td>
+</tr><tr><td><code>shared</code></td>
+<td>regular CPU</td>
+<td>96 hrs</td>
+<td>many</td>
+<td>–</td>
+<td>Default CPU partition – episode 5 runs here</td>
+</tr><tr><td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
 <td>0.5 hrs</td>
 <td>1</td>
@@ -390,9 +402,7 @@ lesson:</p>
 <td>4</td>
 <td>A100 production jobs (your other queue)</td>
 </tr></tbody></table><p>Everything else on Anvil is listed on the <a href="reference.html">reference page</a> – you will not need it in this
-lesson. The one exception is <code>shared</code>, the <strong>default
-CPU partition</strong>: the CPU-only digits job in episode 5 submits
-there.</p>
+lesson.</p>
 <p>Two things to remember about the queues in this lesson:</p>
 <ol style="list-style-type: decimal"><li>
 <strong>Jobs on <code>gpu</code> or <code>gpu-debug</code> must ask
@@ -404,7 +414,7 @@ it.</li>
 <strong><code>gpu-debug</code> only lets one running job per user at
 a time.</strong> Finish (or cancel) a job before you submit the next one
 – a second submission just waits in <code>PENDING</code>.
-<code>shared</code> has no such per-user cap.</li>
+<code>shared</code> does not have that single-job workshop cap.</li>
 </ol><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -414,9 +424,9 @@ a time.</strong> Finish (or cancel) a job before you submit the next one
 <div class="callout-content">
 <ul><li>A partition is a named queue with its own machines and limits (max
 time, max nodes, max jobs per user).</li>
-<li>The workshop allocation reaches only <code>gpu-debug</code> (the GPU
-labs) and <code>gpu</code> (production A100); the CPU-only digits job
-runs on <code>shared</code>.</li>
+<li>The lesson uses <code>debug</code> and <code>shared</code> for CPU
+work, plus <code>gpu-debug</code> and <code>gpu</code> for A100
+work.</li>
 <li>
 <code>gpu-debug</code> runs one job per user at a time; jobs on
 <code>gpu</code> or <code>gpu-debug</code> must ask for a GPU with
@@ -487,8 +497,8 @@ runs on <code>shared</code>.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/03-meeting-anvils-queues.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/03-meeting-anvils-queues.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-11",
-  "datePublished": "2026-09-13"
+  "dateModified": "2026-09-15",
+  "datePublished": "2026-09-15"
 }
 
   </script><script>

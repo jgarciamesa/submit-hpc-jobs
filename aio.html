@@ -645,7 +645,7 @@ ACCESS username (needed only for SSH).</li>
 </div>
 </div></section><section id="aio-03-meeting-anvils-queues"><p>Content from <a href="03-meeting-anvils-queues.html">Meeting Anvil's Queues (Partitions)</a></p>
 <hr>
-<p>Last updated on 2026-09-11 |
+<p>Last updated on 2026-09-15 |
 
         <a href="https://github.com/jgarciamesa/submit-hpc-jobs/edit/main/episodes/03-meeting-anvils-queues.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -698,9 +698,9 @@ lesson:</p>
 <table class="table">
 <colgroup>
 <col width="18%">
-<col width="16%">
-<col width="14%">
-<col width="32%">
+<col width="18%">
+<col width="13%">
+<col width="31%">
 <col width="8%">
 <col width="9%">
 </colgroup>
@@ -713,6 +713,22 @@ lesson:</p>
 <th>Notes</th>
 </tr></thead>
 <tbody>
+<tr>
+<td><code>debug</code></td>
+<td>regular CPU</td>
+<td>2 hrs</td>
+<td>1</td>
+<td>–</td>
+<td>Short CPU tests</td>
+</tr>
+<tr>
+<td><code>shared</code></td>
+<td>regular CPU</td>
+<td>96 hrs</td>
+<td>many</td>
+<td>–</td>
+<td>Default CPU partition – episode 5 runs here</td>
+</tr>
 <tr>
 <td><code>gpu-debug</code></td>
 <td>GPU (A100)</td>
@@ -733,9 +749,7 @@ lesson:</p>
 </tbody>
 </table>
 <p>Everything else on Anvil is listed on the <a href="reference.html">reference page</a> – you will not need it in this
-lesson. The one exception is <code>shared</code>, the <strong>default
-CPU partition</strong>: the CPU-only digits job in episode 5 submits
-there.</p>
+lesson.</p>
 <p>Two things to remember about the queues in this lesson:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -748,7 +762,7 @@ it.</li>
 <strong><code>gpu-debug</code> only lets one running job per user at
 a time.</strong> Finish (or cancel) a job before you submit the next one
 – a second submission just waits in <code>PENDING</code>.
-<code>shared</code> has no such per-user cap.</li>
+<code>shared</code> does not have that single-job workshop cap.</li>
 </ol>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -760,9 +774,9 @@ a time.</strong> Finish (or cancel) a job before you submit the next one
 <ul>
 <li>A partition is a named queue with its own machines and limits (max
 time, max nodes, max jobs per user).</li>
-<li>The workshop allocation reaches only <code>gpu-debug</code> (the GPU
-labs) and <code>gpu</code> (production A100); the CPU-only digits job
-runs on <code>shared</code>.</li>
+<li>The lesson uses <code>debug</code> and <code>shared</code> for CPU
+work, plus <code>gpu-debug</code> and <code>gpu</code> for A100
+work.</li>
 <li>
 <code>gpu-debug</code> runs one job per user at a time; jobs on
 <code>gpu</code> or <code>gpu-debug</code> must ask for a GPU with
@@ -942,7 +956,7 @@ it?</p>
   Most likely: the queue is full
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>On <code>gpu-debug</code>, only one job per user may run at a time.
 If your previous <code>hello</code> job is still running, this one
@@ -980,7 +994,7 @@ it first with <code>scancel &lt;oldjobid&gt;</code>.</p>
   Missing or wrong -A account
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The <code>-A</code> line is missing, or the string does not match an
 account on your allocation. Run <code>mybalance</code>, copy the exact
@@ -1317,7 +1331,7 @@ will report a GPU.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Submit-and-check-later is the real HPC experience </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>There is nothing wrong with the job – the queue is just full. Leave
 it submitted and it will run when a GPU node frees up. Note the job ID,
@@ -1460,7 +1474,7 @@ you match each result to the <code>C</code> value that produced it?</p>
   Read the task ID
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each file is named <code>sweep_&lt;task&gt;.json</code>, where
 <code>&lt;task&gt;</code> is the array task ID (00-04), and the file
@@ -1684,8 +1698,8 @@ resources you need, and cancel jobs you no longer need.</li>
   "url": "https://jgarciamesa.github.io/submit-hpc-jobs/aio.html",
   "identifier": "https://jgarciamesa.github.io/submit-hpc-jobs/aio.html",
   "dateCreated": "2026-09-08",
-  "dateModified": "2026-09-13",
-  "datePublished": "2026-09-13"
+  "dateModified": "2026-09-15",
+  "datePublished": "2026-09-15"
 }
 
   </script><script>
